@@ -11,6 +11,7 @@ from ui_form import Ui_MainWindow
 
 from mainform import MainUI
 
+
 class MainWindow(QMainWindow):
     def __init__(self, app, parent=None):
         super().__init__(parent)
@@ -28,6 +29,8 @@ class MainWindow(QMainWindow):
 
     def file_open(self):
         print('File Open')
+        self.ui.file_open('k4.mid')
+
 
     def file_save(self):
         print('File Save')

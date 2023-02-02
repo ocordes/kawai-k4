@@ -42,11 +42,8 @@ class Ui_MainWindow(object):
         self.formLayout = QFormLayout()
         self.formLayout.setObjectName(u"formLayout")
         self.treeWidget = QTreeWidget(self.centralwidget)
-        __qtreewidgetitem = QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(__qtreewidgetitem)
-        QTreeWidgetItem(__qtreewidgetitem)
-        __qtreewidgetitem1 = QTreeWidgetItem(self.treeWidget)
-        QTreeWidgetItem(__qtreewidgetitem1)
+        QTreeWidgetItem(self.treeWidget)
+        QTreeWidgetItem(self.treeWidget)
         QTreeWidgetItem(self.treeWidget)
         QTreeWidgetItem(self.treeWidget)
         self.treeWidget.setObjectName(u"treeWidget")
@@ -114,18 +111,12 @@ class Ui_MainWindow(object):
         self.treeWidget.setSortingEnabled(False)
         ___qtreewidgetitem1 = self.treeWidget.topLevelItem(0)
         ___qtreewidgetitem1.setText(0, QCoreApplication.translate("MainWindow", u"Single Instruments", None));
-        ___qtreewidgetitem2 = ___qtreewidgetitem1.child(0)
-        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"A1", None));
-        ___qtreewidgetitem3 = ___qtreewidgetitem1.child(1)
-        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"A2", None));
-        ___qtreewidgetitem4 = self.treeWidget.topLevelItem(1)
-        ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Multiple Instruments", None));
-        ___qtreewidgetitem5 = ___qtreewidgetitem4.child(0)
-        ___qtreewidgetitem5.setText(0, QCoreApplication.translate("MainWindow", u"A1", None));
-        ___qtreewidgetitem6 = self.treeWidget.topLevelItem(2)
-        ___qtreewidgetitem6.setText(0, QCoreApplication.translate("MainWindow", u"Drums", None));
-        ___qtreewidgetitem7 = self.treeWidget.topLevelItem(3)
-        ___qtreewidgetitem7.setText(0, QCoreApplication.translate("MainWindow", u"Effects", None));
+        ___qtreewidgetitem2 = self.treeWidget.topLevelItem(1)
+        ___qtreewidgetitem2.setText(0, QCoreApplication.translate("MainWindow", u"Multiple Instruments", None));
+        ___qtreewidgetitem3 = self.treeWidget.topLevelItem(2)
+        ___qtreewidgetitem3.setText(0, QCoreApplication.translate("MainWindow", u"Drums", None));
+        ___qtreewidgetitem4 = self.treeWidget.topLevelItem(3)
+        ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Effects", None));
         self.treeWidget.setSortingEnabled(__sortingEnabled)
 
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
