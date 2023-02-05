@@ -3,7 +3,9 @@
 # written by: Oliver Cordes 2023-01-29
 # changed by: Oliver Cordes 2023-01-29
 
-from midifile import MidiFile
+from k4midi.midifile import MidiFile
+
+from k4midi.k4single import K4SingleInstrument
 
 
 def read_delta(bytes):
@@ -35,6 +37,7 @@ class K4Dump(MidiFile):
 
         data = self._trackdata
         #while ofs < len(self._trackdata):
+        results = None
         while len(data) > 0:
             delta, data = read_delta(data)
             if data[0] == 0xff:
@@ -59,10 +62,12 @@ class K4Dump(MidiFile):
             elif data[0] == 0xf0:
                 # sysex message
                 length, data = read_delta(data[1:])
-                self.k4_dump(data)
+                results = self.k4_dump(data)
                 data = data[length:]
             else:
                 raise ValueError(f'Unknown byte {data[0]:x}')
+
+        return results
 
 
     def k4_dump(self, data):
@@ -80,5 +85,19 @@ class K4Dump(MidiFile):
         print(f'machine={machine:x}')
         print(f'sub_status1={sub_status1:x}')
         print(f'sub_status2={sub_status2:x}')
+
+        data = data[7:]
+        results = {}
+        results['function'] = function
+        if function == 0x22:
+            # full dump
+            single = []
+            for nr in range(64):
+                i = K4SingleInstrument(data[nr*131:(nr+1)*131])
+                single.append(i)
+            results['single_instruments'] = single
+
+        return results
+
         
 

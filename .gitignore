@@ -131,3 +131,5 @@ dmypy.json
 
 # ignore MIDI files
 *.mid
+
+.DS_Store
