@@ -12,3 +12,7 @@ class K4SingleInstrument(object):
     def name(self):
         return self._data[0:10].decode('utf8').strip()
 
+    @property
+    def volume(self):
+        return self._data[11]
+

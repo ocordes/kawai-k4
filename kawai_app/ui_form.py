@@ -16,8 +16,9 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QFormLayout, QHBoxLayout, QHeaderView,
-    QMainWindow, QMenu, QMenuBar, QSizePolicy,
+from PySide6.QtWidgets import (QApplication, QFormLayout, QFrame, QHBoxLayout,
+    QHeaderView, QLabel, QLineEdit, QMainWindow,
+    QMenu, QMenuBar, QSizePolicy, QSpinBox,
     QStatusBar, QTabWidget, QTreeWidget, QTreeWidgetItem,
     QWidget)
 
@@ -53,9 +54,32 @@ class Ui_MainWindow(object):
 
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setMinimumSize(QSize(700, 0))
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy)
+        self.tabWidget.setMinimumSize(QSize(700, 520))
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
+        self.label = QLabel(self.tab)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(10, 0, 58, 21))
+        self.si_name = QLineEdit(self.tab)
+        self.si_name.setObjectName(u"si_name")
+        self.si_name.setGeometry(QRect(90, 0, 221, 21))
+        self.si_name.setMaxLength(10)
+        self.label_2 = QLabel(self.tab)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(10, 40, 58, 21))
+        self.line = QFrame(self.tab)
+        self.line.setObjectName(u"line")
+        self.line.setGeometry(QRect(10, 20, 681, 16))
+        self.line.setFrameShape(QFrame.HLine)
+        self.line.setFrameShadow(QFrame.Sunken)
+        self.si_volume = QSpinBox(self.tab)
+        self.si_volume.setObjectName(u"si_volume")
+        self.si_volume.setGeometry(QRect(90, 40, 42, 21))
         self.tabWidget.addTab(self.tab, "")
         self.tab_2 = QWidget()
         self.tab_2.setObjectName(u"tab_2")
@@ -119,7 +143,9 @@ class Ui_MainWindow(object):
         ___qtreewidgetitem4.setText(0, QCoreApplication.translate("MainWindow", u"Effects", None));
         self.treeWidget.setSortingEnabled(__sortingEnabled)
 
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Tab 1", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Name:", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"Volume:", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Single Instrument", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Tab 2", None))
         self.menu_File.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
     # retranslateUi

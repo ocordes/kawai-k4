@@ -94,7 +94,6 @@ class K4Dump(MidiFile):
             single = []
             for nr in range(64):
                 i = K4SingleInstrument(data[nr*131:(nr+1)*131])
-                print(i.name)
                 single.append(i)
             results['single_instruments'] = single
 
