@@ -39,6 +39,8 @@ class MainUI(Ui_MainWindow):
                 multiple_instruments.addChild(it)
         self.treeWidget.itemClicked.connect(self.onItemClicked)
 
+        #self.
+
 
     @Slot(QtWidgets.QTreeWidgetItem, int)
     def onItemClicked(self, item, col):
@@ -56,6 +58,17 @@ class MainUI(Ui_MainWindow):
                     # fill the single instrument data
                     self.si_name.setText(ins.name)
                     self.si_volume.setValue(ins.volume)
+                    self.si_effect.setValue(ins.effect)
+                    self.si_out_select.setValue(ins.out_select)
+                    self.si_source_mode.children()[ins.source_mode].setChecked(True)
+                    self.si_poly_mode.children()[ins.poly_mode].setChecked(True)
+                    self.si_am_s12.setChecked(ins.am12)
+                    self.si_am_s34.setChecked(ins.am34)
+                    self.si_mute_s1.setChecked(ins.mute_s1)
+                    self.si_mute_s2.setChecked(ins.mute_s2)
+                    self.si_mute_s3.setChecked(ins.mute_s3)
+                    self.si_mute_s4.setChecked(ins.mute_s4)
+
 
 
     def file_open(self, filename):
