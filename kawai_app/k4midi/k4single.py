@@ -123,3 +123,45 @@ class K4SingleInstrument(object):
     @property
     def pres_freq(self):
         return self._data[29]
+
+
+    # sources
+    @property
+    def s1_delay(self):
+        return self._data[30] 
+
+    @property
+    def s1_wave_select(self):
+        return ((self._data[31] & 1)<<7 | (self._data[38])) + 1
+
+    @property    
+    def s1_ks_curve(self):
+        return (self._data[34] >> 4) + 1
+
+    @property
+    def s1_coarse(self):
+        return (self._data[42] & 0b111111) - 24
+
+    @property
+    def s1_key_track(self):
+        return self._data[42] >> 6
+
+    @property    
+    def s1_fix(self):
+        return self._data[46]
+
+    @property
+    def s1_fine(self):
+        return self._data[50] - 50
+
+    @property    
+    def s1_prs_frq(self):
+        return self._data[54] & 1
+
+    @property
+    def s1_vib_bend(self):
+        return (self._data[54] >> 1) & 1
+
+    @property
+    def s1_vel_curve(self):
+        return ((self._data[54] >> 2) & 0b111) + 1
