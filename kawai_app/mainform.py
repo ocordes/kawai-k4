@@ -68,6 +68,17 @@ class MainUI(Ui_MainWindow):
                     self.si_mute_s2.setChecked(ins.mute_s2)
                     self.si_mute_s3.setChecked(ins.mute_s3)
                     self.si_mute_s4.setChecked(ins.mute_s4)
+                    self.s1_wave.setValue(ins.s1_wave_select)
+                    self.s1_ks_curve.setValue(ins.s1_ks_curve)
+                    self.s1_delay.setValue(ins.s1_delay)
+                    self.s1_coarse.setValue(ins.s1_coarse)
+                    self.s1_fix.setValue(ins.s1_fix)
+                    self.s1_fine.setValue(ins.s1_fine)
+                    self.s1_key_track.setChecked(ins.s1_key_track)
+                    self.s1_prs_freq.setChecked(ins.s1_prs_frq)
+                    self.s1_vib_bend.setChecked(ins.s1_vib_bend)
+                    self.s1_vel_curve.setValue(ins.s1_vel_curve)
+
 
 
 
