@@ -126,13 +126,15 @@ class K4SingleInstrument(object):
 
 
     # sources
+
+    # Source 1
     @property
     def s1_delay(self):
         return self._data[30] 
 
     @property
     def s1_wave_select(self):
-        return ((self._data[31] & 1)<<7 | (self._data[38])) + 1
+        return ((self._data[34] & 1)<<7 | (self._data[38]))
 
     @property    
     def s1_ks_curve(self):
@@ -165,3 +167,129 @@ class K4SingleInstrument(object):
     @property
     def s1_vel_curve(self):
         return ((self._data[54] >> 2) & 0b111) + 1
+
+
+    # Source 2
+    @property
+    def s2_delay(self):
+        return self._data[31] 
+
+    @property
+    def s2_wave_select(self):
+        return ((self._data[35] & 1)<<7 | (self._data[39]))
+
+    @property    
+    def s2_ks_curve(self):
+        return (self._data[35] >> 4) + 1
+
+    @property
+    def s2_coarse(self):
+        return (self._data[43] & 0b111111) - 24
+
+    @property
+    def s2_key_track(self):
+        return self._data[43] >> 6
+
+    @property    
+    def s2_fix(self):
+        return self._data[47]
+
+    @property
+    def s2_fine(self):
+        return self._data[51] - 50
+
+    @property    
+    def s2_prs_frq(self):
+        return self._data[55] & 1
+
+    @property
+    def s2_vib_bend(self):
+        return (self._data[55] >> 1) & 1
+
+    @property
+    def s2_vel_curve(self):
+        return ((self._data[55] >> 2) & 0b111) + 1
+
+
+    # Source 3
+    @property
+    def s3_delay(self):
+        return self._data[32] 
+
+    @property
+    def s3_wave_select(self):
+        return ((self._data[36] & 1)<<7 | (self._data[40]))
+
+    @property    
+    def s3_ks_curve(self):
+        return (self._data[36] >> 4) + 1
+
+    @property
+    def s3_coarse(self):
+        return (self._data[44] & 0b111111) - 24
+
+    @property
+    def s3_key_track(self):
+        return self._data[44] >> 6
+
+    @property    
+    def s3_fix(self):
+        return self._data[48]
+
+    @property
+    def s3_fine(self):
+        return self._data[52] - 50
+
+    @property    
+    def s3_prs_frq(self):
+        return self._data[56] & 1
+
+    @property
+    def s3_vib_bend(self):
+        return (self._data[56] >> 1) & 1
+
+    @property
+    def s3_vel_curve(self):
+        return ((self._data[56] >> 2) & 0b111) + 1
+
+
+    # Source 4
+    @property
+    def s4_delay(self):
+        return self._data[33] 
+
+    @property
+    def s4_wave_select(self):
+        return ((self._data[37] & 1)<<7 | (self._data[41]))
+
+    @property    
+    def s4_ks_curve(self):
+        return (self._data[37] >> 4) + 1
+
+    @property
+    def s4_coarse(self):
+        return (self._data[45] & 0b111111) - 24
+
+    @property
+    def s4_key_track(self):
+        return self._data[45] >> 6
+
+    @property    
+    def s4_fix(self):
+        return self._data[49]
+
+    @property
+    def s4_fine(self):
+        return self._data[53] - 50
+
+    @property    
+    def s4_prs_frq(self):
+        return self._data[57] & 1
+
+    @property
+    def s4_vib_bend(self):
+        return (self._data[57] >> 1) & 1
+
+    @property
+    def s4_vel_curve(self):
+        return ((self._data[57] >> 2) & 0b111) + 1
