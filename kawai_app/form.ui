@@ -124,10 +124,10 @@
          <widget class="Line" name="line">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>20</y>
-            <width>681</width>
-            <height>16</height>
+            <width>791</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="orientation">
@@ -860,7 +860,7 @@
            </rect>
           </property>
           <property name="title">
-           <string>S1</string>
+           <string>S2</string>
           </property>
           <widget class="QLabel" name="label_21">
            <property name="geometry">
@@ -1118,7 +1118,7 @@
            </rect>
           </property>
           <property name="title">
-           <string>S1</string>
+           <string>S3</string>
           </property>
           <widget class="QLabel" name="label_28">
            <property name="geometry">
@@ -1376,7 +1376,7 @@
            </rect>
           </property>
           <property name="title">
-           <string>S1</string>
+           <string>S4</string>
           </property>
           <widget class="QLabel" name="label_35">
            <property name="geometry">
@@ -1653,6 +1653,7 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_Open"/>
+    <addaction name="actionOpen_Default"/>
     <addaction name="action_Save"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
@@ -1688,6 +1689,14 @@
   <action name="action_Quit">
    <property name="text">
     <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen_Default">
+   <property name="text">
+    <string>Open Default</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
    </property>
   </action>
  </widget>

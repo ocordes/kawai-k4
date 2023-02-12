@@ -7,7 +7,8 @@ from k4midi.k4dump import K4Dump
 
 # main
 
-mf = K4Dump('k4.mid')
+#mf = K4Dump('k4.mid')
+mf = K4Dump('K4 full dump nach Kauf.mid')
 
 print(mf.version())
 

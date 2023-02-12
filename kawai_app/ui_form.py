@@ -39,6 +39,8 @@ class Ui_MainWindow(object):
         self.actionSave_As.setObjectName(u"actionSave_As")
         self.action_Quit = QAction(MainWindow)
         self.action_Quit.setObjectName(u"action_Quit")
+        self.actionOpen_Default = QAction(MainWindow)
+        self.actionOpen_Default.setObjectName(u"actionOpen_Default")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -78,7 +80,7 @@ class Ui_MainWindow(object):
         self.label_2.setGeometry(QRect(10, 40, 58, 21))
         self.line = QFrame(self.tab)
         self.line.setObjectName(u"line")
-        self.line.setGeometry(QRect(10, 20, 681, 16))
+        self.line.setGeometry(QRect(0, 20, 791, 20))
         self.line.setFrameShape(QFrame.HLine)
         self.line.setFrameShadow(QFrame.Sunken)
         self.si_volume = QSpinBox(self.tab)
@@ -492,6 +494,7 @@ class Ui_MainWindow(object):
 
         self.menubar.addAction(self.menu_File.menuAction())
         self.menu_File.addAction(self.action_Open)
+        self.menu_File.addAction(self.actionOpen_Default)
         self.menu_File.addAction(self.action_Save)
         self.menu_File.addAction(self.actionSave_As)
         self.menu_File.addSeparator()
@@ -520,6 +523,10 @@ class Ui_MainWindow(object):
         self.actionSave_As.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+A", None))
 #endif // QT_CONFIG(shortcut)
         self.action_Quit.setText(QCoreApplication.translate("MainWindow", u"&Quit", None))
+        self.actionOpen_Default.setText(QCoreApplication.translate("MainWindow", u"Open Default", None))
+#if QT_CONFIG(shortcut)
+        self.actionOpen_Default.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+D", None))
+#endif // QT_CONFIG(shortcut)
         ___qtreewidgetitem = self.treeWidget.headerItem()
         ___qtreewidgetitem.setText(0, QCoreApplication.translate("MainWindow", u"Data", None));
 
