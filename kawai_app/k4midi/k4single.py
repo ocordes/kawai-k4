@@ -293,3 +293,186 @@ class K4SingleInstrument(object):
     @property
     def s4_vel_curve(self):
         return ((self._data[57] >> 2) & 0b111) + 1
+
+
+    # DCA 1
+    @property
+    def s1_envelope_level(self):
+        return self._data[58]
+
+    @property
+    def s1_envelope_attack(self):
+        return self._data[62]
+
+    @property
+    def s1_envelope_decay(self):
+        return self._data[66]
+
+    @property
+    def s1_envelope_sustain(self):
+        return self._data[70]
+
+    @property
+    def s1_envelope_release(self):
+        return self._data[74]
+
+    @property
+    def s1_level_mode_vel(self):
+        return self._data[78] - 50 
+
+    @property
+    def s1_level_mode_prs(self):
+        return self._data[82] - 50 
+
+    @property
+    def s1_level_mode_ks(self):
+        return self._data[86] - 50 
+
+    @property
+    def s1_time_mod_on_level(self):
+        return self._data[90] - 50 
+
+    @property
+    def s1_time_mod_off_level(self):
+        return self._data[94] - 50 
+
+    @property
+    def s1_time_mod_ks(self):
+        return self._data[98] - 50
+
+
+    # DCA 2
+    @property
+    def s2_envelope_level(self):
+        return self._data[59]
+
+    @property
+    def s2_envelope_attack(self):
+        return self._data[63]
+
+    @property
+    def s2_envelope_decay(self):
+        return self._data[67]
+
+    @property
+    def s2_envelope_sustain(self):
+        return self._data[71]
+
+    @property
+    def s2_envelope_release(self):
+        return self._data[75]
+
+    @property
+    def s2_level_mode_vel(self):
+        return self._data[79] - 50 
+
+    @property
+    def s2_level_mode_prs(self):
+        return self._data[83] - 50 
+
+    @property
+    def s2_level_mode_ks(self):
+        return self._data[87] - 50 
+
+    @property
+    def s2_time_mod_on_level(self):
+        return self._data[91] - 50
+
+    @property
+    def s2_time_mod_off_level(self):
+        return self._data[95] - 50 
+
+    @property
+    def s2_time_mod_ks(self):
+        return self._data[99] - 50 
+
+    # DCA 3
+    @property
+    def s3_envelope_level(self):
+        return self._data[60]
+
+    @property
+    def s3_envelope_attack(self):
+        return self._data[64]
+
+    @property
+    def s3_envelope_decay(self):
+        return self._data[68]
+
+    @property
+    def s3_envelope_sustain(self):
+        return self._data[72]
+
+    @property
+    def s3_envelope_release(self):
+        return self._data[76]
+
+    @property
+    def s3_level_mode_vel(self):
+        return self._data[80] - 50 
+
+    @property
+    def s3_level_mode_prs(self):
+        return self._data[84] - 50
+
+    @property
+    def s3_level_mode_ks(self):
+        return self._data[88] - 50 
+
+    @property
+    def s3_time_mod_on_level(self):
+        return self._data[92] - 50 
+
+    @property
+    def s3_time_mod_off_level(self):
+        return self._data[96] - 50
+
+    @property
+    def s3_time_mod_ks(self):
+        return self._data[100] - 50
+
+
+    # DCA 4
+    @property
+    def s4_envelope_level(self):
+        return self._data[61]
+
+    @property
+    def s4_envelope_attack(self):
+        return self._data[65]
+
+    @property
+    def s4_envelope_decay(self):
+        return self._data[69]
+
+    @property
+    def s4_envelope_sustain(self):
+        return self._data[73]
+
+    @property
+    def s4_envelope_release(self):
+        return self._data[77]
+
+    @property
+    def s4_level_mode_vel(self):
+        return self._data[81] - 50
+
+    @property
+    def s4_level_mode_prs(self):
+        return self._data[85] - 50
+
+    @property
+    def s4_level_mode_ks(self):
+        return self._data[89] - 50
+
+    @property
+    def s4_time_mod_on_level(self):
+        return self._data[93] - 50
+
+    @property
+    def s4_time_mod_off_level(self):
+        return self._data[97] - 50
+
+    @property
+    def s4_time_mod_ks(self):
+        return self._data[101] - 50
