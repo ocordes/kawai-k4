@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-02-025
+# changed by: Oliver Cordes 2023-02-17
 
 from ui_form import Ui_MainWindow
 
@@ -10,6 +10,8 @@ from PySide6 import QtWidgets
 
 from k4midi.k4dump import K4Dump
 
+
+window_title = 'K4 Instrument Editor'
 
 # helper functions
 def name2pos(name):
@@ -24,10 +26,18 @@ class MainUI(Ui_MainWindow):
 
         self._data = None
 
+        self._ins      = None
+        self._ins_item = None
+
+        self._has_changed = False
+
 
     def setupUi(self, window):
         super().setupUi(window)
         #Ui_MainWindow.setupUi(self)
+
+        self._window = window
+        window.setWindowTitle(window_title)
 
         single_instruments = self.treeWidget.topLevelItem(0)
         multiple_instruments = self.treeWidget.topLevelItem(1)
@@ -39,12 +49,39 @@ class MainUI(Ui_MainWindow):
                 multiple_instruments.addChild(it)
         self.treeWidget.itemClicked.connect(self.onItemClicked)
 
-        #self.
+        # define the change functions for all widgets
+        self.si_name.textChanged.connect(self.ins_gen_valueChanged('set_name'))
+        self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('set_volume'))
+
+
+    # generator to change a data entry
+    # the function is connected to a widget, so the inner function
+    # wil be called with the new value,
+    # with 'funcname' the name of the set function can be specified,
+    # so the specific value can be set, important is that
+    # self._ins can be changed externally, it will always the correct
+    # instance member function be called!
+    def ins_gen_valueChanged(self, funcname):
+
+        def valuechanged(val):
+            func = getattr(self._ins, funcname)
+            func(val)
+
+            self._bas_changed = True
+            self._window.setWindowTitle(window_title+' *')
+
+            if funcname == 'set_name':
+                if self._ins_item is not None:
+                   s = self._ins_item.text(0).split()[0]+' - '+val
+                   self._ins_item.setText(0, s)
+
+        return valuechanged
 
 
     def select_instrument(self, si_nr):
         # selects the si_nr'th instrument
         ins = self._data['single_instruments'][si_nr]
+        self._ins = ins
         # fill the single instrument data
         self.si_name.setText(ins.name)
         self.si_volume.setValue(ins.volume)
@@ -103,6 +140,51 @@ class MainUI(Ui_MainWindow):
         self.s4_vib_bend.setChecked(ins.s4_vib_bend)
         self.s4_vel_curve.setValue(ins.s4_vel_curve)
 
+        self.s1_env_level.setValue(ins.s1_envelope_level)
+        self.s1_env_attack.setValue(ins.s1_envelope_attack)
+        self.s1_env_decay.setValue(ins.s1_envelope_decay)
+        self.s1_env_sustain.setValue(ins.s1_envelope_sustain)
+        self.s1_env_release.setValue(ins.s1_envelope_release)
+        self.s1_level_mod_vel.setValue(ins.s1_level_mod_vel)
+        self.s1_level_mod_prs.setValue(ins.s1_level_mod_prs)
+        self.s1_level_mod_ks.setValue(ins.s1_level_mod_ks)
+        self.s1_time_mod_on_vel.setValue(ins.s1_time_mod_on_vel)
+        self.s1_time_mod_off_vel.setValue(ins.s1_time_mod_off_vel)
+        self.s1_time_mod_ks.setValue(ins.s1_time_mod_ks)
+        self.s2_env_level.setValue(ins.s2_envelope_level)
+        self.s2_env_attack.setValue(ins.s2_envelope_attack)
+        self.s2_env_decay.setValue(ins.s2_envelope_decay)
+        self.s2_env_sustain.setValue(ins.s2_envelope_sustain)
+        self.s2_env_release.setValue(ins.s2_envelope_release)
+        self.s2_level_mod_vel.setValue(ins.s2_level_mod_vel)
+        self.s2_level_mod_prs.setValue(ins.s2_level_mod_prs)
+        self.s2_level_mod_ks.setValue(ins.s2_level_mod_ks)
+        self.s2_time_mod_on_vel.setValue(ins.s2_time_mod_on_vel)
+        self.s2_time_mod_off_vel.setValue(ins.s2_time_mod_off_vel)
+        self.s2_time_mod_ks.setValue(ins.s2_time_mod_ks)
+        self.s3_env_level.setValue(ins.s3_envelope_level)
+        self.s3_env_attack.setValue(ins.s3_envelope_attack)
+        self.s3_env_decay.setValue(ins.s3_envelope_decay)
+        self.s3_env_sustain.setValue(ins.s3_envelope_sustain)
+        self.s3_env_release.setValue(ins.s3_envelope_release)
+        self.s3_level_mod_vel.setValue(ins.s3_level_mod_vel)
+        self.s3_level_mod_prs.setValue(ins.s3_level_mod_prs)
+        self.s3_level_mod_ks.setValue(ins.s3_level_mod_ks)
+        self.s3_time_mod_on_vel.setValue(ins.s3_time_mod_on_vel)
+        self.s3_time_mod_off_vel.setValue(ins.s3_time_mod_off_vel)
+        self.s3_time_mod_ks.setValue(ins.s3_time_mod_ks)
+        self.s4_env_level.setValue(ins.s4_envelope_level)
+        self.s4_env_attack.setValue(ins.s4_envelope_attack)
+        self.s4_env_decay.setValue(ins.s4_envelope_decay)
+        self.s4_env_sustain.setValue(ins.s4_envelope_sustain)
+        self.s4_env_release.setValue(ins.s4_envelope_release)
+        self.s4_level_mod_vel.setValue(ins.s4_level_mod_vel)
+        self.s4_level_mod_prs.setValue(ins.s4_level_mod_prs)
+        self.s4_level_mod_ks.setValue(ins.s4_level_mod_ks)
+        self.s4_time_mod_on_vel.setValue(ins.s4_time_mod_on_vel)
+        self.s4_time_mod_off_vel.setValue(ins.s4_time_mod_off_vel)
+        self.s4_time_mod_ks.setValue(ins.s4_time_mod_ks)
+
 
 
 
@@ -119,6 +201,7 @@ class MainUI(Ui_MainWindow):
                 if self._data is not None and 'single_instruments' in self._data:
                     si_nr = name2pos(item.text(col))
                     self.select_instrument(si_nr)
+                    self._ins_item = item
 
 
 
@@ -141,4 +224,8 @@ class MainUI(Ui_MainWindow):
             nr += 1
 
         self.select_instrument(0)
+        self._ins_item = self.treeWidget.topLevelItem(0).child(0)
+
+        self._window.setWindowTitle(window_title)
+
 

@@ -1,20 +1,30 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-01
+# changed by: Oliver Cordes 2023-02-17
 
 
 class K4SingleInstrument(object):
     def __init__(self, data):
-        self._data = data
+        self._data = bytearray(data)
 
     @property
     def name(self):
         return self._data[0:10].decode('utf8').strip()
 
+    def set_name(self, val):
+        while len(val) < 10: val = val + ' '
+        self._data[0:10] = bytearray(val, 'utf8')
+
+
     @property
     def volume(self):
         return self._data[10]
+
+    def set_volume(self, val):
+        print(f'ins->set_volume: {val} ({self.volume})')
+        self._data[10] = val
+
 
     @property
     def effect(self):
@@ -317,23 +327,23 @@ class K4SingleInstrument(object):
         return self._data[74]
 
     @property
-    def s1_level_mode_vel(self):
+    def s1_level_mod_vel(self):
         return self._data[78] - 50 
 
     @property
-    def s1_level_mode_prs(self):
+    def s1_level_mod_prs(self):
         return self._data[82] - 50 
 
     @property
-    def s1_level_mode_ks(self):
+    def s1_level_mod_ks(self):
         return self._data[86] - 50 
 
     @property
-    def s1_time_mod_on_level(self):
+    def s1_time_mod_on_vel(self):
         return self._data[90] - 50 
 
     @property
-    def s1_time_mod_off_level(self):
+    def s1_time_mod_off_vel(self):
         return self._data[94] - 50 
 
     @property
@@ -363,23 +373,23 @@ class K4SingleInstrument(object):
         return self._data[75]
 
     @property
-    def s2_level_mode_vel(self):
+    def s2_level_mod_vel(self):
         return self._data[79] - 50 
 
     @property
-    def s2_level_mode_prs(self):
+    def s2_level_mod_prs(self):
         return self._data[83] - 50 
 
     @property
-    def s2_level_mode_ks(self):
+    def s2_level_mod_ks(self):
         return self._data[87] - 50 
 
     @property
-    def s2_time_mod_on_level(self):
+    def s2_time_mod_on_vel(self):
         return self._data[91] - 50
 
     @property
-    def s2_time_mod_off_level(self):
+    def s2_time_mod_off_vel(self):
         return self._data[95] - 50 
 
     @property
@@ -408,23 +418,23 @@ class K4SingleInstrument(object):
         return self._data[76]
 
     @property
-    def s3_level_mode_vel(self):
+    def s3_level_mod_vel(self):
         return self._data[80] - 50 
 
     @property
-    def s3_level_mode_prs(self):
+    def s3_level_mod_prs(self):
         return self._data[84] - 50
 
     @property
-    def s3_level_mode_ks(self):
+    def s3_level_mod_ks(self):
         return self._data[88] - 50 
 
     @property
-    def s3_time_mod_on_level(self):
+    def s3_time_mod_on_vel(self):
         return self._data[92] - 50 
 
     @property
-    def s3_time_mod_off_level(self):
+    def s3_time_mod_off_vel(self):
         return self._data[96] - 50
 
     @property
@@ -454,23 +464,23 @@ class K4SingleInstrument(object):
         return self._data[77]
 
     @property
-    def s4_level_mode_vel(self):
+    def s4_level_mod_vel(self):
         return self._data[81] - 50
 
     @property
-    def s4_level_mode_prs(self):
+    def s4_level_mod_prs(self):
         return self._data[85] - 50
 
     @property
-    def s4_level_mode_ks(self):
+    def s4_level_mod_ks(self):
         return self._data[89] - 50
 
     @property
-    def s4_time_mod_on_level(self):
+    def s4_time_mod_on_vel(self):
         return self._data[93] - 50
 
     @property
-    def s4_time_mod_off_level(self):
+    def s4_time_mod_off_vel(self):
         return self._data[97] - 50
 
     @property
