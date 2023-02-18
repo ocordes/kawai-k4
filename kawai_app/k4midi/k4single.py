@@ -1,7 +1,7 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-17
+# changed by: Oliver Cordes 2023-02-18
 
 
 class K4SingleInstrument(object):
@@ -43,6 +43,7 @@ class K4SingleInstrument(object):
         while len(val) < 10: val = val + ' '
         self._data[0:10] = bytearray(val, 'utf8')
 
+    # easy template definitions
     volume     = property(*func_template(10))
     effect     = property(*func_template(11,correct=1))
     out_select = property(*func_template(12))
