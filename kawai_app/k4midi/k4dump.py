@@ -26,46 +26,55 @@ class K4Dump(MidiFile):
     def __init__(self, filename):
         MidiFile.__init__(self, filename)
 
-        self._trackdata = self.get_track(0)
+        #self._trackdata = self.get_track(0)
 
 
 
     def parse_midi_stream(self):
-        ofs = 0
+        
+        results = None
+        track_nr = 0
 
         midi_channel_prefix = 0
 
-        data = self._trackdata
-        #while ofs < len(self._trackdata):
-        results = None
-        while len(data) > 0:
-            delta, data = read_delta(data)
-            if data[0] == 0xff:
-                if data[1] == 0x20:
-                    if data[2] == 0x01:
-                        midi_channel_prefix = data[3]
-                        data = data[4:]
-                        print(f'{delta:d} midi_channel_prefix={midi_channel_prefix}')
-                #elif data[1] == 0x01:
-                elif data[1] in range(0x01, 0x08):
-                    # text events 
+        while (track_nr < self._tracks) and (results is None):
+            data = self.get_track(track_nr)
+        
+            while len(data) > 0:
+                delta, data = read_delta(data)
+                if data[0] == 0xff:
                     tlen = data[2]
-                    text = data[3:3+tlen]
-                    print(f'{delta} text={text}')
-                    data = data[3+tlen:]
-                elif data[1] == 0x2f:
-                    if data[2] == 0:
+
+                    if data[1] == 0x20:
+                        midi_channel_prefix = data[3]
+                        print(f'{delta:d} midi_channel_prefix={midi_channel_prefix}')
+                    elif data[1] in range(0x01, 0x08):
+                        # text events 
+                        text = data[3:3+tlen]
+                        print(f'{delta} text={text}')
+                    elif data[1] == 0x2f:
                         print('End of track')
-                        data = data[3:]
+                    elif data[1] == 0x51:
+                        # FF 51 03 tttttt Set Tempo
+                        tttttt = data[3:7]
+                    elif data[1] == 0x58:
+                        # 58 04 nn dd cc bb Time Signature
+                        nn = data[3]
+                        dd = data[4]
+                        cc = data[5]
+                        bb = data[6]                    
+                    else:
+                        raise ValueError(f'Unknown byte 0x{data[1]:x}')
+                    data = data[3+tlen:]
+                elif data[0] == 0xf0:
+                    # sysex message
+                    length, data = read_delta(data[1:])
+                    results = self.k4_dump(data)
+                    data = data[length:]
                 else:
-                    raise ValueError(f'Unknown byte {data[1]:x}')
-            elif data[0] == 0xf0:
-                # sysex message
-                length, data = read_delta(data[1:])
-                results = self.k4_dump(data)
-                data = data[length:]
-            else:
-                raise ValueError(f'Unknown byte {data[0]:x}')
+                    raise ValueError(f'Unknown byte 0x{data[0]:x}')
+
+            track_nr += 1
 
         return results
 

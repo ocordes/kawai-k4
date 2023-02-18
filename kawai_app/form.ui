@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1034</width>
+    <width>1134</width>
     <height>700</height>
    </rect>
   </property>
@@ -59,7 +59,10 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QTabWidget" name="tabWidget">
+       <widget class="QTabWidget" name="Instrument_Widget">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -68,9 +71,12 @@
         </property>
         <property name="minimumSize">
          <size>
-          <width>700</width>
+          <width>800</width>
           <height>620</height>
          </size>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -118,10 +124,10 @@
          <widget class="Line" name="line">
           <property name="geometry">
            <rect>
-            <x>10</x>
+            <x>0</x>
             <y>20</y>
-            <width>681</width>
-            <height>16</height>
+            <width>791</width>
+            <height>20</height>
            </rect>
           </property>
           <property name="orientation">
@@ -417,12 +423,12 @@
            </property>
           </widget>
          </widget>
-         <widget class="QGroupBox" name="groupBox_3">
+         <widget class="QGroupBox" name="si_vib_shape">
           <property name="geometry">
            <rect>
-            <x>500</x>
-            <y>230</y>
-            <width>120</width>
+            <x>400</x>
+            <y>150</y>
+            <width>91</width>
             <height>101</height>
            </rect>
           </property>
@@ -482,11 +488,11 @@
            </property>
           </widget>
          </widget>
-         <widget class="QGroupBox" name="groupBox_4">
+         <widget class="QGroupBox" name="si_wheel_assign">
           <property name="geometry">
            <rect>
-            <x>320</x>
-            <y>240</y>
+            <x>270</x>
+            <y>160</y>
             <width>120</width>
             <height>80</height>
            </rect>
@@ -586,11 +592,16 @@
            <number>100</number>
           </property>
          </widget>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Source</string>
+         </attribute>
          <widget class="QGroupBox" name="groupBox_5">
           <property name="geometry">
            <rect>
-            <x>20</x>
-            <y>260</y>
+            <x>10</x>
+            <y>60</y>
             <width>181</width>
             <height>321</height>
            </rect>
@@ -689,20 +700,20 @@
             <string>Vel Curve:</string>
            </property>
           </widget>
-          <widget class="QSpinBox" name="s1_wave">
+          <widget class="QSpinBoxWave" name="s1_wave">
            <property name="geometry">
             <rect>
-             <x>80</x>
+             <x>40</x>
              <y>20</y>
-             <width>42</width>
+             <width>141</width>
              <height>22</height>
             </rect>
            </property>
            <property name="minimum">
-            <number>1</number>
+            <number>0</number>
            </property>
            <property name="maximum">
-            <number>256</number>
+            <number>255</number>
            </property>
           </widget>
           <widget class="QSpinBox" name="s1_ks_curve">
@@ -710,7 +721,7 @@
             <rect>
              <x>80</x>
              <y>50</y>
-             <width>42</width>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -726,7 +737,7 @@
             <rect>
              <x>80</x>
              <y>80</y>
-             <width>42</width>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -739,7 +750,7 @@
             <rect>
              <x>80</x>
              <y>110</y>
-             <width>42</width>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -750,12 +761,12 @@
             <number>24</number>
            </property>
           </widget>
-          <widget class="QSpinBox" name="s1_fix">
+          <widget class="QSpinBoxKey" name="s1_fix">
            <property name="geometry">
             <rect>
              <x>80</x>
              <y>170</y>
-             <width>42</width>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -768,7 +779,7 @@
             <rect>
              <x>80</x>
              <y>200</y>
-             <width>42</width>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -832,7 +843,781 @@
             <rect>
              <x>80</x>
              <y>290</y>
-             <width>42</width>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>60</y>
+            <width>181</width>
+            <height>321</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>S2</string>
+          </property>
+          <widget class="QLabel" name="label_21">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Wave:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_22">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>50</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>KS Curve:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_23">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>80</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Delay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_24">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>110</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Coarse:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_25">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>170</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fix:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_26">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>200</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fine:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_27">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>290</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Vel Curve:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxWave" name="s2_wave">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_ks_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_delay">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_coarse">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>110</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxKey" name="s2_fix">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>170</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>115</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_fine">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>200</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s2_prs_freq">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>230</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Prs Freq:       </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s2_key_track">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>140</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Key Track:     </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s2_vib_bend">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>260</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Vib / bend:    </string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_vel_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>290</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>60</y>
+            <width>181</width>
+            <height>321</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>S3</string>
+          </property>
+          <widget class="QLabel" name="label_28">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Wave:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_29">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>50</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>KS Curve:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_30">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>80</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Delay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_31">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>110</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Coarse:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_32">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>170</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fix:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_33">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>200</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fine:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_34">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>290</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Vel Curve:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxWave" name="s3_wave">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_ks_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_delay">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_coarse">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>110</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxKey" name="s3_fix">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>170</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>115</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_fine">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>200</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s3_prs_freq">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>230</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Prs Freq:       </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s3_key_track">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>140</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Key Track:     </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s3_vib_bend">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>260</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Vib / bend:    </string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_vel_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>290</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_8">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>60</y>
+            <width>181</width>
+            <height>321</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>S4</string>
+          </property>
+          <widget class="QLabel" name="label_35">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Wave:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_36">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>50</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>KS Curve:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_37">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>80</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Delay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_38">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>110</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Coarse:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_39">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>170</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fix:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_40">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>200</y>
+             <width>58</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Fine:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_41">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>290</y>
+             <width>71</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Vel Curve:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxWave" name="s4_wave">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="maximum">
+            <number>255</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_ks_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_delay">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_coarse">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>110</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxKey" name="s4_fix">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>170</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>115</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_fine">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>200</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s4_prs_freq">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>230</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Prs Freq:       </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s4_key_track">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>140</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Key Track:     </string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="s4_vib_bend">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>260</y>
+             <width>101</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>Vib / bend:    </string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_vel_curve">
+           <property name="geometry">
+            <rect>
+             <x>80</x>
+             <y>290</y>
+             <width>51</width>
              <height>22</height>
             </rect>
            </property>
@@ -845,10 +1630,1221 @@
           </widget>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab_2">
+        <widget class="QWidget" name="tab_3">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <attribute name="title">
-          <string>Tab 2</string>
+          <string>DCA</string>
          </attribute>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>190</y>
+            <width>181</width>
+            <height>361</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>DCA 1:</string>
+          </property>
+          <widget class="QSpinBox" name="s1_env_level">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>30</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_42">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope level:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>60</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_43">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope attack:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>90</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>120</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_env_release">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>150</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_level_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>180</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_level_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>210</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_level_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>240</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>270</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>300</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s1_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>330</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_8">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_14">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_15">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_17">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_18">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_19">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_20">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_44">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_45">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod ks:</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="geometry">
+           <rect>
+            <x>210</x>
+            <y>190</y>
+            <width>181</width>
+            <height>361</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>DCA 2:</string>
+          </property>
+          <widget class="QSpinBox" name="s2_env_level">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>30</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_46">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope level:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>60</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_47">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope attack:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>90</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>120</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_env_release">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>150</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_level_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>180</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_level_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>210</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_level_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>240</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>270</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>300</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s2_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>330</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_48">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_49">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_50">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_51">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_52">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_53">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_54">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_55">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_56">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod ks:</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>190</y>
+            <width>181</width>
+            <height>361</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>DCA 3:</string>
+          </property>
+          <widget class="QSpinBox" name="s3_env_level">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>30</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_57">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope level:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>60</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_58">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope attack:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>90</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>120</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_env_release">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>150</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_level_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>180</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_level_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>210</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_level_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>240</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>270</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>300</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s3_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>330</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_59">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_60">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_61">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_62">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_63">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_64">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_65">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_66">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_67">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod ks:</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_10">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>190</y>
+            <width>181</width>
+            <height>361</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>DCA 4:</string>
+          </property>
+          <widget class="QSpinBox" name="s4_env_level">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>30</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_68">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope level:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>120</x>
+             <y>60</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_69">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>101</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope attack:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>90</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>120</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_env_release">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>150</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_level_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>180</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_level_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>210</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_level_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>240</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>270</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>300</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="s4_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>121</x>
+             <y>330</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_70">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_71">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_72">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Envelope release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_73">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_74">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_75">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_76">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_77">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_78">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Time mod ks:</string>
+           </property>
+          </widget>
+         </widget>
         </widget>
        </widget>
       </item>
@@ -861,7 +2857,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1034</width>
+     <width>1134</width>
      <height>24</height>
     </rect>
    </property>
@@ -870,6 +2866,7 @@
      <string>&amp;File</string>
     </property>
     <addaction name="action_Open"/>
+    <addaction name="actionOpen_Default"/>
     <addaction name="action_Save"/>
     <addaction name="actionSave_As"/>
     <addaction name="separator"/>
@@ -907,7 +2904,27 @@
     <string>&amp;Quit</string>
    </property>
   </action>
+  <action name="actionOpen_Default">
+   <property name="text">
+    <string>Open Default</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QSpinBoxKey</class>
+   <extends>QSpinBox</extends>
+   <header>qtaddons/qspinboxkey.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSpinBoxWave</class>
+   <extends>QSpinBox</extends>
+   <header>qtaddons/qspinboxwave.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
