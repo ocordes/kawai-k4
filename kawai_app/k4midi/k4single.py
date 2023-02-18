@@ -8,35 +8,51 @@ class K4SingleInstrument(object):
     def __init__(self, data):
         self._data = bytearray(data)
 
+    # most functions can be used by templates
+    # which defines the offset, shift-right(read)
+    # shift-left(set) and mask
+
+    def func_template(ofs, shift=0, mask=255, correct=0):
+        def set_f(self, newval):
+            print(f'set value @{ofs}: {newval}')
+            if shift == 0:
+                # no shift
+                self._data[ofs] = newval - correct
+            else:
+                if newval == 1:
+                    self._data |= 1 << shift
+                elif newval == 0:
+                    self._data &= ~(1 << shift)
+                else:
+                    print('cannot set multibits!')
+                    
+        def get_f(self):
+            print(f'get value @{ofs}')
+            b = self._data[ofs]
+            return ((b >> shift) & mask) + correct
+
+        return get_f, set_f
+
+    
     @property
     def name(self):
         return self._data[0:10].decode('utf8').strip()
 
-    def set_name(self, val):
+    @name.setter
+    def name(self, val):
         while len(val) < 10: val = val + ' '
         self._data[0:10] = bytearray(val, 'utf8')
 
-
-    @property
-    def volume(self):
-        return self._data[10]
-
-    def set_volume(self, val):
-        print(f'ins->set_volume: {val} ({self.volume})')
-        self._data[10] = val
-
-
-    @property
-    def effect(self):
-        return self._data[11]+1
-
-    @property
-    def out_select(self):
-        return self._data[12]
+    volume     = property(*func_template(10))
+    effect     = property(*func_template(11,correct=1))
+    out_select = property(*func_template(12))
 
     @property
     def source_mode(self):
         return self._data[13] & 0b11
+
+    def set_source_mode(self, val):
+        pass
 
     @property
     def poly_mode(self):
@@ -82,9 +98,15 @@ class K4SingleInstrument(object):
     def vib_speed(self):
         return self._data[16]
 
+    def set_vib_speed(self, val):
+        self._data[16] = val
+
     @property
     def wheel_dep(self):
         return self._data[17]
+
+    def wheel_dep(self, val):
+        self._data[17] = val
 
     @property
     def auto_bend_time(self):

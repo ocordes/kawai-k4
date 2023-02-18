@@ -9,6 +9,7 @@ from PySide6.QtCore import Slot
 from PySide6 import QtWidgets
 
 from k4midi.k4dump import K4Dump
+from k4midi.k4single import K4SingleInstrument
 
 
 window_title = 'K4 Instrument Editor'
@@ -50,8 +51,9 @@ class MainUI(Ui_MainWindow):
         self.treeWidget.itemClicked.connect(self.onItemClicked)
 
         # define the change functions for all widgets
-        self.si_name.textChanged.connect(self.ins_gen_valueChanged('set_name'))
-        self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('set_volume'))
+        self.si_name.textChanged.connect(self.ins_gen_valueChanged('name'))
+        self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('volume'))
+        self.si_effect.valueChanged.connect(self.ins_gen_valueChanged('effect'))
 
 
     # generator to change a data entry
@@ -64,13 +66,16 @@ class MainUI(Ui_MainWindow):
     def ins_gen_valueChanged(self, funcname):
 
         def valuechanged(val):
-            func = getattr(self._ins, funcname)
-            func(val)
+            func = getattr(K4SingleInstrument, funcname)
+            if type(func) == property:
+               func.fset(self._ins, val)
+            else:
+               func(self._ins, val)
 
             self._bas_changed = True
             self._window.setWindowTitle(window_title+' *')
 
-            if funcname == 'set_name':
+            if funcname == 'name':
                 if self._ins_item is not None:
                    s = self._ins_item.text(0).split()[0]+' - '+val
                    self._ins_item.setText(0, s)
