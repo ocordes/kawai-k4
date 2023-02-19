@@ -1,7 +1,7 @@
 # midifile.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-01-29
+# changed by: Oliver Cordes 2023-02-19
 
 
 def chunk_size(bytes):
@@ -32,16 +32,22 @@ class MidiFile(object):
             raise ValueError(f'Cannot read MIDI file \'{filename}\'')
 
         self._is_midi = self._data[0:4] == b'MThd'
-        self._header_length = chunk_size(self._data[4:8])
-        self._format = two_bytes(self._data[8:10])
-        self._tracks = two_bytes(self._data[10:12])
 
-        print(self._is_midi)
-        print(f'format={self._format}')
-        print(f'length={self._header_length}')
-        print(f'nr_tracks={self._tracks}')
+        print(f'FILE {filename} is MIDI: {self._is_midi}')
 
-        self._header_offset = 8 + self._header_length
+        if self._is_midi:
+            self._header_length = chunk_size(self._data[4:8])
+            self._format = two_bytes(self._data[8:10])
+            self._tracks = two_bytes(self._data[10:12])
+
+            print(f'format={self._format}')
+            print(f'length={self._header_length}')
+            print(f'nr_tracks={self._tracks}')
+
+            self._header_offset = 8 + self._header_length
+
+        else:
+            self._header_offset = 0
 
 
     def get_track(self, nr):
@@ -69,9 +75,4 @@ class MidiFile(object):
 
         data = self._data[start_track:end_track]
         return data
-
-            
-
-    def version(self):
-        return self._format
 

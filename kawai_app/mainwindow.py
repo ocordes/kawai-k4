@@ -35,7 +35,7 @@ class MainWindow(QMainWindow):
         print('File Open')
         fileName = QFileDialog.getOpenFileName(self, translate('main', "Open File"),
                                                         os.getcwd(),
-                                                        translate('main', "MIDI Files (*.mid *.MID *.MIDI)"))
+                                                        translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
         print(fileName)
         if fileName[0] != '':
             self.ui.file_open(fileName[0])
