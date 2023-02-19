@@ -1,7 +1,7 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-18
+# changed by: Oliver Cordes 2023-02-19
 
 
 class K4SingleInstrument(object):
@@ -15,21 +15,28 @@ class K4SingleInstrument(object):
     def func_template(ofs, shift=0, mask=255, correct=0):
         def set_f(self, newval):
             print(f'set value @{ofs}: {newval}')
-            if shift == 0:
-                # no shift
-                self._data[ofs] = newval - correct
-            else:
-                if newval == 1:
-                    self._data |= 1 << shift
-                elif newval == 0:
-                    self._data &= ~(1 << shift)
-                else:
-                    print('cannot set multibits!')
+            print(f'mask={mask}, shift={shift} correct={correct}')
+
+            newval = newval - correct
+            nmask = ~(mask << shift)
+            print(nmask)
+
+            print(f'oldval={self._data[ofs]:0b} {self._data[ofs]}')
+            d = self._data[ofs] & nmask # clear all bits
+
+            print(f'oldval(cleared)={d:0b}')
+            nnewval = newval << shift
+            print(f'val(shifted)={nnewval:0b}')
+            d = d | nnewval
+            print(f'newval={d:0b} {d}')
+            # set the new data
+            self._data[ofs] = d
                     
         def get_f(self):
-            print(f'get value @{ofs}')
-            b = self._data[ofs]
-            return ((b >> shift) & mask) + correct
+            b = ((self._data[ofs] >> shift) & mask) + correct
+            print(f'get value @{ofs} {self._data[ofs]} {self._data[ofs]:0b}')
+            print(f'mask={mask}, shift={shift} correct={correct} -> {b} {b:0b}')
+            return b
 
         return get_f, set_f
 
@@ -44,48 +51,19 @@ class K4SingleInstrument(object):
         self._data[0:10] = bytearray(val, 'utf8')
 
     # easy template definitions
-    volume     = property(*func_template(10))
-    effect     = property(*func_template(11,correct=1))
-    out_select = property(*func_template(12))
+    volume      = property(*func_template(10))
+    effect      = property(*func_template(11,correct=1))
+    out_select  = property(*func_template(12))
+    source_mode = property(*func_template(13, mask=0b11))
+    poly_mode = property(*func_template(13, shift=2, mask=0b11))
+    am12 = property(*func_template(13, shift=4, mask=0b1))
+    am34 = property(*func_template(13, shift=5, mask=0b1))
+    mute_s1 = property(*func_template(14, shift=0, mask=0b1))
+    mute_s2 = property(*func_template(14, shift=1, mask=0b1))
+    mute_s3 = property(*func_template(14, shift=2, mask=0b1))
+    mute_s4 = property(*func_template(14, shift=3, mask=0b1))
+    vib_shape = property(*func_template(14, shift=4, mask=0b11))
 
-    @property
-    def source_mode(self):
-        return self._data[13] & 0b11
-
-    def set_source_mode(self, val):
-        pass
-
-    @property
-    def poly_mode(self):
-        return (self._data[13] >> 2) & 0b11
-
-    @property
-    def am12(self):
-        return (self._data[13] >> 4) & 1
-
-    @property
-    def am34(self):
-        return (self._data[13] >> 5) & 1
-
-    @property
-    def mute_s1(self):
-        return self._data[14] & 1
-
-    @property
-    def mute_s2(self):
-        return (self._data[14] >> 1 ) & 1
-
-    @property
-    def mute_s3(self):
-        return (self._data[14] >> 2 ) & 1
-
-    @property
-    def mute_s4(self):
-        return (self._data[14] >> 3 ) & 1
-
-    @property
-    def vib_shape(self):
-        return (self._data[14] >> 4 ) & 0b11
 
     @property
     def pitch_bend(self):

@@ -1,7 +1,8 @@
 # k4dump.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-01-29
+# changed by: Oliver Cordes 2023-02-19
+
 
 from k4midi.midifile import MidiFile
 
@@ -26,12 +27,15 @@ class K4Dump(MidiFile):
     def __init__(self, filename):
         MidiFile.__init__(self, filename)
 
-        #self._trackdata = self.get_track(0)
-
-
 
     def parse_midi_stream(self):
-        
+        # if not MIDI file, then treat as sysex file
+
+        if not self._is_midi:
+            results = self.k4_dump(self._data[1:])
+            return results
+
+        # assume data is a MIDI file
         results = None
         track_nr = 0
 

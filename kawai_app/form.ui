@@ -173,7 +173,7 @@
            <number>1</number>
           </property>
           <property name="maximum">
-           <number>32</number>
+           <number>64</number>
           </property>
          </widget>
          <widget class="QLabel" name="label_4">
@@ -435,7 +435,7 @@
           <property name="title">
            <string>Vibrato shape:</string>
           </property>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="si_vs_triangle">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -448,7 +448,7 @@
             <string>Triangle</string>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="si_vs_saw">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -461,7 +461,7 @@
             <string>Saw</string>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_3">
+          <widget class="QRadioButton" name="si_vs_square">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -474,7 +474,7 @@
             <string>Square</string>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_4">
+          <widget class="QRadioButton" name="si_vs_random">
            <property name="geometry">
             <rect>
              <x>0</x>
