@@ -63,29 +63,11 @@ class K4SingleInstrument(object):
     mute_s3 = property(*func_template(14, shift=2, mask=0b1))
     mute_s4 = property(*func_template(14, shift=3, mask=0b1))
     vib_shape = property(*func_template(14, shift=4, mask=0b11))
-
-
-    @property
-    def pitch_bend(self):
-        return self._data[15] & 0b1111
-
-    @property
-    def wheel_assign(self):
-        return (self._data[15] >> 4 ) & 0b11
-
-    @property
-    def vib_speed(self):
-        return self._data[16]
-
-    def set_vib_speed(self, val):
-        self._data[16] = val
-
-    @property
-    def wheel_dep(self):
-        return self._data[17]
-
-    def wheel_dep(self, val):
-        self._data[17] = val
+    pitch_bend = property(*func_template(15, shift=0, mask=0b1111))
+    wheel_assign = property(*func_template(15, shift=4, mask=0b11))
+    vib_speed = property(*func_template(16))
+    wheel_dep = property(*func_template(17))
+    
 
     @property
     def auto_bend_time(self):

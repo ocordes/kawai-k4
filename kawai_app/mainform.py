@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-02-19
+# changed by: Oliver Cordes 2023-02-20
 
 from ui_form import Ui_MainWindow
 
@@ -17,6 +17,17 @@ window_title = 'K4 Instrument Editor'
 # helper functions
 def name2pos(name):
     return (ord(name[0]) - ord('A'))*16 + int(name[1:3])-1
+
+
+def generate_button_group(window, buttons):
+    grp = QtWidgets.QButtonGroup(window)
+    nr = 0
+    for btn in buttons:
+        grp.addButton(btn)
+        grp.setId(btn, nr)
+        nr += 1
+
+    return grp
 
 
 class MainUI(Ui_MainWindow):
@@ -56,24 +67,17 @@ class MainUI(Ui_MainWindow):
         self.si_effect.valueChanged.connect(self.ins_gen_valueChanged('effect'))
 
         # create a special button group with ids
-        self.si_source_mode_grp = QtWidgets.QButtonGroup(self._window)
-        self.si_source_mode_grp.addButton(self.si_sm_norm)
-        self.si_source_mode_grp.setId(self.si_sm_norm, 0)
-        self.si_source_mode_grp.addButton(self.si_sm_twin)
-        self.si_source_mode_grp.setId(self.si_sm_twin, 1)
-        self.si_source_mode_grp.addButton(self.si_sm_double)
-        self.si_source_mode_grp.setId(self.si_sm_double, 2)
+        self.si_source_mode_grp = generate_button_group(self._window,
+                                                        [self.si_sm_norm,
+                                                        self.si_sm_twin,
+                                                        self.si_sm_double])
         self.si_source_mode_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_source_mode_grp,'source_mode'))
 
-        self.si_poly_mode_grp = QtWidgets.QButtonGroup(self._window)
-        self.si_poly_mode_grp.addButton(self.si_pm_poly1)
-        self.si_poly_mode_grp.setId(self.si_pm_poly1, 0)
-        self.si_poly_mode_grp.addButton(self.si_pm_poly2)
-        self.si_poly_mode_grp.setId(self.si_pm_poly2, 1)
-        self.si_poly_mode_grp.addButton(self.si_pm_solo1)
-        self.si_poly_mode_grp.setId(self.si_pm_solo1, 2)
-        self.si_poly_mode_grp.addButton(self.si_pm_solo2)
-        self.si_poly_mode_grp.setId(self.si_pm_solo2, 3)
+        self.si_poly_mode_grp = generate_button_group(self._window,
+                                                      [self.si_pm_poly1,
+                                                      self.si_pm_poly2,
+                                                      self.si_pm_solo1,
+                                                      self.si_pm_solo2])
         self.si_poly_mode_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_poly_mode_grp,'poly_mode'))
 
         self.si_am_s12.stateChanged.connect(self.ins_gen_check_buttonClicked('am12'))
@@ -83,16 +87,22 @@ class MainUI(Ui_MainWindow):
         self.si_mute_s3.stateChanged.connect(self.ins_gen_check_buttonClicked('mute_s3'))
         self.si_mute_s4.stateChanged.connect(self.ins_gen_check_buttonClicked('mute_s4'))
 
-        self.si_vib_shape_grp = QtWidgets.QButtonGroup(self._window)
-        self.si_vib_shape_grp.addButton(self.si_vs_triangle)
-        self.si_vib_shape_grp.setId(self.si_vs_triangle, 0)
-        self.si_vib_shape_grp.addButton(self.si_vs_saw)
-        self.si_vib_shape_grp.setId(self.si_vs_saw, 1)
-        self.si_vib_shape_grp.addButton(self.si_vs_square)
-        self.si_vib_shape_grp.setId(self.si_vs_square, 2)
-        self.si_vib_shape_grp.addButton(self.si_vs_random)
-        self.si_vib_shape_grp.setId(self.si_vs_random, 3)
+        self.si_vib_shape_grp = generate_button_group(self._window,
+                                                        [self.si_vs_triangle,
+                                                        self.si_vs_saw,
+                                                        self.si_vs_square,
+                                                        self.si_vs_random])
         self.si_vib_shape_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_vib_shape_grp,'vib_shape'))
+
+        self.si_pitch_bend.valueChanged.connect(self.ins_gen_valueChanged('pitch_bend'))
+
+        self.si_wheel_assign_grp = generate_button_group(self._window,
+                                                            [self.si_wa_vibrato,
+                                                            self.si_wa_lfo,
+                                                            self.si_wa_dcf])
+        self.si_wheel_assign_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_wheel_assign_grp, 'wheel_assign'))
+
+        self.si_vib_speed.valueChanged.connect(self.ins_gen_valueChanged('vib_speed'))
 
 
 
@@ -185,10 +195,13 @@ class MainUI(Ui_MainWindow):
         self.si_mute_s2.setChecked(ins.mute_s2)
         self.si_mute_s3.setChecked(ins.mute_s3)
         self.si_mute_s4.setChecked(ins.mute_s4)
-        self.si_wheel_assign.children()[ins.wheel_assign].setChecked(True)
         self.si_vib_shape.children()[ins.vib_shape].setChecked(True)
-        self.si_am_s12.setChecked(ins.am12)
-        self.si_am_s34.setChecked(ins.am34)
+        self.si_pitch_bend.setValue(ins.pitch_bend)
+        self.si_wheel_assign.children()[ins.wheel_assign].setChecked(True)
+        self.si_vib_speed.setValue(ins.vib_speed)
+
+
+
         self.s1_wave.setValue(ins.s1_wave_select)
         self.s1_ks_curve.setValue(ins.s1_ks_curve)
         self.s1_delay.setValue(ins.s1_delay)
