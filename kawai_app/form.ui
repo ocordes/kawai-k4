@@ -500,7 +500,7 @@
           <property name="title">
            <string>Wheel assign:</string>
           </property>
-          <widget class="QRadioButton" name="radioButton_5">
+          <widget class="QRadioButton" name="si_wa_vibrato">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -513,7 +513,7 @@
             <string>Vibrato</string>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_6">
+          <widget class="QRadioButton" name="si_wa_lfo">
            <property name="geometry">
             <rect>
              <x>0</x>
@@ -526,7 +526,7 @@
             <string>LFO</string>
            </property>
           </widget>
-          <widget class="QRadioButton" name="radioButton_7">
+          <widget class="QRadioButton" name="si_wa_dcf">
            <property name="geometry">
             <rect>
              <x>0</x>
