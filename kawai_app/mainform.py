@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-02-20
+# changed by: Oliver Cordes 2023-02-25
 
 from ui_form import Ui_MainWindow
 
@@ -103,6 +103,30 @@ class MainUI(Ui_MainWindow):
         self.si_wheel_assign_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_wheel_assign_grp, 'wheel_assign'))
 
         self.si_vib_speed.valueChanged.connect(self.ins_gen_valueChanged('vib_speed'))
+        self.si_wheel_dep.valueChanged.connect(self.ins_gen_valueChanged('wheel_dep'))
+        self.si_auto_bend_time.valueChanged.connect(self.ins_gen_valueChanged('auto_bend_time'))
+        self.si_auto_bend_depth.valueChanged.connect(self.ins_gen_valueChanged('auto_bend_depth'))
+        self.si_auto_bend_ks_time.valueChanged.connect(self.ins_gen_valueChanged('auto_bend_ks_time'))
+        self.si_auto_bend_vel_dep.valueChanged.connect(self.ins_gen_valueChanged('auto_bend_vel_dep'))
+        self.si_vib_prs_vib.valueChanged.connect(self.ins_gen_valueChanged('vib_prs_vib'))
+        self.si_vibrato_dep.valueChanged.connect(self.ins_gen_valueChanged('vibrato_dep'))
+
+        self.si_lfo_shape_grp = generate_button_group(self._window,
+                                                        [self.si_ls_triangle,
+                                                        self.si_ls_saw,
+                                                        self.si_ls_square,
+                                                        self.si_ls_random])
+        self.si_lfo_shape_grp.buttonClicked.connect(self.ins_gen_radio_buttonClicked(self.si_lfo_shape_grp,'lfo_shape'))
+        self.si_lfo_speed.valueChanged.connect(self.ins_gen_valueChanged('lfo_speed'))
+        self.si_lfo_delay.valueChanged.connect(self.ins_gen_valueChanged('lfo_delay'))
+        self.si_lfo_dep.valueChanged.connect(self.ins_gen_valueChanged('lfo_dep'))
+        self.si_lfo_prs_dep.valueChanged.connect(self.ins_gen_valueChanged('lfo_prs_dep'))
+        self.si_pres_freq.valueChanged.connect(self.ins_gen_valueChanged('pres_freq'))
+
+        self.pb_load.clicked.connect(self.load_instrument)
+        self.pb_save.clicked.connect(self.save_instrument)
+        self.pb_copy.clicked.connect(self.copy_instrument)
+        self.pb_paste.clicked.connect(self.paste_instrument)
 
 
 
@@ -199,8 +223,19 @@ class MainUI(Ui_MainWindow):
         self.si_pitch_bend.setValue(ins.pitch_bend)
         self.si_wheel_assign.children()[ins.wheel_assign].setChecked(True)
         self.si_vib_speed.setValue(ins.vib_speed)
-
-
+        self.si_wheel_dep.setValue(ins.wheel_dep)
+        self.si_auto_bend_time.setValue(ins.auto_bend_time)
+        self.si_auto_bend_depth.setValue(ins.auto_bend_depth)
+        self.si_auto_bend_ks_time.setValue(ins.auto_bend_ks_time)
+        self.si_auto_bend_vel_dep.setValue(ins.auto_bend_vel_dep)
+        self.si_vib_prs_vib.setValue(ins.vib_prs_vib)
+        self.si_vibrato_dep.setValue(ins.vibrato_dep)
+        self.si_lfo_shape.children()[ins.lfo_shape].setChecked(True)
+        self.si_lfo_speed.setValue(ins.lfo_speed)
+        self.si_lfo_delay.setValue(ins.lfo_delay)
+        self.si_lfo_dep.setValue(ins.lfo_dep)
+        self.si_lfo_prs_dep.setValue(ins.lfo_prs_dep)
+        self.si_pres_freq.setValue(ins.pres_freq)
 
         self.s1_wave.setValue(ins.s1_wave_select)
         self.s1_ks_curve.setValue(ins.s1_ks_curve)
@@ -310,6 +345,21 @@ class MainUI(Ui_MainWindow):
                     self.select_instrument(si_nr)
 
 
+
+    def load_instrument(self):
+        print('Load instrument')
+
+
+    def save_instrument(self):
+        print('Save instrument')
+
+
+    def copy_instrument(self):
+        print('Copy instrument')
+
+
+    def paste_instrument(self):
+        print('Paste instrument')
 
 
 

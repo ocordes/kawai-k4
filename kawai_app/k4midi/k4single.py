@@ -1,7 +1,7 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-19
+# changed by: Oliver Cordes 2023-02-25
 
 
 class K4SingleInstrument(object):
@@ -66,56 +66,19 @@ class K4SingleInstrument(object):
     pitch_bend = property(*func_template(15, shift=0, mask=0b1111))
     wheel_assign = property(*func_template(15, shift=4, mask=0b11))
     vib_speed = property(*func_template(16))
-    wheel_dep = property(*func_template(17))
-    
-
-    @property
-    def auto_bend_time(self):
-        return self._data[18]
-
-    @property
-    def auto_bend_depth(self):
-        return self._data[19]
-
-    @property
-    def auto_bend_ks_time(self):
-        return self._data[20]
-    
-    @property
-    def auto_bend_vel_dep(self):
-        return self._data[21]
-
-    @property
-    def vib_prs_vib(self):
-        return self._data[22]
-
-    @property
-    def vibrato_dep(self):
-        return self._data[23]
-
-    @property
-    def lfo_shape(self):
-        return self._data[24]
-
-    @property
-    def lfo_speed(self):
-        return self._data[25]
-
-    @property
-    def lfo_delay(self):
-        return self._data[26]
-    
-    @property
-    def lfo_dep(self):
-        return self._data[27]
-
-    @property
-    def lfo_prs_dep(self):
-        return self._data[28]
-
-    @property
-    def pres_freq(self):
-        return self._data[29]
+    wheel_dep = property(*func_template(17, correct=-50))
+    auto_bend_time = property(*func_template(18))
+    auto_bend_depth = property(*func_template(19, correct=-50))
+    auto_bend_ks_time = property(*func_template(20, correct=-50))
+    auto_bend_vel_dep = property(*func_template(21, correct=-50))
+    vib_prs_vib = property(*func_template(22, correct=-50))
+    vibrato_dep = property(*func_template(23, correct=-50))
+    lfo_shape = property(*func_template(24, mask=0b11))
+    lfo_speed = property(*func_template(25))
+    lfo_delay = property(*func_template(26))
+    lfo_dep = property(*func_template(27, correct=-50))
+    lfo_prs_dep = property(*func_template(28, correct=-50))
+    pres_freq = property(*func_template(29, correct=-50))
 
 
     # sources
