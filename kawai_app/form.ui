@@ -387,7 +387,7 @@
          <widget class="QGroupBox" name="groupBox_2">
           <property name="geometry">
            <rect>
-            <x>520</x>
+            <x>270</x>
             <y>150</y>
             <width>161</width>
             <height>41</height>
@@ -426,8 +426,8 @@
          <widget class="QGroupBox" name="si_vib_shape">
           <property name="geometry">
            <rect>
-            <x>400</x>
-            <y>150</y>
+            <x>430</x>
+            <y>240</y>
             <width>91</width>
             <height>101</height>
            </rect>
@@ -492,7 +492,7 @@
           <property name="geometry">
            <rect>
             <x>270</x>
-            <y>160</y>
+            <y>240</y>
             <width>120</width>
             <height>80</height>
            </rect>
@@ -591,6 +591,472 @@
           <property name="maximum">
            <number>100</number>
           </property>
+         </widget>
+         <widget class="QLabel" name="label_79">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>170</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Wheel dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_wheel_dep">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>170</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_80">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>210</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Auto bend time:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_81">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>240</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Auto bend depth:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_82">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>270</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Auto bend ks time:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_83">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>300</y>
+            <width>121</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Auto bend vel dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_auto_bend_vel_dep">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>300</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_auto_bend_ks_time">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>270</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_auto_bend_depth">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>240</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_auto_bend_time">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>210</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_84">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>340</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Vibrato prs&gt;vib:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_85">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>370</y>
+            <width>91</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Vibrato dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_vib_prs_vib">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>340</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_vibrato_dep">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>370</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="si_lfo_shape">
+          <property name="geometry">
+           <rect>
+            <x>560</x>
+            <y>240</y>
+            <width>91</width>
+            <height>101</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>LFO shape:</string>
+          </property>
+          <widget class="QRadioButton" name="si_ls_triangle">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>20</y>
+             <width>99</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Triangle</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="si_ls_saw">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>40</y>
+             <width>99</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Saw</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="si_ls_square">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>60</y>
+             <width>99</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Square</string>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="si_ls_random">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>80</y>
+             <width>99</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Random</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QLabel" name="label_86">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>410</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO speed:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_87">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>440</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO delay:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_88">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>470</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO dep:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_89">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>500</y>
+            <width>101</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO prs&gt;dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_speed">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>410</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_delay">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>440</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_dep">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>470</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_prs_dep">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>500</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_90">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>540</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pres&gt;freq:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_pres_freq">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>540</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_11">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>380</y>
+            <width>541</width>
+            <height>191</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>IO Functions</string>
+          </property>
+          <widget class="QPushButton" name="pb_load">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>30</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_save">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>70</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_copy">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>30</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Copy</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="pb_paste">
+           <property name="geometry">
+            <rect>
+             <x>170</x>
+             <y>70</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Paste</string>
+           </property>
+          </widget>
          </widget>
         </widget>
         <widget class="QWidget" name="tab_2">
