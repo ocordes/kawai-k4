@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-02-25
+# changed by: Oliver Cordes 2023-02-27
 
 from ui_form import Ui_MainWindow
 
@@ -123,6 +123,41 @@ class MainUI(Ui_MainWindow):
         self.si_lfo_prs_dep.valueChanged.connect(self.ins_gen_valueChanged('lfo_prs_dep'))
         self.si_pres_freq.valueChanged.connect(self.ins_gen_valueChanged('pres_freq'))
 
+        # LFO1/DCF1
+        self.si_lfo1_cutoff.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff'))
+        self.si_lfo1_resonance.valueChanged.connect(self.ins_gen_valueChanged('lfo1_resonance'))
+        self.si_lfo1_switch.toggled.connect(self.ins_gen_toggled('lfo1_switch'))
+        self.si_lfo1_cutoff_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff_mod_vel'))
+        self.si_lfo1_cutoff_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff_mod_prs'))
+        self.si_lfo1_cutoff_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff_mod_ks'))
+        self.si_dcf1_env_dep.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_dep'))
+        self.si_dcf1_env_vel_dep.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_vel_dep'))
+        self.si_dcf1_env_attack.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_attack'))
+        self.si_dcf1_env_decay.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_decay'))
+        self.si_dcf1_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_sustain'))
+        self.si_dcf1_env_release.valueChanged.connect(self.ins_gen_valueChanged('dcf1_env_release'))
+        self.si_dcf1_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('dcf1_time_mod_on_vel'))
+        self.si_dcf1_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('dcf1_time_mod_off_vel'))
+        self.si_dcf1_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('dcf1_time_mod_ks'))
+
+        # LFO2/DCF2
+        self.si_lfo2_cutoff.valueChanged.connect(self.ins_gen_valueChanged('lfo2_cutoff'))
+        self.si_lfo2_resonance.valueChanged.connect(self.ins_gen_valueChanged('lfo2_resonance'))
+        self.si_lfo2_switch.toggled.connect(self.ins_gen_toggled('lfo2_switch'))
+        self.si_lfo2_cutoff_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('lfo2_cutoff_mod_vel'))
+        self.si_lfo2_cutoff_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('lfo2_cutoff_mod_prs'))
+        self.si_lfo2_cutoff_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('lfo2_cutoff_mod_ks'))
+        self.si_dcf2_env_dep.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_dep'))
+        self.si_dcf2_env_vel_dep.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_vel_dep'))
+        self.si_dcf2_env_attack.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_attack'))
+        self.si_dcf2_env_decay.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_decay'))
+        self.si_dcf2_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_sustain'))
+        self.si_dcf2_env_release.valueChanged.connect(self.ins_gen_valueChanged('dcf2_env_release'))
+        self.si_dcf2_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('dcf2_time_mod_on_vel'))
+        self.si_dcf2_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('dcf2_time_mod_off_vel'))
+        self.si_dcf2_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('dcf2_time_mod_ks'))
+
+
         self.pb_load.clicked.connect(self.load_instrument)
         self.pb_save.clicked.connect(self.save_instrument)
         self.pb_copy.clicked.connect(self.copy_instrument)
@@ -200,6 +235,24 @@ class MainUI(Ui_MainWindow):
                 func(self._ins, val)
 
         return statechanged
+
+
+    def ins_gen_toggled(self, funcname):
+
+        def toggled(checked):
+            if self._ins is None:
+                return
+
+            print('radio button toggled', checked)
+
+            # the id is the bit mask of the pressed button
+            func = getattr(K4SingleInstrument, funcname)
+            if type(func) == property:
+                func.fset(self._ins, checked)
+            else:
+                func(self._ins, checked)
+
+        return toggled
 
 
     def select_instrument(self, si_nr):
@@ -323,6 +376,39 @@ class MainUI(Ui_MainWindow):
         self.s4_time_mod_off_vel.setValue(ins.s4_time_mod_off_vel)
         self.s4_time_mod_ks.setValue(ins.s4_time_mod_ks)
 
+        # LFO 1
+        self.si_lfo1_cutoff.setValue(ins.lfo1_cutoff)
+        self.si_lfo1_resonance.setValue(ins.lfo1_resonance)
+        self.si_lfo1_switch.setChecked(ins.lfo1_switch)
+        self.si_lfo1_cutoff_mod_vel.setValue(ins.lfo1_cutoff_mod_vel)
+        self.si_lfo1_cutoff_mod_prs.setValue(ins.lfo1_cutoff_mod_prs)
+        self.si_lfo1_cutoff_mod_ks.setValue(ins.lfo1_cutoff_mod_ks)
+        self.si_dcf1_env_dep.setValue(ins.dcf1_env_dep)
+        self.si_dcf1_env_vel_dep.setValue(ins.dcf1_env_vel_dep)
+        self.si_dcf1_env_attack.setValue(ins.dcf1_env_attack)
+        self.si_dcf1_env_decay.setValue(ins.dcf1_env_decay)
+        self.si_dcf1_env_sustain.setValue(ins.dcf1_env_sustain)
+        self.si_dcf1_env_release.setValue(ins.dcf1_env_release)
+        self.si_dcf1_time_mod_on_vel.setValue(ins.dcf1_time_mod_on_vel)
+        self.si_dcf1_time_mod_off_vel.setValue(ins.dcf1_time_mod_off_vel)
+        self.si_dcf1_time_mod_ks.setValue(ins.dcf1_time_mod_ks)
+
+        # LFO 2
+        self.si_lfo2_cutoff.setValue(ins.lfo2_cutoff)
+        self.si_lfo2_resonance.setValue(ins.lfo2_resonance)
+        self.si_lfo2_switch.setChecked(ins.lfo2_switch)
+        self.si_lfo2_cutoff_mod_vel.setValue(ins.lfo2_cutoff_mod_vel)
+        self.si_lfo2_cutoff_mod_prs.setValue(ins.lfo2_cutoff_mod_prs)
+        self.si_lfo2_cutoff_mod_ks.setValue(ins.lfo2_cutoff_mod_ks)
+        self.si_dcf2_env_dep.setValue(ins.dcf2_env_dep)
+        self.si_dcf2_env_vel_dep.setValue(ins.dcf2_env_vel_dep)
+        self.si_dcf2_env_attack.setValue(ins.dcf2_env_attack)
+        self.si_dcf2_env_decay.setValue(ins.dcf2_env_decay)
+        self.si_dcf2_env_sustain.setValue(ins.dcf2_env_sustain)
+        self.si_dcf2_env_release.setValue(ins.dcf2_env_release)
+        self.si_dcf2_time_mod_on_vel.setValue(ins.dcf2_time_mod_on_vel)
+        self.si_dcf2_time_mod_off_vel.setValue(ins.dcf2_time_mod_off_vel)
+        self.si_dcf2_time_mod_ks.setValue(ins.dcf2_time_mod_ks)
 
 
 

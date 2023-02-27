@@ -1,7 +1,7 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-25
+# changed by: Oliver Cordes 2023-02-27
 
 
 class K4SingleInstrument(object):
@@ -432,3 +432,37 @@ class K4SingleInstrument(object):
     @property
     def s4_time_mod_ks(self):
         return self._data[101] - 50
+
+    # LFO1/DCF1
+    lfo1_cutoff = property(*func_template(102))
+    lfo1_resonance = property(*func_template(104, mask=0b111, correct=1))
+    lfo1_switch = property(*func_template(104, shift=3, mask=0b1))
+    lfo1_cutoff_mod_vel = property(*func_template(106, correct=-50))
+    lfo1_cutoff_mod_prs = property(*func_template(108, correct=-50))
+    lfo1_cutoff_mod_ks = property(*func_template(110, correct=-50))
+    dcf1_env_dep = property(*func_template(112, correct=-50))
+    dcf1_env_vel_dep = property(*func_template(114, correct=-50))
+    dcf1_env_attack = property(*func_template(116))
+    dcf1_env_decay = property(*func_template(118))
+    dcf1_env_sustain = property(*func_template(120))
+    dcf1_env_release = property(*func_template(122))
+    dcf1_time_mod_on_vel = property(*func_template(124, correct=-50))
+    dcf1_time_mod_off_vel = property(*func_template(126, correct=-50))
+    dcf1_time_mod_ks = property(*func_template(128, correct = -50))
+
+    # LFO2/DCF2
+    lfo2_cutoff = property(*func_template(103))
+    lfo2_resonance = property(*func_template(105, mask=0b111, correct=1))
+    lfo2_switch = property(*func_template(105, shift=3, mask=0b1))
+    lfo2_cutoff_mod_vel = property(*func_template(107, correct=-50))
+    lfo2_cutoff_mod_prs = property(*func_template(109, correct=-50))
+    lfo2_cutoff_mod_ks = property(*func_template(111, correct=-50))
+    dcf2_env_dep = property(*func_template(113, correct=-50))
+    dcf2_env_vel_dep = property(*func_template(115, correct=-50))
+    dcf2_env_attack = property(*func_template(117))
+    dcf2_env_decay = property(*func_template(119))
+    dcf2_env_sustain = property(*func_template(121))
+    dcf2_env_release = property(*func_template(123))
+    dcf2_time_mod_on_vel = property(*func_template(125, correct=-50))
+    dcf2_time_mod_off_vel = property(*func_template(127, correct=-50))
+    dcf2_time_mod_ks = property(*func_template(129, correct=-50))
