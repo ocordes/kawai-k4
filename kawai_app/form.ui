@@ -76,7 +76,7 @@
          </size>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -853,116 +853,6 @@
             <string>Random</string>
            </property>
           </widget>
-         </widget>
-         <widget class="QLabel" name="label_86">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>410</y>
-            <width>111</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>LFO speed:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_87">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>440</y>
-            <width>111</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>LFO delay:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_88">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>470</y>
-            <width>111</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>LFO dep:</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_89">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>500</y>
-            <width>101</width>
-            <height>21</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>LFO prs&gt;dep:</string>
-          </property>
-         </widget>
-         <widget class="QSpinBox" name="si_lfo_speed">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>410</y>
-            <width>42</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-         </widget>
-         <widget class="QSpinBox" name="si_lfo_delay">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>440</y>
-            <width>42</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="maximum">
-           <number>100</number>
-          </property>
-         </widget>
-         <widget class="QSpinBox" name="si_lfo_dep">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>470</y>
-            <width>42</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="minimum">
-           <number>-50</number>
-          </property>
-          <property name="maximum">
-           <number>50</number>
-          </property>
-         </widget>
-         <widget class="QSpinBox" name="si_lfo_prs_dep">
-          <property name="geometry">
-           <rect>
-            <x>130</x>
-            <y>500</y>
-            <width>42</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="minimum">
-           <number>-50</number>
-          </property>
-          <property name="maximum">
-           <number>50</number>
-          </property>
          </widget>
          <widget class="QLabel" name="label_90">
           <property name="geometry">
@@ -3310,6 +3200,901 @@
             <string>Time mod ks:</string>
            </property>
           </widget>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>LFO/DCF</string>
+         </attribute>
+         <widget class="QGroupBox" name="groupBox_12">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>20</y>
+            <width>231</width>
+            <height>481</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>LFO 1</string>
+          </property>
+          <widget class="QLabel" name="label_91">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo1_cutoff">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>30</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_92">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Resonance:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_93">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_94">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_95">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo1_resonance">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>60</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="si_lfo1_switch">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>191</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>LFO Switch                             </string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo1_cutoff_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>120</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo1_cutoff_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>150</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo1_cutoff_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>180</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_96">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env dep:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_97">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env vel dep:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_98">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env attack:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_99">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_100">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_101">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>360</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_102">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>390</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_103">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>420</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_104">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>450</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_dep">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>210</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_vel_dep">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>240</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>270</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>300</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>330</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_env_release">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>360</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>390</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>420</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf1_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>450</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_13">
+          <property name="geometry">
+           <rect>
+            <x>550</x>
+            <y>20</y>
+            <width>231</width>
+            <height>481</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>LFO 2</string>
+          </property>
+          <widget class="QLabel" name="label_105">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo2_cutoff">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>30</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_106">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Resonance:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_107">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>180</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_108">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>120</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_109">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>150</y>
+             <width>161</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Cut off mod prs:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo2_resonance">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>60</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>8</number>
+           </property>
+          </widget>
+          <widget class="QRadioButton" name="si_lfo2_switch">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>90</y>
+             <width>191</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string>LFO Switch                             </string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo2_cutoff_mod_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>120</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo2_cutoff_mod_prs">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>150</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_lfo2_cutoff_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>180</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_110">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>210</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env dep:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_111">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>240</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env vel dep:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_112">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>270</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env attack:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_113">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>300</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env decay:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_114">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>330</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env sustain:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_115">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>360</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF env release:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_116">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>390</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod on vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_117">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>420</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod off vel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_118">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>450</y>
+             <width>151</width>
+             <height>21</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>DCF time mod ks:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_dep">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>210</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_vel_dep">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>240</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_attack">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>270</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_decay">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>300</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_sustain">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>330</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_env_release">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>360</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_time_mod_on_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>390</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_time_mod_off_vel">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>420</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="si_dcf2_time_mod_ks">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>450</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_speed">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>50</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_86">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>50</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO speed:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_87">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>80</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO delay:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_delay">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>80</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_88">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>110</y>
+            <width>111</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_dep">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>110</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_89">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>140</y>
+            <width>101</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>LFO prs&gt;dep:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="si_lfo_prs_dep">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>140</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>-50</number>
+          </property>
+          <property name="maximum">
+           <number>50</number>
+          </property>
          </widget>
         </widget>
        </widget>
