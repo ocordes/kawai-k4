@@ -1,12 +1,40 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-02-27
+# changed by: Oliver Cordes 2023-03-11
 
 
 class K4SingleInstrument(object):
     def __init__(self, data):
         self._data = bytearray(data)
+
+        #self.verify_checksum()
+
+
+    def verify_checksum(self):
+        sum = 0
+        for i in self._data[:-1]:
+            sum += i
+        sum += 0xa5
+        sum &= 0b1111111
+
+        return sum == self._data[-1]
+
+
+    # update_checksum
+    #
+    # updates the checksum field (last byte in dataarray)
+    # chksum = sum(b[0]-b[129]) + hex A5 -> last 7 bits
+    def update_checksum(self):
+        sum = 0
+        for i in self._data[:-1]:
+            sum += i
+        sum += 0xa5
+        sum &= 0b1111111
+
+        #print(f'change checksum from {self._data[-1]:x} to {sum:x}')
+        self._data[-1] = sum
+
 
     # most functions can be used by templates
     # which defines the offset, shift-right(read)
@@ -15,22 +43,25 @@ class K4SingleInstrument(object):
     def func_template(ofs, shift=0, mask=255, correct=0):
         def set_f(self, newval):
             print(f'set value @{ofs}: {newval}')
-            print(f'mask={mask}, shift={shift} correct={correct}')
+            #print(f'mask={mask}, shift={shift} correct={correct}') 
 
             newval = newval - correct
             nmask = ~(mask << shift)
-            print(nmask)
+            #print(nmask)
 
-            print(f'oldval={self._data[ofs]:0b} {self._data[ofs]}')
+            #print(f'oldval={self._data[ofs]:0b} {self._data[ofs]}')
             d = self._data[ofs] & nmask # clear all bits
 
-            print(f'oldval(cleared)={d:0b}')
+            #print(f'oldval(cleared)={d:0b}')
             nnewval = newval << shift
-            print(f'val(shifted)={nnewval:0b}')
+            #print(f'val(shifted)={nnewval:0b}')
             d = d | nnewval
             print(f'newval={d:0b} {d}')
             # set the new data
             self._data[ofs] = d
+
+            self.update_checksum()
+
                     
         def get_f(self):
             b = ((self._data[ofs] >> shift) & mask) + correct
@@ -84,21 +115,22 @@ class K4SingleInstrument(object):
     # sources
 
     # Source 1
-    @property
-    def s1_delay(self):
-        return self._data[30] 
-
+    s1_delay = property(*func_template(30))
+    
     @property
     def s1_wave_select(self):
         return ((self._data[34] & 1)<<7 | (self._data[38]))
 
-    @property    
-    def s1_ks_curve(self):
-        return (self._data[34] >> 4) + 1
+    @s1_wave_select.setter
+    def s1_wave_select(self, val):
+        print(f's1_wave_select={val}')
+        self._data[38] = val & 0b1111111
+        self._data[34] = (val >> 7) & 1
 
-    @property
-    def s1_coarse(self):
-        return (self._data[42] & 0b111111) - 24
+
+    s1_ks_curve = property(*func_template(34, shift=4, correct=1))
+    s1_coarse = property(*func_template(42, mask=0b111111, correct=-24))
+
 
     @property
     def s1_key_track(self):
