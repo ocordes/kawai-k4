@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-02-27
+# changed by: Oliver Cordes 2023-03-11
 
 from ui_form import Ui_MainWindow
 
@@ -41,7 +41,26 @@ class MainUI(Ui_MainWindow):
         self._ins      = None
         self._ins_item = None
 
+        self._edit_mode = False
         self._has_changed = False
+
+
+    # update_status
+    #
+    # if the editor is in edit-mode, then change the flag
+    def update_status(self):
+        if self._edit_mode:
+            self._has_changed = True
+
+            self._window.setWindowTitle(window_title+' *')
+
+
+    def lock_status(self):
+        self._edit_mode = False
+
+
+    def unlock_status(self):
+        self._edit_mode = True
 
 
     def setupUi(self, window):
@@ -123,6 +142,12 @@ class MainUI(Ui_MainWindow):
         self.si_lfo_prs_dep.valueChanged.connect(self.ins_gen_valueChanged('lfo_prs_dep'))
         self.si_pres_freq.valueChanged.connect(self.ins_gen_valueChanged('pres_freq'))
 
+        # SOURCES
+        self.s1_wave.valueChanged.connect(self.ins_gen_valueChanged('s1_wave_select'))
+        self.s1_delay.valueChanged.connect(self.ins_gen_valueChanged('s1_delay'))
+        self.s1_ks_curve.valueChanged.connect(self.ins_gen_valueChanged('s1_ks_curve'))
+        self.s1_coarse.valueChanged.connect(self.ins_gen_valueChanged('s1_coarse'))
+
         # LFO1/DCF1
         self.si_lfo1_cutoff.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff'))
         self.si_lfo1_resonance.valueChanged.connect(self.ins_gen_valueChanged('lfo1_resonance'))
@@ -184,8 +209,7 @@ class MainUI(Ui_MainWindow):
             else:
                func(self._ins, val)
 
-            self._bas_changed = True
-            self._window.setWindowTitle(window_title+' *')
+            self.update_status()
 
             if funcname == 'name':
                 if self._ins_item is not None:
@@ -211,6 +235,8 @@ class MainUI(Ui_MainWindow):
             else:
                 func(self._ins, id)
 
+            self.update_status()
+
         return buttonclicked
 
 
@@ -234,6 +260,8 @@ class MainUI(Ui_MainWindow):
             else:
                 func(self._ins, val)
 
+            self.update_status()
+
         return statechanged
 
 
@@ -252,10 +280,13 @@ class MainUI(Ui_MainWindow):
             else:
                 func(self._ins, checked)
 
+            self.update_status()
+
         return toggled
 
 
     def select_instrument(self, si_nr):
+        self.lock_status()
         # selects the si_nr'th instrument
         ins = self._data['single_instruments'][si_nr]
         self._ins = ins
@@ -410,6 +441,7 @@ class MainUI(Ui_MainWindow):
         self.si_dcf2_time_mod_off_vel.setValue(ins.dcf2_time_mod_off_vel)
         self.si_dcf2_time_mod_ks.setValue(ins.dcf2_time_mod_ks)
 
+        self.unlock_status()
 
 
     @Slot(QtWidgets.QTreeWidgetItem, int)
