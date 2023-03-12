@@ -1163,7 +1163,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.Instrument_Widget.setCurrentIndex(3)
+        self.Instrument_Widget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
