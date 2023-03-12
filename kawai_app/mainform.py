@@ -1,12 +1,19 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-03-11
+# changed by: Oliver Cordes 2023-03-12
+
+import os
 
 from ui_form import Ui_MainWindow
 
 from PySide6.QtCore import Slot
 from PySide6 import QtWidgets
+
+from PySide6.QtWidgets import QFileDialog
+
+from PySide6.QtCore import QCoreApplication
+translate = QCoreApplication.translate
 
 from k4midi.k4dump import K4Dump
 from k4midi.k4single import K4SingleInstrument
@@ -31,28 +38,33 @@ def generate_button_group(window, buttons):
 
 
 class MainUI(Ui_MainWindow):
-    def __init__(self, app):
+    def __init__(self, app, window):
         #Ui_MainWindow.__init__(self)
         super().__init__()
-        self._app = app
+        self._app         = app
+        self._window      = window
 
-        self._data = None
+        self._data        = None
 
-        self._ins      = None
-        self._ins_item = None
+        self._si_nr       = 0
+        self._ins         = None
+        self._ins_item    = None
 
-        self._edit_mode = False
+        self._edit_mode   = False
         self._has_changed = False
+        self._read_only   = True
 
 
     # update_status
     #
     # if the editor is in edit-mode, then change the flag
     def update_status(self):
-        if self._edit_mode:
+        if self._edit_mode and not self._read_only:
             self._has_changed = True
 
             self._window.setWindowTitle(window_title+' *')
+        else:
+            self._window.setWindowTitle(window_title)
 
 
     def lock_status(self):
@@ -142,11 +154,105 @@ class MainUI(Ui_MainWindow):
         self.si_lfo_prs_dep.valueChanged.connect(self.ins_gen_valueChanged('lfo_prs_dep'))
         self.si_pres_freq.valueChanged.connect(self.ins_gen_valueChanged('pres_freq'))
 
-        # SOURCES
+        # SOURCES 1
         self.s1_wave.valueChanged.connect(self.ins_gen_valueChanged('s1_wave_select'))
         self.s1_delay.valueChanged.connect(self.ins_gen_valueChanged('s1_delay'))
         self.s1_ks_curve.valueChanged.connect(self.ins_gen_valueChanged('s1_ks_curve'))
         self.s1_coarse.valueChanged.connect(self.ins_gen_valueChanged('s1_coarse'))
+        self.s1_key_track.stateChanged.connect(self.ins_gen_check_buttonClicked('s1_key_track'))
+        self.s1_fix.valueChanged.connect(self.ins_gen_valueChanged('s1_fix'))
+        self.s1_fine.valueChanged.connect(self.ins_gen_valueChanged('s1_fine'))
+        self.s1_prs_freq.stateChanged.connect(self.ins_gen_check_buttonClicked('s1_prs_freq'))
+        self.s1_vib_bend.stateChanged.connect(self.ins_gen_check_buttonClicked('s1_vib_bend'))
+        self.s1_vel_curve.valueChanged.connect(self.ins_gen_valueChanged('s1_vel_curve'))
+
+        # SOURCES 2
+        self.s2_wave.valueChanged.connect(self.ins_gen_valueChanged('s2_wave_select'))
+        self.s2_delay.valueChanged.connect(self.ins_gen_valueChanged('s2_delay'))
+        self.s2_ks_curve.valueChanged.connect(self.ins_gen_valueChanged('s2_ks_curve'))
+        self.s2_coarse.valueChanged.connect(self.ins_gen_valueChanged('s2_coarse'))
+        self.s2_key_track.stateChanged.connect(self.ins_gen_check_buttonClicked('s2_key_track'))
+        self.s2_fix.valueChanged.connect(self.ins_gen_valueChanged('s2_fix'))
+        self.s2_fine.valueChanged.connect(self.ins_gen_valueChanged('s2_fine'))
+        self.s2_prs_freq.stateChanged.connect(self.ins_gen_check_buttonClicked('s2_prs_freq'))
+        self.s2_vib_bend.stateChanged.connect(self.ins_gen_check_buttonClicked('s2_vib_bend'))
+        self.s2_vel_curve.valueChanged.connect(self.ins_gen_valueChanged('s2_vel_curve'))
+
+        # SOURCES 3
+        self.s3_wave.valueChanged.connect(self.ins_gen_valueChanged('s3_wave_select'))
+        self.s3_delay.valueChanged.connect(self.ins_gen_valueChanged('s3_delay'))
+        self.s3_ks_curve.valueChanged.connect(self.ins_gen_valueChanged('s3_ks_curve'))
+        self.s3_coarse.valueChanged.connect(self.ins_gen_valueChanged('s3_coarse'))
+        self.s3_key_track.stateChanged.connect(self.ins_gen_check_buttonClicked('s3_key_track'))
+        self.s3_fix.valueChanged.connect(self.ins_gen_valueChanged('s3_fix'))
+        self.s3_fine.valueChanged.connect(self.ins_gen_valueChanged('s3_fine'))
+        self.s3_prs_freq.stateChanged.connect(self.ins_gen_check_buttonClicked('s3_prs_freq'))
+        self.s3_vib_bend.stateChanged.connect(self.ins_gen_check_buttonClicked('s3_vib_bend'))
+        self.s3_vel_curve.valueChanged.connect(self.ins_gen_valueChanged('s3_vel_curve'))
+
+        # SOURCES 4
+        self.s4_wave.valueChanged.connect(self.ins_gen_valueChanged('s4_wave_select'))
+        self.s4_delay.valueChanged.connect(self.ins_gen_valueChanged('s4_delay'))
+        self.s4_ks_curve.valueChanged.connect(self.ins_gen_valueChanged('s4_ks_curve'))
+        self.s4_coarse.valueChanged.connect(self.ins_gen_valueChanged('s4_coarse'))
+        self.s4_key_track.stateChanged.connect(self.ins_gen_check_buttonClicked('s4_key_track'))
+        self.s4_fix.valueChanged.connect(self.ins_gen_valueChanged('s4_fix'))
+        self.s4_fine.valueChanged.connect(self.ins_gen_valueChanged('s4_fine'))
+        self.s4_prs_freq.stateChanged.connect(self.ins_gen_check_buttonClicked('s4_prs_freq'))
+        self.s4_vib_bend.stateChanged.connect(self.ins_gen_check_buttonClicked('s4_vib_bend'))
+        self.s4_vel_curve.valueChanged.connect(self.ins_gen_valueChanged('s4_vel_curve'))
+
+        # DCA 1
+        self.s1_env_level.valueChanged.connect(self.ins_gen_valueChanged('s1_envelope_level'))
+        self.s1_env_attack.valueChanged.connect(self.ins_gen_valueChanged('s1_envelope_attack'))
+        self.s1_env_decay.valueChanged.connect(self.ins_gen_valueChanged('s1_envelope_decay'))
+        self.s1_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('s1_envelope_sustain'))
+        self.s1_env_release.valueChanged.connect(self.ins_gen_valueChanged('s1_envelope_release'))
+        self.s1_level_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('s1_level_mod_vel'))
+        self.s1_level_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('s1_level_mod_prs'))
+        self.s1_level_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s1_level_mod_ks'))
+        self.s1_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('s1_time_mod_on_vel'))
+        self.s1_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('s1_time_mod_off_vel'))
+        self.s1_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s1_time_mod_ks'))
+
+        # DCA 2
+        self.s2_env_level.valueChanged.connect(self.ins_gen_valueChanged('s2_envelope_level'))
+        self.s2_env_attack.valueChanged.connect(self.ins_gen_valueChanged('s2_envelope_attack'))
+        self.s2_env_decay.valueChanged.connect(self.ins_gen_valueChanged('s2_envelope_decay'))
+        self.s2_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('s2_envelope_sustain'))
+        self.s2_env_release.valueChanged.connect(self.ins_gen_valueChanged('s2_envelope_release'))
+        self.s2_level_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('s2_level_mod_vel'))
+        self.s2_level_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('s2_level_mod_prs'))
+        self.s2_level_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s2_level_mod_ks'))
+        self.s2_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('s2_time_mod_on_vel'))
+        self.s2_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('s2_time_mod_off_vel'))
+        self.s2_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s2_time_mod_ks'))
+
+        # DCA 3
+        self.s3_env_level.valueChanged.connect(self.ins_gen_valueChanged('s3_envelope_level'))
+        self.s3_env_attack.valueChanged.connect(self.ins_gen_valueChanged('s3_envelope_attack'))
+        self.s3_env_decay.valueChanged.connect(self.ins_gen_valueChanged('s3_envelope_decay'))
+        self.s3_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('s3_envelope_sustain'))
+        self.s3_env_release.valueChanged.connect(self.ins_gen_valueChanged('s3_envelope_release'))
+        self.s3_level_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('s3_level_mod_vel'))
+        self.s3_level_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('s3_level_mod_prs'))
+        self.s3_level_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s3_level_mod_ks'))
+        self.s3_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('s3_time_mod_on_vel'))
+        self.s3_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('s3_time_mod_off_vel'))
+        self.s3_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s3_time_mod_ks'))
+
+        # DCA 4
+        self.s4_env_level.valueChanged.connect(self.ins_gen_valueChanged('s4_envelope_level'))
+        self.s4_env_attack.valueChanged.connect(self.ins_gen_valueChanged('s4_envelope_attack'))
+        self.s4_env_decay.valueChanged.connect(self.ins_gen_valueChanged('s4_envelope_decay'))
+        self.s4_env_sustain.valueChanged.connect(self.ins_gen_valueChanged('s4_envelope_sustain'))
+        self.s4_env_release.valueChanged.connect(self.ins_gen_valueChanged('s4_envelope_release'))
+        self.s4_level_mod_vel.valueChanged.connect(self.ins_gen_valueChanged('s4_level_mod_vel'))
+        self.s4_level_mod_prs.valueChanged.connect(self.ins_gen_valueChanged('s4_level_mod_prs'))
+        self.s4_level_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s4_level_mod_ks'))
+        self.s4_time_mod_on_vel.valueChanged.connect(self.ins_gen_valueChanged('s4_time_mod_on_vel'))
+        self.s4_time_mod_off_vel.valueChanged.connect(self.ins_gen_valueChanged('s4_time_mod_off_vel'))
+        self.s4_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('s4_time_mod_ks'))
 
         # LFO1/DCF1
         self.si_lfo1_cutoff.valueChanged.connect(self.ins_gen_valueChanged('lfo1_cutoff'))
@@ -287,6 +393,7 @@ class MainUI(Ui_MainWindow):
 
     def select_instrument(self, si_nr):
         self.lock_status()
+        self._si_nr = si_nr
         # selects the si_nr'th instrument
         ins = self._data['single_instruments'][si_nr]
         self._ins = ins
@@ -328,7 +435,7 @@ class MainUI(Ui_MainWindow):
         self.s1_fix.setValue(ins.s1_fix)
         self.s1_fine.setValue(ins.s1_fine)
         self.s1_key_track.setChecked(ins.s1_key_track)
-        self.s1_prs_freq.setChecked(ins.s1_prs_frq)
+        self.s1_prs_freq.setChecked(ins.s1_prs_freq)
         self.s1_vib_bend.setChecked(ins.s1_vib_bend)
         self.s1_vel_curve.setValue(ins.s1_vel_curve)
         self.s2_wave.setValue(ins.s2_wave_select)
@@ -338,7 +445,7 @@ class MainUI(Ui_MainWindow):
         self.s2_fix.setValue(ins.s2_fix)
         self.s2_fine.setValue(ins.s2_fine)
         self.s2_key_track.setChecked(ins.s2_key_track)
-        self.s2_prs_freq.setChecked(ins.s2_prs_frq)
+        self.s2_prs_freq.setChecked(ins.s2_prs_freq)
         self.s2_vib_bend.setChecked(ins.s2_vib_bend)
         self.s2_vel_curve.setValue(ins.s2_vel_curve)
         self.s3_wave.setValue(ins.s3_wave_select)
@@ -348,7 +455,7 @@ class MainUI(Ui_MainWindow):
         self.s3_fix.setValue(ins.s3_fix)
         self.s3_fine.setValue(ins.s3_fine)
         self.s3_key_track.setChecked(ins.s3_key_track)
-        self.s3_prs_freq.setChecked(ins.s3_prs_frq)
+        self.s3_prs_freq.setChecked(ins.s3_prs_freq)
         self.s3_vib_bend.setChecked(ins.s3_vib_bend)
         self.s3_vel_curve.setValue(ins.s3_vel_curve)
         self.s4_wave.setValue(ins.s4_wave_select)
@@ -358,7 +465,7 @@ class MainUI(Ui_MainWindow):
         self.s4_fix.setValue(ins.s4_fix)
         self.s4_fine.setValue(ins.s4_fine)
         self.s4_key_track.setChecked(ins.s4_key_track)
-        self.s4_prs_freq.setChecked(ins.s4_prs_frq)
+        self.s4_prs_freq.setChecked(ins.s4_prs_freq)
         self.s4_vib_bend.setChecked(ins.s4_vib_bend)
         self.s4_vel_curve.setValue(ins.s4_vel_curve)
 
@@ -465,11 +572,28 @@ class MainUI(Ui_MainWindow):
 
 
     def load_instrument(self):
-        print('Load instrument')
+        if self._data is not None:
+            print('Load instrument')
+
+            fileName = QFileDialog.getOpenFileName(self._window, translate('main', "Load instrument file"),
+                                                        os.getcwd(),
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            print(fileName)
+
+            self._ins.load(fileName[0])
+            self.select_instrument(self._si_nr)
+            s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
+            self._ins_item.setText(0, s)
 
 
     def save_instrument(self):
-        print('Save instrument')
+        if self._data is not None:
+            name = os.getcwd()+'/'+self._ins.name+'.k4'
+            fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save instrument file"),
+                                                        #os.getcwd(),
+                                                        name,
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            self._ins.save(fileName[0])
 
 
     def copy_instrument(self):
@@ -481,7 +605,7 @@ class MainUI(Ui_MainWindow):
 
 
 
-    def file_open(self, filename):
+    def file_open(self, filename, read_only=False):
         mf = K4Dump(filename)
 
         self._data = mf.parse_midi_stream()
@@ -499,6 +623,23 @@ class MainUI(Ui_MainWindow):
         self.select_instrument(0)
         self._ins_item = self.treeWidget.topLevelItem(0).child(0)
 
-        self._window.setWindowTitle(window_title)
+        self._read_only = read_only
+        self.update_status()
 
+
+    def file_save(self, filename):
+        print('File save')
+        if self._read_only:
+            print('File is read-only!')
+
+        if filename is None:
+            # use the original file name
+            pass
+        else:
+            # save file to another filename
+            self._filename = filename
+
+        # reset the status flags
+        self._has_changed = False
+        self.update_status()
 

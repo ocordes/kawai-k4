@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         super().__init__(parent)
         self._app = app
         #self.ui = Ui_MainWindow()
-        self.ui = MainUI(app)
+        self.ui = MainUI(app, self)
         self.ui.setupUi(self)
         self.ui.action_Quit.triggered.connect(self.prg_quit)
         self.ui.action_Open.triggered.connect(self.file_open)
@@ -42,10 +42,10 @@ class MainWindow(QMainWindow):
 
 
     def file_open_default(self):
-        self.ui.file_open('k4.mid')
+        self.ui.file_open('k4.mid', read_only=True)
 
     def file_save(self):
-        print('File Save')
+        self.ui.file_save(None)
 
     def file_saveas(self):
         print('File SaveAs')
