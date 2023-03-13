@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-03-12
+# changed by: Oliver Cordes 2023-03-13
 
 import os
 
@@ -17,6 +17,8 @@ translate = QCoreApplication.translate
 
 from k4midi.k4dump import K4Dump
 from k4midi.k4single import K4SingleInstrument
+
+from qtaddons.qthelper import keyboard_keys_k4
 
 
 window_title = 'K4 Instrument Editor'
@@ -84,13 +86,25 @@ class MainUI(Ui_MainWindow):
 
         single_instruments = self.treeWidget.topLevelItem(0)
         multiple_instruments = self.treeWidget.topLevelItem(1)
+        drums = self.treeWidget.topLevelItem(2)
+        effects = self.treeWidget.topLevelItem(3)
         for back in ['A', 'B', 'C', 'D']:
             for nr in range(1,17):
                 it = QtWidgets.QTreeWidgetItem([f'{back}{nr:02d}'])
                 single_instruments.addChild(it)
                 it = QtWidgets.QTreeWidgetItem([f'{back}{nr:02d}'])
                 multiple_instruments.addChild(it)
+
+
+        for drumkey in keyboard_keys_k4:
+            it = QtWidgets.QTreeWidgetItem([f'Drumkey {drumkey}'])
+            drums.addChild(it)
+
+        # connect the treeWidget with mouse clicks
         self.treeWidget.itemClicked.connect(self.onItemClicked)
+
+
+
 
         # define the change functions for all widgets
         self.si_name.textChanged.connect(self.ins_gen_valueChanged('name'))
@@ -559,7 +573,8 @@ class MainUI(Ui_MainWindow):
         if item.parent() is not None:
             # correct sub element ;-)
             #print('>',item.parent().text(0))
-            if item.parent().text(0) == 'Single Instruments':
+            itemtext = item.parent().text(0)
+            if itemtext == 'Single Instruments':
                 # select instrument
                 if self._data is not None and 'single_instruments' in self._data:
                     # sets the item first, since select_instrument sets the widgets
@@ -568,6 +583,9 @@ class MainUI(Ui_MainWindow):
                     self._ins_item = item
                     si_nr = name2pos(item.text(col))
                     self.select_instrument(si_nr)
+            elif itemtext == 'Drums':
+                # select drums
+                print(f'Drums {item.text(col)}')
 
 
 
