@@ -1,12 +1,15 @@
 # k4dump.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-02-19
+# changed by: Oliver Cordes 2023-04-10
 
 
 from k4midi.midifile import MidiFile
 
 from k4midi.k4single import K4SingleInstrument
+from k4midi.k4multi import K4MultiInstrument
+from k4midi.k4drums import K4DrumCommon, K4Drums
+from k4midi.k4effects import K4Effects
 
 
 def read_delta(bytes):
@@ -104,11 +107,60 @@ class K4Dump(MidiFile):
         results['function'] = function
         if function == 0x22:
             # full dump
+
+            # 64 single instruments
             single = []
+            size = K4SingleInstrument.size
             for nr in range(64):
-                i = K4SingleInstrument(data[nr*131:(nr+1)*131])
+                i = K4SingleInstrument(data[nr*size:(nr+1)*size])
+                if not i.verify_checksum():
+                    print(f'Checksum mismatched for single instrument nr. {nr+1}!')
                 single.append(i)
             results['single_instruments'] = single
+            data = data[(size*64):]
+
+            # 64 multi instrumens
+            multi = []
+            size = K4MultiInstrument.size
+            for nr in range(64):
+                i = K4MultiInstrument(data[nr*size:(nr+1)*size])
+                if not i.verify_checksum():
+                    print(f'Checksum mismatched for multi instrument nr. {nr+1}!')
+                multi.append(i)
+            results['multi_instruments'] = multi
+            data = data[(size*64):]
+
+            # 1 drum common
+            size = K4DrumCommon.size
+            i = K4DrumCommon(data[:size])
+            if not i.verify_checksum():
+                print(f'Checksum mismatched for drum common!')
+            results['drum_common'] = i
+            data = data[size:]
+
+            # 61 drums
+            size = K4Drums.size
+            drums = []
+            for nr in range(61):
+                i = K4Drums(data[nr*size:(nr+1)*size])
+                if not i.verify_checksum():
+                    print(f'Checksum mismatched for drums nr. {nr+1}!')
+                drums.append(i)
+            results['drums'] = drums
+            data = data[(size*61):]
+            
+            # 32 effects
+            size = K4Effects.size
+            effects = []
+            for nr in range(32):
+                i = K4Effects(data[nr*size:(nr+1)*size])
+                if not i.verify_checksum():
+                    print(f'Checksum mismatched for effects nr. {nr+1}!')
+                effects.append(i)
+            results['effects'] = effects
+            data = data[(size*32):]
+
+            #print(f'Bytes left over: {len(data)}')
 
         return results
 
