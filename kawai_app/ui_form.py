@@ -1136,6 +1136,12 @@ class Ui_MainWindow(object):
         self.si_lfo_prs_dep.setMinimum(-50)
         self.si_lfo_prs_dep.setMaximum(50)
         self.Instrument_Widget.addTab(self.tab_4, "")
+        self.tab_5 = QWidget()
+        self.tab_5.setObjectName(u"tab_5")
+        self.Instrument_Widget.addTab(self.tab_5, "")
+        self.tab_effects = QWidget()
+        self.tab_effects.setObjectName(u"tab_effects")
+        self.Instrument_Widget.addTab(self.tab_effects, "")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.Instrument_Widget)
 
@@ -1163,7 +1169,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.Instrument_Widget.setCurrentIndex(0)
+        self.Instrument_Widget.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1385,6 +1391,8 @@ class Ui_MainWindow(object):
         self.label_88.setText(QCoreApplication.translate("MainWindow", u"LFO dep:", None))
         self.label_89.setText(QCoreApplication.translate("MainWindow", u"LFO prs>dep:", None))
         self.Instrument_Widget.setTabText(self.Instrument_Widget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"LFO/DCF", None))
+        self.Instrument_Widget.setTabText(self.Instrument_Widget.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"Drums", None))
+        self.Instrument_Widget.setTabText(self.Instrument_Widget.indexOf(self.tab_effects), QCoreApplication.translate("MainWindow", u"Effects", None))
         self.menu_File.setTitle(QCoreApplication.translate("MainWindow", u"&File", None))
     # retranslateUi
 

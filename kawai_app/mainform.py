@@ -406,6 +406,7 @@ class MainUI(Ui_MainWindow):
 
 
     def select_instrument(self, si_nr):
+        #self.Instrument_Widget.removeTab(self.tab_5)
         self.lock_status()
         self._si_nr = si_nr
         # selects the si_nr'th instrument

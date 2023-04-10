@@ -6,6 +6,7 @@
 
 class K4SingleInstrument(object):
     id = 0x10
+    size = 131
     def __init__(self, data):
         self._data = bytearray(data)
 
