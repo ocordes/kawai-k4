@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-03-13
+# changed by: Oliver Cordes 2023-04-15
 
 import os
 
@@ -17,6 +17,7 @@ translate = QCoreApplication.translate
 
 from k4midi.k4dump import K4Dump
 from k4midi.k4single import K4SingleInstrument
+from k4midi.k4effects import K4Effects
 
 from qtaddons.qthelper import keyboard_keys_k4
 
@@ -26,6 +27,10 @@ window_title = 'K4 Instrument Editor'
 # helper functions
 def name2pos(name):
     return (ord(name[0]) - ord('A'))*16 + int(name[1:3])-1
+
+
+def eff_name2pos(name):
+    return int(name.split()[-1])-1
 
 
 def generate_button_group(window, buttons):
@@ -51,6 +56,8 @@ class MainUI(Ui_MainWindow):
         self._si_nr       = 0
         self._ins         = None
         self._ins_item    = None
+
+        self._effect      = None
 
         self._edit_mode   = False
         self._has_changed = False
@@ -99,6 +106,10 @@ class MainUI(Ui_MainWindow):
         for drumkey in keyboard_keys_k4:
             it = QtWidgets.QTreeWidgetItem([f'Drumkey {drumkey}'])
             drums.addChild(it)
+
+        for nr in range(1,33):
+            it = QtWidgets.QTreeWidgetItem([f'Effect {nr:02d}'])
+            effects.addChild(it)
 
         # connect the treeWidget with mouse clicks
         self.treeWidget.itemClicked.connect(self.onItemClicked)
@@ -308,6 +319,39 @@ class MainUI(Ui_MainWindow):
         self.pb_copy.clicked.connect(self.copy_instrument)
         self.pb_paste.clicked.connect(self.paste_instrument)
 
+        # effects
+        self.eff_pan_a.valueChanged.connect(self.effect_gen_valueChanged('pan_A'))
+        self.eff_send1_a.valueChanged.connect(self.effect_gen_valueChanged('send1_A'))
+        self.eff_send2_a.valueChanged.connect(self.effect_gen_valueChanged('send2_A'))
+
+        self.eff_pan_b.valueChanged.connect(self.effect_gen_valueChanged('pan_B'))
+        self.eff_send1_b.valueChanged.connect(self.effect_gen_valueChanged('send1_B'))
+        self.eff_send2_b.valueChanged.connect(self.effect_gen_valueChanged('send2_B'))
+
+        self.eff_pan_c.valueChanged.connect(self.effect_gen_valueChanged('pan_C'))
+        self.eff_send1_c.valueChanged.connect(self.effect_gen_valueChanged('send1_C'))
+        self.eff_send2_c.valueChanged.connect(self.effect_gen_valueChanged('send2_C'))
+
+        self.eff_pan_d.valueChanged.connect(self.effect_gen_valueChanged('pan_D'))
+        self.eff_send1_d.valueChanged.connect(self.effect_gen_valueChanged('send1_D'))
+        self.eff_send2_d.valueChanged.connect(self.effect_gen_valueChanged('send2_D'))
+
+        self.eff_pan_e.valueChanged.connect(self.effect_gen_valueChanged('pan_E'))
+        self.eff_send1_e.valueChanged.connect(self.effect_gen_valueChanged('send1_E'))
+        self.eff_send2_e.valueChanged.connect(self.effect_gen_valueChanged('send2_E'))
+
+        self.eff_pan_f.valueChanged.connect(self.effect_gen_valueChanged('pan_F'))
+        self.eff_send1_f.valueChanged.connect(self.effect_gen_valueChanged('send1_F'))
+        self.eff_send2_f.valueChanged.connect(self.effect_gen_valueChanged('send2_F'))
+
+        self.eff_pan_g.valueChanged.connect(self.effect_gen_valueChanged('pan_G'))
+        self.eff_send1_g.valueChanged.connect(self.effect_gen_valueChanged('send1_G'))
+        self.eff_send2_g.valueChanged.connect(self.effect_gen_valueChanged('send2_G'))
+
+        self.eff_pan_h.valueChanged.connect(self.effect_gen_valueChanged('pan_H'))
+        self.eff_send1_h.valueChanged.connect(self.effect_gen_valueChanged('send1_H'))
+        self.eff_send2_h.valueChanged.connect(self.effect_gen_valueChanged('send2_H'))
+
 
 
     # generator to change a data entry
@@ -335,6 +379,23 @@ class MainUI(Ui_MainWindow):
                 if self._ins_item is not None:
                    s = self._ins_item.text(0).split()[0]+' - '+val
                    self._ins_item.setText(0, s)
+
+        return valuechanged
+
+
+    def effect_gen_valueChanged(self, funcname):
+
+        def valuechanged(val):
+            if self._effect is None:
+                return
+
+            func = getattr(K4Effects, funcname)
+            if type(func) == property:
+               func.fset(self._effect, val)
+            else:
+               func(self._effect, val)
+
+            self.update_status()
 
         return valuechanged
 
@@ -566,6 +627,51 @@ class MainUI(Ui_MainWindow):
         self.unlock_status()
 
 
+    def select_effect(self, eff_nr):
+        self.lock_status()
+        #self._si_nr = si_nr
+
+        effect = self._data['effects'][eff_nr]
+        self._effect = effect
+
+        self.eff_number.setText(f'{eff_nr}')
+
+        self.eff_pan_a.setValue(effect.pan_A)
+        self.eff_send1_a.setValue(effect.send1_A)
+        self.eff_send2_a.setValue(effect.send2_A)
+
+        self.eff_pan_b.setValue(effect.pan_B)
+        self.eff_send1_b.setValue(effect.send1_B)
+        self.eff_send2_b.setValue(effect.send2_B)
+
+        self.eff_pan_c.setValue(effect.pan_C)
+        self.eff_send1_c.setValue(effect.send1_C)
+        self.eff_send2_c.setValue(effect.send2_C)
+
+        self.eff_pan_d.setValue(effect.pan_D)
+        self.eff_send1_d.setValue(effect.send1_D)
+        self.eff_send2_d.setValue(effect.send2_D)
+
+        self.eff_pan_e.setValue(effect.pan_E)
+        self.eff_send1_e.setValue(effect.send1_E)
+        self.eff_send2_e.setValue(effect.send2_E)
+
+        self.eff_pan_f.setValue(effect.pan_F)
+        self.eff_send1_f.setValue(effect.send1_F)
+        self.eff_send2_f.setValue(effect.send2_F)
+
+        self.eff_pan_g.setValue(effect.pan_G)
+        self.eff_send1_g.setValue(effect.send1_G)
+        self.eff_send2_g.setValue(effect.send2_G)
+
+        self.eff_pan_h.setValue(effect.pan_H)
+        self.eff_send1_h.setValue(effect.send1_H)
+        self.eff_send2_h.setValue(effect.send2_H)
+
+        self.unlock_status()
+
+
+
     @Slot(QtWidgets.QTreeWidgetItem, int)
     def onItemClicked(self, item, col):
         #print(item, col, item.text(col))
@@ -587,6 +693,13 @@ class MainUI(Ui_MainWindow):
             elif itemtext == 'Drums':
                 # select drums
                 print(f'Drums {item.text(col)}')
+            elif itemtext == 'Effects':
+                # select effect
+                if self._data is not None and 'effects' in self._data:
+                    print(f'Effect {item.text(col)}')
+                    effect_nr = eff_name2pos(item.text(col))
+                    self.select_effect(effect_nr)
+
 
 
 
