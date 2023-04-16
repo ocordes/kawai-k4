@@ -1,7 +1,7 @@
 # k4effects.py
 #
 # written by: Oliver Cordes 2023-04-10
-# changed by: Oliver Cordes 2023-04-10
+# changed by: Oliver Cordes 2023-04-16
 
 from k4midi.k4base import K4Base
 
@@ -46,4 +46,4 @@ class K4Effects(K4Base):
     send1_H = property(*K4Base.func_template(32, mask=0b1111111))
     send2_H = property(*K4Base.func_template(33, mask=0b1111111))
 
-    
+

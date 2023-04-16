@@ -1,7 +1,7 @@
 # k4dump.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-04-10
+# changed by: Oliver Cordes 2023-04-16
 
 
 from k4midi.midifile import MidiFile
@@ -30,7 +30,13 @@ class K4Dump(MidiFile):
     def __init__(self, filename):
         MidiFile.__init__(self, filename)
 
+        self._results = self.parse_midi_stream()
 
+    @property
+    def data(self):
+        return self._results
+
+        
     def parse_midi_stream(self):
         # if not MIDI file, then treat as sysex file
 
@@ -82,6 +88,8 @@ class K4Dump(MidiFile):
                     raise ValueError(f'Unknown byte 0x{data[0]:x}')
 
             track_nr += 1
+
+            self._results = results
 
         return results
 
@@ -164,5 +172,13 @@ class K4Dump(MidiFile):
 
         return results
 
-        
 
+    def save_sysexdata(self, file):
+        pass
+
+    def save_midifile(self, filename):
+        pass
+
+    def save_sysexfile(self, filename):        
+        with open(filename, 'wb') as f:
+            self.save_sysexdata(data, f)

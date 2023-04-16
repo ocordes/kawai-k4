@@ -895,7 +895,7 @@
           <property name="title">
            <string>IO Functions</string>
           </property>
-          <widget class="QPushButton" name="pb_load">
+          <widget class="QPushButton" name="si_load">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -908,7 +908,7 @@
             <string>Load</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="pb_save">
+          <widget class="QPushButton" name="si_save">
            <property name="geometry">
             <rect>
              <x>20</x>
@@ -921,7 +921,7 @@
             <string>Save</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="pb_copy">
+          <widget class="QPushButton" name="si_copy">
            <property name="geometry">
             <rect>
              <x>170</x>
@@ -934,7 +934,7 @@
             <string>Copy</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="pb_paste">
+          <widget class="QPushButton" name="si_paste">
            <property name="geometry">
             <rect>
              <x>170</x>
@@ -4139,7 +4139,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>220</y>
+            <y>200</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4227,7 +4227,7 @@
           <property name="geometry">
            <rect>
             <x>150</x>
-            <y>220</y>
+            <y>200</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4315,7 +4315,7 @@
           <property name="geometry">
            <rect>
             <x>290</x>
-            <y>220</y>
+            <y>200</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4402,8 +4402,8 @@
          <widget class="QGroupBox" name="groupBox_17">
           <property name="geometry">
            <rect>
-            <x>420</x>
-            <y>220</y>
+            <x>430</x>
+            <y>200</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4491,7 +4491,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>360</y>
+            <y>340</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4579,7 +4579,7 @@
           <property name="geometry">
            <rect>
             <x>150</x>
-            <y>360</y>
+            <y>340</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4667,7 +4667,7 @@
           <property name="geometry">
            <rect>
             <x>290</x>
-            <y>360</y>
+            <y>340</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4754,8 +4754,8 @@
          <widget class="QGroupBox" name="groupBox_21">
           <property name="geometry">
            <rect>
-            <x>420</x>
-            <y>360</y>
+            <x>430</x>
+            <y>340</y>
             <width>120</width>
             <height>121</height>
            </rect>
@@ -4864,6 +4864,162 @@
           <property name="maximum">
            <number>15</number>
           </property>
+         </widget>
+         <widget class="QLabel" name="label_145">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>90</y>
+            <width>41</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Para1:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="eff_para1">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>90</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>7</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_146">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>120</y>
+            <width>41</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Para2:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="eff_para2">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>120</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>7</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_147">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>150</y>
+            <width>41</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Para3:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="eff_para3">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>150</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>31</number>
+          </property>
+         </widget>
+         <widget class="Line" name="line_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>180</y>
+            <width>781</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_22">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>470</y>
+            <width>241</width>
+            <height>111</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>IO Functions</string>
+          </property>
+          <widget class="QPushButton" name="eff_load">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Load</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="eff_copy">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>30</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Copy</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="eff_save">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>70</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Save</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="eff_paste">
+           <property name="geometry">
+            <rect>
+             <x>130</x>
+             <y>70</y>
+             <width>100</width>
+             <height>32</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Paste</string>
+           </property>
+          </widget>
          </widget>
         </widget>
        </widget>
