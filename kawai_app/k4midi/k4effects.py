@@ -1,7 +1,7 @@
 # k4effects.py
 #
 # written by: Oliver Cordes 2023-04-10
-# changed by: Oliver Cordes 2023-04-10
+# changed by: Oliver Cordes 2023-05-06
 
 from k4midi.k4base import K4Base
 
@@ -9,7 +9,7 @@ class K4Effects(K4Base):
     id = 0x14
     size = 35
 
-    effect_type = property(*K4Base.func_template(00, mask=0b1111, correct=1))
+    effect_type = property(*K4Base.func_template(00, mask=0b1111))
     para1 = property(*K4Base.func_template(1, mask=0b111))
     para2 = property(*K4Base.func_template(2, mask=0b111))
     para3 = property(*K4Base.func_template(3, mask=0b11111))
@@ -46,4 +46,4 @@ class K4Effects(K4Base):
     send1_H = property(*K4Base.func_template(32, mask=0b1111111))
     send2_H = property(*K4Base.func_template(33, mask=0b1111111))
 
-    
+

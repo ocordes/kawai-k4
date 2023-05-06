@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-03-13
+# changed by: Oliver Cordes 2023-05-06
 
 import os
 
@@ -17,6 +17,7 @@ translate = QCoreApplication.translate
 
 from k4midi.k4dump import K4Dump
 from k4midi.k4single import K4SingleInstrument
+from k4midi.k4effects import K4Effects
 
 from qtaddons.qthelper import keyboard_keys_k4
 
@@ -26,6 +27,10 @@ window_title = 'K4 Instrument Editor'
 # helper functions
 def name2pos(name):
     return (ord(name[0]) - ord('A'))*16 + int(name[1:3])-1
+
+
+def eff_name2pos(name):
+    return int(name.split()[-1])-1
 
 
 def generate_button_group(window, buttons):
@@ -39,34 +44,54 @@ def generate_button_group(window, buttons):
     return grp
 
 
+def suggest_filename(filename):
+    s = filename.split('.')
+    n = ''.join(s[:-1])+'_2'
+    print(f'{filename} {n}')
+    return n
+
+
+
 class MainUI(Ui_MainWindow):
     def __init__(self, app, window):
         #Ui_MainWindow.__init__(self)
         super().__init__()
-        self._app         = app
-        self._window      = window
+        self._app             = app
+        self._window          = window
 
-        self._data        = None
+        self._mf              = None   # the MIDI file
 
-        self._si_nr       = 0
-        self._ins         = None
-        self._ins_item    = None
+        self._si_nr           = 0
+        self._ins             = None
+        self._ins_item        = None
+        self._copy_instrument = None
 
-        self._edit_mode   = False
-        self._has_changed = False
-        self._read_only   = True
+        self._eff_nr          = 0
+        self._effect          = None
+        self._copy_effect     = None
+
+        self._filename        = None
+        self._edit_mode       = False
+        self._has_changed     = False
+        self._read_only       = True
 
 
     # update_status
     #
     # if the editor is in edit-mode, then change the flag
-    def update_status(self):
-        if self._edit_mode and not self._read_only:
-            self._has_changed = True
-
-            self._window.setWindowTitle(window_title+' *')
+    def update_status(self, has_changed=True):
+        if self._filename is None:
+            fname = ''
         else:
-            self._window.setWindowTitle(window_title)
+            fname = f' - {self._filename}'
+        if self._edit_mode and not self._read_only:
+            self._has_changed = has_changed
+
+
+        if self._has_changed:
+            self._window.setWindowTitle(window_title+f' *{fname}')
+        else:
+            self._window.setWindowTitle(window_title+fname)
 
 
     def lock_status(self):
@@ -100,6 +125,10 @@ class MainUI(Ui_MainWindow):
             it = QtWidgets.QTreeWidgetItem([f'Drumkey {drumkey}'])
             drums.addChild(it)
 
+        for nr in range(1,33):
+            it = QtWidgets.QTreeWidgetItem([f'Effect {nr:02d}'])
+            effects.addChild(it)
+
         # connect the treeWidget with mouse clicks
         self.treeWidget.itemClicked.connect(self.onItemClicked)
 
@@ -110,6 +139,7 @@ class MainUI(Ui_MainWindow):
         self.si_name.textChanged.connect(self.ins_gen_valueChanged('name'))
         self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('volume'))
         self.si_effect.valueChanged.connect(self.ins_gen_valueChanged('effect'))
+        self.si_out_select.valueChanged.connect(self.ins_gen_valueChanged('out_select'))
 
         # create a special button group with ids
         self.si_source_mode_grp = generate_button_group(self._window,
@@ -303,11 +333,53 @@ class MainUI(Ui_MainWindow):
         self.si_dcf2_time_mod_ks.valueChanged.connect(self.ins_gen_valueChanged('dcf2_time_mod_ks'))
 
 
-        self.pb_load.clicked.connect(self.load_instrument)
-        self.pb_save.clicked.connect(self.save_instrument)
-        self.pb_copy.clicked.connect(self.copy_instrument)
-        self.pb_paste.clicked.connect(self.paste_instrument)
+        self.si_load.clicked.connect(self.load_instrument)
+        self.si_save.clicked.connect(self.save_instrument)
+        self.si_copy.clicked.connect(self.copy_instrument)
+        self.si_paste.clicked.connect(self.paste_instrument)
 
+        # effects
+
+        self.eff_para1.valueChanged.connect(self.effect_gen_valueChanged('para1'))
+        self.eff_para2.valueChanged.connect(self.effect_gen_valueChanged('para2'))
+        self.eff_para3.valueChanged.connect(self.effect_gen_valueChanged('para3'))
+
+        self.eff_pan_a.valueChanged.connect(self.effect_gen_valueChanged('pan_A'))
+        self.eff_send1_a.valueChanged.connect(self.effect_gen_valueChanged('send1_A'))
+        self.eff_send2_a.valueChanged.connect(self.effect_gen_valueChanged('send2_A'))
+
+        self.eff_pan_b.valueChanged.connect(self.effect_gen_valueChanged('pan_B'))
+        self.eff_send1_b.valueChanged.connect(self.effect_gen_valueChanged('send1_B'))
+        self.eff_send2_b.valueChanged.connect(self.effect_gen_valueChanged('send2_B'))
+
+        self.eff_pan_c.valueChanged.connect(self.effect_gen_valueChanged('pan_C'))
+        self.eff_send1_c.valueChanged.connect(self.effect_gen_valueChanged('send1_C'))
+        self.eff_send2_c.valueChanged.connect(self.effect_gen_valueChanged('send2_C'))
+
+        self.eff_pan_d.valueChanged.connect(self.effect_gen_valueChanged('pan_D'))
+        self.eff_send1_d.valueChanged.connect(self.effect_gen_valueChanged('send1_D'))
+        self.eff_send2_d.valueChanged.connect(self.effect_gen_valueChanged('send2_D'))
+
+        self.eff_pan_e.valueChanged.connect(self.effect_gen_valueChanged('pan_E'))
+        self.eff_send1_e.valueChanged.connect(self.effect_gen_valueChanged('send1_E'))
+        self.eff_send2_e.valueChanged.connect(self.effect_gen_valueChanged('send2_E'))
+
+        self.eff_pan_f.valueChanged.connect(self.effect_gen_valueChanged('pan_F'))
+        self.eff_send1_f.valueChanged.connect(self.effect_gen_valueChanged('send1_F'))
+        self.eff_send2_f.valueChanged.connect(self.effect_gen_valueChanged('send2_F'))
+
+        self.eff_pan_g.valueChanged.connect(self.effect_gen_valueChanged('pan_G'))
+        self.eff_send1_g.valueChanged.connect(self.effect_gen_valueChanged('send1_G'))
+        self.eff_send2_g.valueChanged.connect(self.effect_gen_valueChanged('send2_G'))
+
+        self.eff_pan_h.valueChanged.connect(self.effect_gen_valueChanged('pan_H'))
+        self.eff_send1_h.valueChanged.connect(self.effect_gen_valueChanged('send1_H'))
+        self.eff_send2_h.valueChanged.connect(self.effect_gen_valueChanged('send2_H'))
+
+        self.eff_load.clicked.connect(self.load_effect)
+        self.eff_save.clicked.connect(self.save_effect)
+        self.eff_copy.clicked.connect(self.copy_effect)
+        self.eff_paste.clicked.connect(self.paste_effect)
 
 
     # generator to change a data entry
@@ -335,6 +407,23 @@ class MainUI(Ui_MainWindow):
                 if self._ins_item is not None:
                    s = self._ins_item.text(0).split()[0]+' - '+val
                    self._ins_item.setText(0, s)
+
+        return valuechanged
+
+
+    def effect_gen_valueChanged(self, funcname):
+
+        def valuechanged(val):
+            if self._effect is None:
+                return
+
+            func = getattr(K4Effects, funcname)
+            if type(func) == property:
+               func.fset(self._effect, val)
+            else:
+               func(self._effect, val)
+
+            self.update_status()
 
         return valuechanged
 
@@ -410,7 +499,7 @@ class MainUI(Ui_MainWindow):
         self.lock_status()
         self._si_nr = si_nr
         # selects the si_nr'th instrument
-        ins = self._data['single_instruments'][si_nr]
+        ins = self._mf.data['single_instruments'][si_nr]
         self._ins = ins
         # fill the single instrument data
         self.si_name.setText(ins.name)
@@ -566,6 +655,58 @@ class MainUI(Ui_MainWindow):
         self.unlock_status()
 
 
+    def select_effect(self, eff_nr):
+        self.lock_status()
+        self._eff_nr = eff_nr
+
+        effect = self._mf.data['effects'][eff_nr]
+        self._effect = effect
+
+        self.eff_number.setText(f'{eff_nr+1}')
+
+        self.eff_type.setValue(effect.effect_type)
+        print(effect.effect_type)
+
+        self.eff_para1.setValue(effect.para1)
+        self.eff_para2.setValue(effect.para2)
+        self.eff_para3.setValue(effect.para3)
+
+        self.eff_pan_a.setValue(effect.pan_A)
+        self.eff_send1_a.setValue(effect.send1_A)
+        self.eff_send2_a.setValue(effect.send2_A)
+
+        self.eff_pan_b.setValue(effect.pan_B)
+        self.eff_send1_b.setValue(effect.send1_B)
+        self.eff_send2_b.setValue(effect.send2_B)
+
+        self.eff_pan_c.setValue(effect.pan_C)
+        self.eff_send1_c.setValue(effect.send1_C)
+        self.eff_send2_c.setValue(effect.send2_C)
+
+        self.eff_pan_d.setValue(effect.pan_D)
+        self.eff_send1_d.setValue(effect.send1_D)
+        self.eff_send2_d.setValue(effect.send2_D)
+
+        self.eff_pan_e.setValue(effect.pan_E)
+        self.eff_send1_e.setValue(effect.send1_E)
+        self.eff_send2_e.setValue(effect.send2_E)
+
+        self.eff_pan_f.setValue(effect.pan_F)
+        self.eff_send1_f.setValue(effect.send1_F)
+        self.eff_send2_f.setValue(effect.send2_F)
+
+        self.eff_pan_g.setValue(effect.pan_G)
+        self.eff_send1_g.setValue(effect.send1_G)
+        self.eff_send2_g.setValue(effect.send2_G)
+
+        self.eff_pan_h.setValue(effect.pan_H)
+        self.eff_send1_h.setValue(effect.send1_H)
+        self.eff_send2_h.setValue(effect.send2_H)
+
+        self.unlock_status()
+
+
+
     @Slot(QtWidgets.QTreeWidgetItem, int)
     def onItemClicked(self, item, col):
         #print(item, col, item.text(col))
@@ -577,7 +718,7 @@ class MainUI(Ui_MainWindow):
             itemtext = item.parent().text(0)
             if itemtext == 'Single Instruments':
                 # select instrument
-                if self._data is not None and 'single_instruments' in self._data:
+                if self._mf.data is not None and 'single_instruments' in self._mf.data:
                     # sets the item first, since select_instrument sets the widgets
                     # which calles the update function which will update the list
                     # name, so self._ins should be set properly!
@@ -587,11 +728,18 @@ class MainUI(Ui_MainWindow):
             elif itemtext == 'Drums':
                 # select drums
                 print(f'Drums {item.text(col)}')
+            elif itemtext == 'Effects':
+                # select effect
+                if self._mf.data is not None and 'effects' in self._mf.data:
+                    print(f'Effect {item.text(col)}')
+                    effect_nr = eff_name2pos(item.text(col))
+                    self.select_effect(effect_nr)
+
 
 
 
     def load_instrument(self):
-        if self._data is not None:
+        if self._mf.data is not None:
             print('Load instrument')
 
             fileName = QFileDialog.getOpenFileName(self._window, translate('main', "Load instrument file"),
@@ -599,57 +747,99 @@ class MainUI(Ui_MainWindow):
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
             print(fileName)
 
-            self._ins.load(fileName[0])
-            self.select_instrument(self._si_nr)
-            s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
-            self._ins_item.setText(0, s)
+            if fileName[0] != '':
+                self._ins.load(fileName[0])
+                self.select_instrument(self._si_nr)
+                s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
+                self._ins_item.setText(0, s)
 
 
     def save_instrument(self):
-        if self._data is not None:
+        if self._mf.data is not None:
             name = os.getcwd()+'/'+self._ins.name+'.k4'
             fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save instrument file"),
                                                         #os.getcwd(),
                                                         name,
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
-            self._ins.save(fileName[0])
+            if fileName[0] != '':
+                self._ins.save(fileName[0])
 
 
     def copy_instrument(self):
         print('Copy instrument')
+        self._copy_instrument = self._ins.copy()
 
 
     def paste_instrument(self):
         print('Paste instrument')
+        self._ins.paste(self._copy_instrument)
+        s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
+        self._ins_item.setText(0, s)
 
+
+    def load_effect(self):
+        if self._mf.data is not None:
+            print('Load instrument')
+
+            fileName = QFileDialog.getOpenFileName(self._window, translate('main', "Load effect file"),
+                                                        os.getcwd(),
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            print(fileName)
+            if fileName[0] != '':
+                self._effect.load(fileName[0])
+                self.select_effect(self._eff_nr)
+
+
+
+    def save_effect(self):
+        if self._mf.data is not None:
+            name = f'{os.getcwd()}/effect{(self._eff_nr+1):02d}.k4'
+            fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save effect file"),
+                                                        #os.getcwd(),
+                                                        name,
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            if fileName[0] != '':
+                self._effect.save(fileName[0])
+
+
+    def copy_effect(self):
+        self._copy_effect = self._effect.copy()
+
+
+    def paste_effect(self):
+        self._effect.paste(self._copy_effect)
+        self.select_effect(self._eff_nr)
 
 
     def file_open(self, filename, read_only=False):
-        mf = K4Dump(filename)
+        self._mf = K4Dump(filename)
 
-        self._data = mf.parse_midi_stream()
+        self._filename = filename
 
         # insert single multiple_instruments
         single_instruments = self.treeWidget.topLevelItem(0)
         nr = 0
-        for ins in self._data['single_instruments']:
+        for ins in self._mf.data['single_instruments']:
             #print(ins.name)
             w = single_instruments.child(nr)
             pre = w.text(0).split()[0]
             w.setText(0, f'{pre} - {ins.name}')
             nr += 1
 
+        self._has_changed = False
+
         self.select_instrument(0)
         self._ins_item = self.treeWidget.topLevelItem(0).child(0)
 
         self._read_only = read_only
-        self.update_status()
+        self.update_status(has_changed=False)
 
 
     def file_save(self, filename):
         print('File save')
         if self._read_only:
             print('File is read-only!')
+            return
 
         if filename is None:
             # use the original file name
@@ -658,7 +848,29 @@ class MainUI(Ui_MainWindow):
             # save file to another filename
             self._filename = filename
 
-        # reset the status flags
-        self._has_changed = False
-        self.update_status()
+        print(self._filename)
+        #self._mf.save_midifile(self._filename)
 
+        # reset the status flags
+        self.update_status(has_changed=False)
+
+
+    def file_saveas(self):
+        print('File SaveAs')
+
+        if self._mf is None:
+            print('Nothing to save ...')
+            return
+
+        name = os.getcwd()+'/'+suggest_filename(self._filename)
+        fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save SysEX/MIDI file"),
+                                                        #os.getcwd(),
+                                                        name,
+                                                        translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
+        if fileName[0] != '':
+            fileName = fileName[0]
+            print(fileName)
+            if fileName.endswith('.mid'):
+                self._mf.save_midifile(fileName)
+            else:
+                self._mf.save_sysexfile(fileName)
