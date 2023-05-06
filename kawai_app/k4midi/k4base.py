@@ -1,10 +1,12 @@
 # k4base.py
 #
 # written by: Oliver Cordes 2023-04-10
-# changed by: Oliver Cordes 2023-04-16
+# changed by: Oliver Cordes 2023-05-06
 
 
 import copy
+
+_debug = False
 
 class K4Base(object):
     def __init__(self, data):
@@ -19,6 +21,8 @@ class K4Base(object):
         sum += 0xa5
         sum &= 0b1111111
 
+        if _debug:
+            print(f'checksum check: {sum:x} == {self._data[-1]:x} = {sum == self._data[-1]}')
         return sum == self._data[-1]
 
 
@@ -33,7 +37,8 @@ class K4Base(object):
         sum += 0xa5
         sum &= 0b1111111
 
-        # print(f'change checksum from {self._data[-1]:x} to {sum:x}')
+        if _debug:
+            print(f'change checksum from {self._data[-1]:x} to {sum:x}')
         self._data[-1] = sum
 
 
@@ -42,7 +47,8 @@ class K4Base(object):
     # shift-left(set) and mask
     def func_template(ofs, shift=0, mask=255, correct=0):
         def set_f(self, newval):
-            print(f'set value @{ofs}: {newval}')
+            if _debug:
+                print(f'set value @{ofs}: {newval}')
             # print(f'mask={mask}, shift={shift} correct={correct}')
 
             newval = newval - correct
@@ -56,7 +62,8 @@ class K4Base(object):
             nnewval = newval << shift
             # print(f'val(shifted)={nnewval:0b}')
             d = d | nnewval
-            print(f'newval={d:0b} {d}')
+            if _debug:                
+                print(f'newval={d:0b} {d}')
             # set the new data
             self._data[ofs] = d
 
@@ -64,8 +71,9 @@ class K4Base(object):
 
         def get_f(self):
             b = ((self._data[ofs] >> shift) & mask) + correct
-            print(f'get value @{ofs} {self._data[ofs]} {self._data[ofs]:0b}')
-            print(f'mask={mask}, shift={shift} correct={correct} -> {b} {b:0b}')
+            if _debug:
+                print(f'get value @{ofs} {self._data[ofs]} {self._data[ofs]:0b}')
+                print(f'mask={mask}, shift={shift} correct={correct} -> {b} {b:0b}')
             return b
 
         return get_f, set_f
@@ -78,6 +86,9 @@ class K4Base(object):
     # 1-2    size in bytes
     # 3-...  data block
     def save(self, filename):
+        # fix any error made before ;-)
+        self.update_checksum()
+
         print(f'Save data to {filename} ...')
 
         with open(filename, 'bw') as f:
@@ -97,10 +108,21 @@ class K4Base(object):
             if b == self.id:
                 size = int.from_bytes(f.read(2))
                 if size == len(self._data):
+                    olddata = self._data
                     self._data = bytearray(f.read(size))
-                    return True
+                    check = self.verify_checksum()
+                    if not check:
+                        print('Checksum error while reading data from disk!')
+                        self._data = olddata    # restore old data if failing...
+                    return check
 
         return False
+
+
+    def raw_save(self, f):
+        # fix any error made before ;-)
+        self.update_checksum()
+        f.write(self._data)
 
 
     def copy(self):

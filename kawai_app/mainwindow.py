@@ -1,8 +1,13 @@
 # This Python file uses the following encoding: utf-8
+
+# written by: Oliver Cordes 2023-01-30
+# changed by: Oliver Cordes 2023-05-06
+
 import sys, os
 
 from PySide6.QtCore import QCoreApplication
 from PySide6.QtWidgets import QApplication, QMainWindow , QFileDialog
+
 
 translate = QCoreApplication.translate
 
@@ -10,6 +15,7 @@ translate = QCoreApplication.translate
 # You need to run the following command to generate the ui_form.py file
 #     pyside6-uic form.ui -o ui_form.py, or
 #     pyside2-uic form.ui -o ui_form.py
+
 from ui_form import Ui_MainWindow
 
 from mainform import MainUI
@@ -48,7 +54,7 @@ class MainWindow(QMainWindow):
         self.ui.file_save(None)
 
     def file_saveas(self):
-        print('File SaveAs')
+        self.ui.file_saveas()
 
 
 if __name__ == "__main__":

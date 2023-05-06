@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-04-15
+# changed by: Oliver Cordes 2023-05-06
 
 import os
 
@@ -44,6 +44,14 @@ def generate_button_group(window, buttons):
     return grp
 
 
+def suggest_filename(filename):
+    s = filename.split('.')
+    n = ''.join(s[:-1])+'_2'
+    print(f'{filename} {n}')
+    return n
+
+
+
 class MainUI(Ui_MainWindow):
     def __init__(self, app, window):
         #Ui_MainWindow.__init__(self)
@@ -52,7 +60,6 @@ class MainUI(Ui_MainWindow):
         self._window          = window
 
         self._mf              = None   # the MIDI file
-        self._data            = None
 
         self._si_nr           = 0
         self._ins             = None
@@ -132,6 +139,7 @@ class MainUI(Ui_MainWindow):
         self.si_name.textChanged.connect(self.ins_gen_valueChanged('name'))
         self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('volume'))
         self.si_effect.valueChanged.connect(self.ins_gen_valueChanged('effect'))
+        self.si_out_select.valueChanged.connect(self.ins_gen_valueChanged('out_select'))
 
         # create a special button group with ids
         self.si_source_mode_grp = generate_button_group(self._window,
@@ -654,7 +662,10 @@ class MainUI(Ui_MainWindow):
         effect = self._mf.data['effects'][eff_nr]
         self._effect = effect
 
-        self.eff_number.setText(f'{eff_nr}')
+        self.eff_number.setText(f'{eff_nr+1}')
+
+        self.eff_type.setValue(effect.effect_type)
+        print(effect.effect_type)
 
         self.eff_para1.setValue(effect.para1)
         self.eff_para2.setValue(effect.para2)
@@ -843,3 +854,23 @@ class MainUI(Ui_MainWindow):
         # reset the status flags
         self.update_status(has_changed=False)
 
+
+    def file_saveas(self):
+        print('File SaveAs')
+
+        if self._mf is None:
+            print('Nothing to save ...')
+            return
+
+        name = os.getcwd()+'/'+suggest_filename(self._filename)
+        fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save SysEX/MIDI file"),
+                                                        #os.getcwd(),
+                                                        name,
+                                                        translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
+        if fileName[0] != '':
+            fileName = fileName[0]
+            print(fileName)
+            if fileName.endswith('.mid'):
+                self._mf.save_midifile(fileName)
+            else:
+                self._mf.save_sysexfile(fileName)

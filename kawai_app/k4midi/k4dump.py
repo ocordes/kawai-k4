@@ -1,7 +1,7 @@
 # k4dump.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-04-16
+# changed by: Oliver Cordes 2023-05-06
 
 
 from k4midi.midifile import MidiFile
@@ -11,6 +11,7 @@ from k4midi.k4multi import K4MultiInstrument
 from k4midi.k4drums import K4DrumCommon, K4Drums
 from k4midi.k4effects import K4Effects
 
+_debug = False
 
 def read_delta(bytes):
     delta = 0
@@ -30,7 +31,11 @@ class K4Dump(MidiFile):
     def __init__(self, filename):
         MidiFile.__init__(self, filename)
 
+        self._header = None
+
+        # read the dump data
         self._results = self.parse_midi_stream()
+
 
     @property
     def data(self):
@@ -60,13 +65,16 @@ class K4Dump(MidiFile):
 
                     if data[1] == 0x20:
                         midi_channel_prefix = data[3]
-                        print(f'{delta:d} midi_channel_prefix={midi_channel_prefix}')
+                        if _debug:
+                            print(f'{delta:d} midi_channel_prefix={midi_channel_prefix}')
                     elif data[1] in range(0x01, 0x08):
                         # text events 
                         text = data[3:3+tlen]
-                        print(f'{delta} text={text}')
+                        if _debug:
+                            print(f'{delta} text={text}')
                     elif data[1] == 0x2f:
-                        print('End of track')
+                        if _debug:
+                            print('End of track')
                     elif data[1] == 0x51:
                         # FF 51 03 tttttt Set Tempo
                         tttttt = data[3:7]
@@ -102,13 +110,18 @@ class K4Dump(MidiFile):
         machine = data[4]
         sub_status1 = data[5]
         sub_status2 = data[6]
-        print(f'vendor={vendor:x}')
-        print(f'channel={channel:x}')
-        print(f'function={function:x}')
-        print(f'group={group:x}')
-        print(f'machine={machine:x}')
-        print(f'sub_status1={sub_status1:x}')
-        print(f'sub_status2={sub_status2:x}')
+
+        if _debug:
+            print(f'vendor={vendor:x}')
+            print(f'channel={channel:x}')
+            print(f'function={function:x}')
+            print(f'group={group:x}')
+            print(f'machine={machine:x}')
+            print(f'sub_status1={sub_status1:x}')
+            print(f'sub_status2={sub_status2:x}')
+
+        self._header = bytearray(data[:7])
+        
 
         data = data[7:]
         results = {}
@@ -173,12 +186,38 @@ class K4Dump(MidiFile):
         return results
 
 
-    def save_sysexdata(self, file):
-        pass
+    def save_file(self, filename, start_header, end_header):
+        with open(filename, 'wb') as f:
+            # write start bytes
+            f.write(start_header)
+            
+            f.write(self._header)
+
+            for i in self._results['single_instruments']:
+                 i.raw_save(f)
+            for i in self._results['multi_instruments']:
+                i.raw_save(f)
+            self._results['drum_common'].raw_save(f)
+            for i in self._results['drums']:
+                i.raw_save(f)
+            for i in self._results['effects']:
+                i.raw_save(f)
+
+            # write ending bytes
+            f.write(end_header)
+        
+        
 
     def save_midifile(self, filename):
-        pass
+
+        midi_header = b'\x4d\x54\x68\x64\x00\x00\x00\x06\x00\x01\x00\x02\x01\xe0\x4d\x54' \
+                        +  b'\x72\x6b\x00\x00\x00\x13\x00\xff\x58\x04\x04\x02\x18\x08\x00\xff' \
+                        +  b'\x51\x03\x07\xa1\x20\x00\xff\x2f\x00\x4d\x54\x72\x6b\x00\x00\x3b' \
+                        +  b'\x1a\x00\xf0\xf6\x12' 
+        midi_end = b'\xf7\x00\xff\x2f\x00'
+
+        self.save_file(filename, midi_header, midi_end)
+
 
     def save_sysexfile(self, filename):        
-        with open(filename, 'wb') as f:
-            self.save_sysexdata(data, f)
+        self.save_file(filename, b'\xf0', b'\xf7')

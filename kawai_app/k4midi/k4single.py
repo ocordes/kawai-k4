@@ -1,7 +1,7 @@
 # k4single.py
 #
 # written by: Oliver Cordes 2023-02-01
-# changed by: Oliver Cordes 2023-04-16
+# changed by: Oliver Cordes 2023-05_06
 
 from k4midi.k4base import K4Base
 
@@ -18,6 +18,7 @@ class K4SingleInstrument(K4Base):
     def name(self, val):
         while len(val) < 10: val = val + ' '
         self._data[0:10] = bytearray(val, 'utf8')
+        self.update_checksum()
 
     # easy template definitions
     volume      = property(*K4Base.func_template(10))
@@ -62,6 +63,7 @@ class K4SingleInstrument(K4Base):
         print(f's1_wave_select={val}')
         self._data[38] = val & 0b1111111
         self._data[34] = (val >> 7) & 1
+        self.update_checksum()
 
 
     s1_ks_curve = property(*K4Base.func_template(34, shift=4, correct=1))
@@ -85,6 +87,7 @@ class K4SingleInstrument(K4Base):
         print(f's2_wave_select={val}')
         self._data[39] = val & 0b1111111
         self._data[35] = (val >> 7) & 1
+        self.update_checksum()
 
     s2_ks_curve = property(*K4Base.func_template(35, shift=4, correct=1))
     s2_coarse = property(*K4Base.func_template(43, mask=0b111111, correct=-24))
@@ -108,6 +111,7 @@ class K4SingleInstrument(K4Base):
         print(f's3_wave_select={val}')
         self._data[40] = val & 0b1111111
         self._data[36] = (val >> 7) & 1
+        self.update_checksum()
 
     s3_ks_curve = property(*K4Base.func_template(36, shift=4, correct=1))
     s3_coarse = property(*K4Base.func_template(44, mask=0b111111, correct=-24))
@@ -131,6 +135,7 @@ class K4SingleInstrument(K4Base):
         print(f's4_wave_select={val}')
         self._data[41] = val & 0b1111111
         self._data[37] = (val >> 7) & 1
+        self.update_checksum()
 
     s4_ks_curve = property(*K4Base.func_template(37, shift=4, correct=1))
     s4_coarse = property(*K4Base.func_template(45, mask=0b111111, correct=-24))
