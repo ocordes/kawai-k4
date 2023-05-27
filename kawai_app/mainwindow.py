@@ -38,17 +38,18 @@ class MainWindow(QMainWindow):
         self._app.quit()
 
     def file_open(self):
-        print('File Open')
-        fileName = QFileDialog.getOpenFileName(self, translate('main', "Open File"),
-                                                        os.getcwd(),
-                                                        translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
-        print(fileName)
-        if fileName[0] != '':
-            self.ui.file_open(fileName[0])
+        self.ui.file_open()
+        #print('File Open')
+        #fileName = QFileDialog.getOpenFileName(self, translate('main', "Open File"),
+        #                                                os.getcwd(),
+        #                                                translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
+        #print(fileName)
+        #if fileName[0] != '':
+        #    self.ui.file_open_file(fileName[0])
 
 
     def file_open_default(self):
-        self.ui.file_open('k4.mid', read_only=True)
+        self.ui.file_open_file('k4.mid', read_only=True)
 
     def file_save(self):
         self.ui.file_save(None)

@@ -71,10 +71,22 @@ class MainUI(Ui_MainWindow):
         self._copy_effect     = None
 
         self._filename        = None
+        self._lastdir         = None
         self._edit_mode       = False
         self._has_changed     = False
         self._read_only       = True
 
+
+    def get_working_dir(self):
+        if self._lastdir is None:
+            return os.getcwd()
+        else:
+            return self._lastdir
+
+
+    def set_working_dir(self, filename=None):
+        if filename is not None:
+           self._lastdir = os.path.dirname(filename)
 
     # update_status
     #
@@ -742,13 +754,15 @@ class MainUI(Ui_MainWindow):
         if self._mf.data is not None:
             print('Load instrument')
 
-            fileName = QFileDialog.getOpenFileName(self._window, translate('main', "Load instrument file"),
-                                                        os.getcwd(),
+            filename = QFileDialog.getOpenFileName(self._window, translate('main', "Load instrument file"),
+                                                        #os.getcwd(),
+                                                        self.get_working_dir(),
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
-            print(fileName)
+            print(filename)
 
-            if fileName[0] != '':
-                self._ins.load(fileName[0])
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                self._ins.load(filename[0])
                 self.select_instrument(self._si_nr)
                 s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
                 self._ins_item.setText(0, s)
@@ -756,13 +770,14 @@ class MainUI(Ui_MainWindow):
 
     def save_instrument(self):
         if self._mf.data is not None:
-            name = os.getcwd()+'/'+self._ins.name+'.k4'
-            fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save instrument file"),
+            name = self.get_working_dir()+'/'+self._ins.name+'.k4'
+            filename = QFileDialog.getSaveFileName(self._window, translate('main', "Save instrument file"),
                                                         #os.getcwd(),
                                                         name,
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
-            if fileName[0] != '':
-                self._ins.save(fileName[0])
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                self._ins.save(filename[0])
 
 
     def copy_instrument(self):
@@ -781,25 +796,28 @@ class MainUI(Ui_MainWindow):
         if self._mf.data is not None:
             print('Load instrument')
 
-            fileName = QFileDialog.getOpenFileName(self._window, translate('main', "Load effect file"),
-                                                        os.getcwd(),
+            filename = QFileDialog.getOpenFileName(self._window, translate('main', "Load effect file"),
+                                                        #os.getcwd(),
+                                                        self.get_working_dir(),
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
-            print(fileName)
-            if fileName[0] != '':
-                self._effect.load(fileName[0])
+            print(filename)
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                self._effect.load(filename[0])
                 self.select_effect(self._eff_nr)
 
 
 
     def save_effect(self):
         if self._mf.data is not None:
-            name = f'{os.getcwd()}/effect{(self._eff_nr+1):02d}.k4'
-            fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save effect file"),
+            name = f'{self.get_working_dir()}/effect{(self._eff_nr+1):02d}.k4'
+            filename = QFileDialog.getSaveFileName(self._window, translate('main', "Save effect file"),
                                                         #os.getcwd(),
                                                         name,
                                                         translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
-            if fileName[0] != '':
-                self._effect.save(fileName[0])
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                self._effect.save(filename[0])
 
 
     def copy_effect(self):
@@ -811,7 +829,18 @@ class MainUI(Ui_MainWindow):
         self.select_effect(self._eff_nr)
 
 
-    def file_open(self, filename, read_only=False):
+    def file_open(self):
+        filename = QFileDialog.getOpenFileName(self._window, translate('main', "Open File"),
+                                                            #os.getcwd(),
+                                                            self.get_working_dir(),
+                                                            translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
+        print(filename)
+        if filename[0] != '':
+            self.set_working_dir(filename[0])
+            self.file_open_file(filename[0])
+
+
+    def file_open_file(self, filename, read_only=False):
         self._mf = K4Dump(filename)
 
         self._filename = filename
@@ -862,15 +891,16 @@ class MainUI(Ui_MainWindow):
             print('Nothing to save ...')
             return
 
-        name = os.getcwd()+'/'+suggest_filename(self._filename)
-        fileName = QFileDialog.getSaveFileName(self._window, translate('main', "Save SysEX/MIDI file"),
+        name = self.get_working_dir()+'/'+suggest_filename(self._filename)
+        filename = QFileDialog.getSaveFileName(self._window, translate('main', "Save SysEX/MIDI file"),
                                                         #os.getcwd(),
                                                         name,
                                                         translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
-        if fileName[0] != '':
-            fileName = fileName[0]
-            print(fileName)
-            if fileName.endswith('.mid'):
-                self._mf.save_midifile(fileName)
+        if filename[0] != '':
+            self.set_working_dir(filename[0])
+            filename = filename[0]
+            print(filename)
+            if filename.endswith('.mid'):
+                self._mf.save_midifile(filename)
             else:
-                self._mf.save_sysexfile(fileName)
+                self._mf.save_sysexfile(filename)
