@@ -114,6 +114,12 @@ class MainUI(Ui_MainWindow):
         self._edit_mode = True
 
 
+    def show_tabs(self, key):
+        self.Data_Widget.clear()
+        for tab in self.group_tabs[key]:
+            self.Data_Widget.addTab(*tab)
+
+
     def setupUi(self, window):
         super().setupUi(window)
         #Ui_MainWindow.setupUi(self)
@@ -140,6 +146,17 @@ class MainUI(Ui_MainWindow):
         for nr in range(1,33):
             it = QtWidgets.QTreeWidgetItem([f'Effect {nr:02d}'])
             effects.addChild(it)
+
+
+        # identify the tabs
+        self.group_tabs = { 'single': [(self.tab_ins_main, u'Single Instrument'),
+                                       (self.tab_ins_source, u'Source'),
+                                       (self.tab_ins_dca, u'DCA'),
+                                       (self.tab_ins_lfo, u'LFO/DCF')],
+                            'multi': [(self.tab_multi_main, u'Multi Instrument')],
+                            'drums': [(self.tab_drums, u'Drums')],
+                            'effects': [(self.tab_effects, u'Effects')] }
+
 
         # connect the treeWidget with mouse clicks
         self.treeWidget.itemClicked.connect(self.onItemClicked)
@@ -392,6 +409,14 @@ class MainUI(Ui_MainWindow):
         self.eff_save.clicked.connect(self.save_effect)
         self.eff_copy.clicked.connect(self.copy_effect)
         self.eff_paste.clicked.connect(self.paste_effect)
+
+        self.eff_pan_zero.clicked.connect(self.effect_pan_zero)
+        self.eff_send1_zero.clicked.connect(self.effect_send1_zero)
+        self.eff_send2_zero.clicked.connect(self.effect_send2_zero)
+
+
+        # show the default single tabs
+        self.show_tabs('single')
 
 
     # generator to change a data entry
@@ -667,6 +692,19 @@ class MainUI(Ui_MainWindow):
         self.unlock_status()
 
 
+    def select_multi(self, mi_nr):
+        self.lock_status()
+
+        self._mi_nr = mi_nr
+        multi = self._mf.data['multi_instruments'][mi_nr]
+        self._multi = multi
+
+        # ...
+
+
+        self.unlock_status()
+
+
     def select_effect(self, eff_nr):
         self.lock_status()
         self._eff_nr = eff_nr
@@ -677,7 +715,6 @@ class MainUI(Ui_MainWindow):
         self.eff_number.setText(f'{eff_nr+1}')
 
         self.eff_type.setValue(effect.effect_type)
-        print(effect.effect_type)
 
         self.eff_para1.setValue(effect.para1)
         self.eff_para2.setValue(effect.para2)
@@ -730,22 +767,32 @@ class MainUI(Ui_MainWindow):
             itemtext = item.parent().text(0)
             if itemtext == 'Single Instruments':
                 # select instrument
-                if self._mf.data is not None and 'single_instruments' in self._mf.data:
+                if self._mf is not None and self._mf.data is not None and 'single_instruments' in self._mf.data:
                     # sets the item first, since select_instrument sets the widgets
                     # which calles the update function which will update the list
                     # name, so self._ins should be set properly!
                     self._ins_item = item
                     si_nr = name2pos(item.text(col))
                     self.select_instrument(si_nr)
+                self.show_tabs('single')
+            elif itemtext == 'Multiple Instruments':
+                # select multi instrument
+                if self._mf is not None and self._mf.data is not None and 'multi_instruments' in self._mf.data:
+                    self._multi_item = item
+                    mi_nr = name2pos(item.text(col))
+                    self.select_multi(mi_nr)
+                self.show_tabs('multi')
             elif itemtext == 'Drums':
                 # select drums
                 print(f'Drums {item.text(col)}')
+                self.show_tabs('drums')
             elif itemtext == 'Effects':
                 # select effect
-                if self._mf.data is not None and 'effects' in self._mf.data:
+                if self._mf is not None and self._mf.data is not None and 'effects' in self._mf.data:
                     print(f'Effect {item.text(col)}')
                     effect_nr = eff_name2pos(item.text(col))
                     self.select_effect(effect_nr)
+                self.show_tabs('effects')
 
 
 
@@ -829,6 +876,41 @@ class MainUI(Ui_MainWindow):
         self.select_effect(self._eff_nr)
 
 
+    def effect_pan_zero(self):
+        self._effect.pan_A = 0
+        self._effect.pan_B = 0
+        self._effect.pan_C = 0
+        self._effect.pan_D = 0
+        self._effect.pan_E = 0
+        self._effect.pan_F = 0
+        self._effect.pan_G = 0
+        self._effect.pan_H = 0
+        self.select_effect(self._eff_nr)
+
+    def effect_send1_zero(self):
+        self._effect.send1_A = 0
+        self._effect.send1_B = 0
+        self._effect.send1_C = 0
+        self._effect.send1_D = 0
+        self._effect.send1_E = 0
+        self._effect.send1_F = 0
+        self._effect.send1_G = 0
+        self._effect.send1_H = 0
+        self.select_effect(self._eff_nr)
+
+
+    def effect_send2_zero(self):
+        self._effect.send2_A = 0
+        self._effect.send2_B = 0
+        self._effect.send2_C = 0
+        self._effect.send2_D = 0
+        self._effect.send2_E = 0
+        self._effect.send2_F = 0
+        self._effect.send2_G = 0
+        self._effect.send2_H = 0
+        self.select_effect(self._eff_nr)
+
+
     def file_open(self):
         filename = QFileDialog.getOpenFileName(self._window, translate('main', "Open File"),
                                                             #os.getcwd(),
@@ -862,6 +944,9 @@ class MainUI(Ui_MainWindow):
 
         self._read_only = read_only
         self.update_status(has_changed=False)
+
+        # show the single tabs
+        self.show_tabs('single')
 
 
     def file_save(self, filename):
