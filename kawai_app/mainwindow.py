@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
         #                                                translate('main', "MIDI Files (*.mid *.MID *.MIDI);;SysEX Files (*.syx)"))
         #print(fileName)
         #if fileName[0] != '':
-        #    self.ui.file_open_file(fileName[0])
+        #s    self.ui.file_open_file(fileName[0])
 
 
     def file_open_default(self):
