@@ -3202,10 +3202,2813 @@
           </widget>
          </widget>
         </widget>
-        <widget class="QWidget" name="tab_multi_main">
+        <widget class="QWidget" name="tab_multi_main1">
          <attribute name="title">
-          <string>Multi Instrument</string>
+          <string>Multi Instrument (1)</string>
          </attribute>
+         <widget class="QLabel" name="label_148">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>58</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="mi_name">
+          <property name="geometry">
+           <rect>
+            <x>90</x>
+            <y>0</y>
+            <width>221</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="maxLength">
+           <number>10</number>
+          </property>
+         </widget>
+         <widget class="Line" name="line_3">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>20</y>
+            <width>791</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_149">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>0</y>
+            <width>58</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Volume:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="mi_volume">
+          <property name="geometry">
+           <rect>
+            <x>390</x>
+            <y>0</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="maximum">
+           <number>100</number>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_150">
+          <property name="geometry">
+           <rect>
+            <x>460</x>
+            <y>0</y>
+            <width>41</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Effect:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="mi_effect">
+          <property name="geometry">
+           <rect>
+            <x>510</x>
+            <y>0</y>
+            <width>42</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="minimum">
+           <number>1</number>
+          </property>
+          <property name="maximum">
+           <number>64</number>
+          </property>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_24">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 1:</string>
+          </property>
+          <widget class="QLabel" name="label_151">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s1_single">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_152">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_153">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_159">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_160">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_161">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_low">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_high">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_level">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_transpose">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_tune">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_157">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_154">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_channel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s1_outsel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s1_mute">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_velsw">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_3">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_mode">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_4">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_5">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_6">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_25">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>40</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 2:</string>
+          </property>
+          <widget class="QLabel" name="label_155">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s2_single">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_156">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_158">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_162">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_163">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_164">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s2_zone_low">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s2_zone_high">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s2_level">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s2_transpose">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s2_tune">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_165">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_166">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s2_channel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s2_outsel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s2_mute">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s2_velsw">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_7">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_8">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_9">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s2_mode">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_10">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_11">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_12">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_26">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>320</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 3:</string>
+          </property>
+          <widget class="QLabel" name="label_175">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s3_single">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_176">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_177">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_178">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_179">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_180">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s3_zone_low">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s3_zone_high">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s3_level">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s3_transpose">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s3_tune">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_181">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_182">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s3_channel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s3_outsel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s3_mute">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s3_velsw">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_19">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_20">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_21">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s3_mode">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_22">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_23">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_24">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_27">
+          <property name="geometry">
+           <rect>
+            <x>260</x>
+            <y>320</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 4:</string>
+          </property>
+          <widget class="QLabel" name="label_191">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s4_single">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_192">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_193">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_194">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_195">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_196">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s4_zone_low">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s4_zone_high">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s4_level">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s4_transpose">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s4_tune">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_197">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_198">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s4_channel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s4_outsel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s4_mute">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s4_velsw">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_31">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_32">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_33">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s4_mode">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_34">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_35">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_36">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_multi_main2">
+         <attribute name="title">
+          <string>Multi Instrument (2)</string>
+         </attribute>
+         <widget class="QGroupBox" name="groupBox_28">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 5:</string>
+          </property>
+          <widget class="QLabel" name="label_199">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s5_single">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_200">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_201">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_202">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_203">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_204">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s5_zone_low">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s5_zone_high">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s5_level">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s5_transpose">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s5_tune">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_205">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_206">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s5_channel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s5_outsel">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s5_mute">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s5_velsw">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_37">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_38">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_39">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s5_mode">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_40">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_41">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_42">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_29">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>10</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 6:</string>
+          </property>
+          <widget class="QLabel" name="label_207">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s1_single_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_208">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_209">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_210">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_211">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_212">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_low_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_high_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_level_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_transpose_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_tune_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_213">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_214">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_channel_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s1_outsel_8">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s1_mute_8">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_velsw_8">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_43">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_44">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_45">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_mode_8">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_46">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_47">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_48">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_30">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>300</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 7:</string>
+          </property>
+          <widget class="QLabel" name="label_215">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s1_single_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_216">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_217">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_218">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_219">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_220">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_low_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_high_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_level_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_transpose_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_tune_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_221">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_222">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_channel_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s1_outsel_9">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s1_mute_9">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_velsw_9">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_49">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_50">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_51">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_mode_9">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_52">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_53">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_54">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
+         <widget class="QGroupBox" name="groupBox_31">
+          <property name="geometry">
+           <rect>
+            <x>270</x>
+            <y>300</y>
+            <width>241</width>
+            <height>271</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Section 8:</string>
+          </property>
+          <widget class="QLabel" name="label_223">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>20</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Single:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxInstrument" name="mi_s1_single_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>20</y>
+             <width>141</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_224">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone low:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_225">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>80</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Zone high:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_226">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>110</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Level:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_227">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>140</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Transpose:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_228">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>170</y>
+             <width>61</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Tune:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_low_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>50</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxZone" name="mi_s1_zone_high_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>80</y>
+             <width>51</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="maximum">
+            <number>127</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_level_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>110</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_transpose_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>140</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-24</number>
+           </property>
+           <property name="maximum">
+            <number>24</number>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_tune_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>170</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>-50</number>
+           </property>
+           <property name="maximum">
+            <number>50</number>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_229">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>230</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Out Sel:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_230">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>200</y>
+             <width>58</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Channel:</string>
+           </property>
+          </widget>
+          <widget class="QSpinBox" name="mi_s1_channel_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>200</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="maximum">
+            <number>16</number>
+           </property>
+          </widget>
+          <widget class="QSpinBoxChannel" name="mi_s1_outsel_10">
+           <property name="geometry">
+            <rect>
+             <x>90</x>
+             <y>230</y>
+             <width>42</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="mi_s1_mute_10">
+           <property name="geometry">
+            <rect>
+             <x>160</x>
+             <y>50</y>
+             <width>71</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mute</string>
+           </property>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_velsw_10">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>80</y>
+             <width>81</width>
+             <height>91</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Velocity:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_55">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>All</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_56">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Soft</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_57">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Loud</string>
+            </property>
+           </widget>
+          </widget>
+          <widget class="QGroupBox" name="mi_s1_mode_10">
+           <property name="geometry">
+            <rect>
+             <x>150</x>
+             <y>180</y>
+             <width>81</width>
+             <height>80</height>
+            </rect>
+           </property>
+           <property name="title">
+            <string>Mode:</string>
+           </property>
+           <widget class="QRadioButton" name="radioButton_58">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>20</y>
+              <width>51</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Keyb.</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_59">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>40</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Midi</string>
+            </property>
+           </widget>
+           <widget class="QRadioButton" name="radioButton_60">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>60</y>
+              <width>61</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="text">
+             <string>Mix</string>
+            </property>
+           </widget>
+          </widget>
+         </widget>
         </widget>
         <widget class="QWidget" name="tab_ins_lfo">
          <attribute name="title">
@@ -5161,6 +7964,21 @@
    <class>QSpinBoxEffect</class>
    <extends>QSpinBox</extends>
    <header>qtaddons/qspinboxeffect.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSpinBoxZone</class>
+   <extends>QSpinBox</extends>
+   <header>qtaddons/qspinboxzone.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSpinBoxInstrument</class>
+   <extends>QSpinBox</extends>
+   <header>qtaddons/qspinboxinstrument.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSpinBoxChannel</class>
+   <extends>QSpinBox</extends>
+   <header>qtaddons/qspinboxchannel.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

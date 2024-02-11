@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2023-05-06
+# changed by: Oliver Cordes 2024-02-11
 
 import os
 
@@ -20,6 +20,9 @@ from k4midi.k4single import K4SingleInstrument
 from k4midi.k4effects import K4Effects
 
 from qtaddons.qthelper import keyboard_keys_k4
+
+# add interface to the instrument selection
+from qtaddons.qspinboxinstrument import set_instruments
 
 
 window_title = 'K4 Instrument Editor'
@@ -106,6 +109,14 @@ class MainUI(Ui_MainWindow):
             self._window.setWindowTitle(window_title+fname)
 
 
+    # update_instruments
+    #
+    # update the list of instruments which can be selected by a QT spin box
+    def update_instruments(self):
+        names = [ins.name for ins in self._mf.data['single_instruments']]
+        set_instruments(names)
+
+
     def lock_status(self):
         self._edit_mode = False
 
@@ -153,7 +164,7 @@ class MainUI(Ui_MainWindow):
                                        (self.tab_ins_source, u'Source'),
                                        (self.tab_ins_dca, u'DCA'),
                                        (self.tab_ins_lfo, u'LFO/DCF')],
-                            'multi': [(self.tab_multi_main, u'Multi Instrument')],
+                            'multi': [(self.tab_multi_main1, u'Multi Instrument (1)'),(self.tab_multi_main2, u'Multi Instrument (2)')],
                             'drums': [(self.tab_drums, u'Drums')],
                             'effects': [(self.tab_effects, u'Effects')] }
 
@@ -445,6 +456,8 @@ class MainUI(Ui_MainWindow):
                    s = self._ins_item.text(0).split()[0]+' - '+val
                    self._ins_item.setText(0, s)
 
+                   self.update_instruments()
+
         return valuechanged
 
 
@@ -699,8 +712,75 @@ class MainUI(Ui_MainWindow):
         multi = self._mf.data['multi_instruments'][mi_nr]
         self._multi = multi
 
-        # ...
+        # basic information
+        self.mi_name.setText(multi.name)
+        self.mi_volume.setValue(multi.volume)
+        self.mi_effect.setValue(multi.effect)
 
+        # section1
+        self.mi_s1_single.setValue(multi.sect1_single)
+        self.mi_s1_zone_low.setValue(multi.sect1_zone_low)
+        self.mi_s1_zone_high.setValue(multi.sect1_zone_high)
+        self.mi_s1_level.setValue(multi.sect1_level)
+        self.mi_s1_transpose.setValue(multi.sect1_transpose)
+        self.mi_s1_tune.setValue(multi.sect1_tune)
+        self.mi_s1_channel.setValue(multi.sect1_rec_chan)
+        self.mi_s1_outsel.setValue(multi.sect1_out_sel)
+        self.mi_s1_velsw.children()[multi.sect1_vel_sw].setChecked(True)
+        self.mi_s1_mode.children()[multi.sect1_mode].setChecked(True)
+        self.mi_s1_mute.setChecked(multi.sect1_mute)
+
+        # section2
+        self.mi_s2_single.setValue(multi.sect2_single)
+        self.mi_s2_zone_low.setValue(multi.sect2_zone_low)
+        self.mi_s2_zone_high.setValue(multi.sect2_zone_high)
+        self.mi_s2_level.setValue(multi.sect2_level)
+        self.mi_s2_transpose.setValue(multi.sect2_transpose)
+        self.mi_s2_tune.setValue(multi.sect2_tune)
+        self.mi_s2_channel.setValue(multi.sect2_rec_chan)
+        self.mi_s2_outsel.setValue(multi.sect2_out_sel)
+        self.mi_s2_velsw.children()[multi.sect2_vel_sw].setChecked(True)
+        self.mi_s2_mode.children()[multi.sect2_mode].setChecked(True)
+        self.mi_s2_mute.setChecked(multi.sect2_mute)
+
+        # section3
+        self.mi_s3_single.setValue(multi.sect1_single)
+        self.mi_s3_zone_low.setValue(multi.sect1_zone_low)
+        self.mi_s3_zone_high.setValue(multi.sect1_zone_high)
+        self.mi_s3_level.setValue(multi.sect1_level)
+        self.mi_s3_transpose.setValue(multi.sect1_transpose)
+        self.mi_s3_tune.setValue(multi.sect1_tune)
+        self.mi_s3_channel.setValue(multi.sect1_rec_chan)
+        self.mi_s3_outsel.setValue(multi.sect1_out_sel)
+        self.mi_s3_velsw.children()[multi.sect1_vel_sw].setChecked(True)
+        self.mi_s3_mode.children()[multi.sect1_mode].setChecked(True)
+        self.mi_s3_mute.setChecked(multi.sect1_mute)
+
+        # section4
+        self.mi_s4_single.setValue(multi.sect1_single)
+        self.mi_s4_zone_low.setValue(multi.sect1_zone_low)
+        self.mi_s4_zone_high.setValue(multi.sect1_zone_high)
+        self.mi_s4_level.setValue(multi.sect1_level)
+        self.mi_s4_transpose.setValue(multi.sect1_transpose)
+        self.mi_s4_tune.setValue(multi.sect1_tune)
+        self.mi_s4_channel.setValue(multi.sect1_rec_chan)
+        self.mi_s4_outsel.setValue(multi.sect1_out_sel)
+        self.mi_s4_velsw.children()[multi.sect1_vel_sw].setChecked(True)
+        self.mi_s4_mode.children()[multi.sect1_mode].setChecked(True)
+        self.mi_s4_mute.setChecked(multi.sect1_mute)
+
+        # section5
+        self.mi_s5_single.setValue(multi.sect1_single)
+        self.mi_s5_zone_low.setValue(multi.sect1_zone_low)
+        self.mi_s5_zone_high.setValue(multi.sect1_zone_high)
+        self.mi_s5_level.setValue(multi.sect1_level)
+        self.mi_s5_transpose.setValue(multi.sect1_transpose)
+        self.mi_s5_tune.setValue(multi.sect1_tune)
+        self.mi_s5_channel.setValue(multi.sect1_rec_chan)
+        self.mi_s5_outsel.setValue(multi.sect1_out_sel)
+        self.mi_s5_velsw.children()[multi.sect1_vel_sw].setChecked(True)
+        self.mi_s5_mode.children()[multi.sect1_mode].setChecked(True)
+        self.mi_s5_mute.setChecked(multi.sect1_mute)
 
         self.unlock_status()
 
@@ -814,6 +894,8 @@ class MainUI(Ui_MainWindow):
                 s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
                 self._ins_item.setText(0, s)
 
+                self.update_instruments()
+
 
     def save_instrument(self):
         if self._mf.data is not None:
@@ -837,6 +919,8 @@ class MainUI(Ui_MainWindow):
         self._ins.paste(self._copy_instrument)
         s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
         self._ins_item.setText(0, s)
+
+        self.update_instruments()
 
 
     def load_effect(self):
@@ -929,10 +1013,18 @@ class MainUI(Ui_MainWindow):
 
         # insert single multiple_instruments
         single_instruments = self.treeWidget.topLevelItem(0)
-        nr = 0
+        nr = 0        
         for ins in self._mf.data['single_instruments']:
-            #print(ins.name)
             w = single_instruments.child(nr)
+            pre = w.text(0).split()[0]
+            w.setText(0, f'{pre} - {ins.name}')
+            nr += 1
+        self.update_instruments()
+
+        multi_instruments = self.treeWidget.topLevelItem(1)
+        nr = 0
+        for ins in self._mf.data['multi_instruments']:
+            w = multi_instruments.child(nr)
             pre = w.text(0).split()[0]
             w.setText(0, f'{pre} - {ins.name}')
             nr += 1
