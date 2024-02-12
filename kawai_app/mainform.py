@@ -1,7 +1,7 @@
 # mainform.py
 #
 # written by: Oliver Cordes 2023-01-30
-# changed by: Oliver Cordes 2024-02-11
+# changed by: Oliver Cordes 2024-02-12
 
 import os
 
@@ -15,11 +15,17 @@ from PySide6.QtWidgets import QFileDialog
 from PySide6.QtCore import QCoreApplication
 translate = QCoreApplication.translate
 
+
+
+# MIDI definitions and classes
 from k4midi.k4dump import K4Dump
 from k4midi.k4single import K4SingleInstrument
+from k4midi.k4multi import K4MultiInstrument
 from k4midi.k4effects import K4Effects
 
+# QT helper and dialogs
 from qtaddons.qthelper import keyboard_keys_k4
+from ui_sect_dialog import Ui_Sect_Dialog
 
 # add interface to the instrument selection
 from qtaddons.qspinboxinstrument import set_instruments
@@ -131,6 +137,18 @@ class MainUI(Ui_MainWindow):
             self.Data_Widget.addTab(*tab)
 
 
+    # dialog_failed_data_loading
+    #
+    # show a dialog to inform user about failed data loading
+    def dialog_failed_data_loading(self, name):
+        msgBox = QtWidgets.QMessageBox()
+        msgBox.setText(f'Loading {name} data failed!')
+        msgBox.setInformativeText('Either wrong type of data or data checksum failed!')
+        msgBox.setStandardButtons(QtWidgets.QMessageBox.Ok) # | QtWidgets.QMessageBox.Cancel)
+        #msgBox.setDefaultButton(QtWidgets.QMessageBox.Cancel)
+        msgBox.exec()
+
+
     def setupUi(self, window):
         super().setupUi(window)
         #Ui_MainWindow.setupUi(self)
@@ -174,7 +192,8 @@ class MainUI(Ui_MainWindow):
 
 
 
-
+        # single instrument change connectors
+        #
         # define the change functions for all widgets
         self.si_name.textChanged.connect(self.ins_gen_valueChanged('name'))
         self.si_volume.valueChanged.connect(self.ins_gen_valueChanged('volume'))
@@ -378,8 +397,197 @@ class MainUI(Ui_MainWindow):
         self.si_copy.clicked.connect(self.copy_instrument)
         self.si_paste.clicked.connect(self.paste_instrument)
 
-        # effects
+        # multi instruments change connectors
+        #
+        # basics
+        self.mi_name.textChanged.connect(self.multi_gen_valueChanged('name'))
+        self.mi_volume.valueChanged.connect(self.multi_gen_valueChanged('volume'))
+        self.mi_effect.valueChanged.connect(self.multi_gen_valueChanged('effect'))
 
+        # section1
+        self.mi_s1_single.valueChanged.connect(self.multi_gen_valueChanged('sect1_single'))
+        self.mi_s1_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect1_zone_low'))
+        self.mi_s1_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect1_zone_high'))
+        self.mi_s1_level.valueChanged.connect(self.multi_gen_valueChanged('sect1_level'))
+        self.mi_s1_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect1_transpose'))
+        self.mi_s1_tune.valueChanged.connect(self.multi_gen_valueChanged('sect1_tune'))
+        self.mi_s1_channel.valueChanged.connect(self.multi_gen_valueChanged('sect1_rec_chan'))
+        self.mi_s1_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect1_out_sel'))
+        self.mi_s1_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s1_vel_all,
+                                                        self.mi_s1_vel_soft,
+                                                        self.mi_s1_vel_loud])
+        self.mi_s1_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s1_velsw_grp, 'sect1_vel_sw'))
+        self.mi_s1_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s1_mode_keyb,
+                                                        self.mi_s1_mode_midi,
+                                                        self.mi_s1_mode_mix])
+        self.mi_s1_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s1_mode_grp, 'sect1_mode'))
+        self.mi_s1_mute.toggled.connect(self.multi_gen_toggled('sect1_mute'))
+
+        # section2
+        self.mi_s2_single.valueChanged.connect(self.multi_gen_valueChanged('sect2_single'))
+        self.mi_s2_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect2_zone_low'))
+        self.mi_s2_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect2_zone_high'))
+        self.mi_s2_level.valueChanged.connect(self.multi_gen_valueChanged('sect2_level'))
+        self.mi_s2_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect2_transpose'))
+        self.mi_s2_tune.valueChanged.connect(self.multi_gen_valueChanged('sect2_tune'))
+        self.mi_s2_channel.valueChanged.connect(self.multi_gen_valueChanged('sect2_rec_chan'))
+        self.mi_s2_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect2_out_sel'))
+        self.mi_s2_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s2_vel_all,
+                                                        self.mi_s2_vel_soft,
+                                                        self.mi_s2_vel_loud])
+        self.mi_s2_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s2_velsw_grp, 'sect2_vel_sw'))
+        self.mi_s2_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s2_mode_keyb,
+                                                        self.mi_s2_mode_midi,
+                                                        self.mi_s2_mode_mix])
+        self.mi_s2_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s2_mode_grp, 'sect2_mode'))
+        self.mi_s2_mute.toggled.connect(self.multi_gen_toggled('sect2_mute'))
+
+        # section3
+        self.mi_s3_single.valueChanged.connect(self.multi_gen_valueChanged('sect3_single'))
+        self.mi_s3_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect3_zone_low'))
+        self.mi_s3_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect3_zone_high'))
+        self.mi_s3_level.valueChanged.connect(self.multi_gen_valueChanged('sect3_level'))
+        self.mi_s3_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect3_transpose'))
+        self.mi_s3_tune.valueChanged.connect(self.multi_gen_valueChanged('sect3_tune'))
+        self.mi_s3_channel.valueChanged.connect(self.multi_gen_valueChanged('sect3_rec_chan'))
+        self.mi_s3_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect3_out_sel'))
+        self.mi_s3_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s3_vel_all,
+                                                        self.mi_s3_vel_soft,
+                                                        self.mi_s3_vel_loud])
+        self.mi_s3_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s3_velsw_grp, 'sect3_vel_sw'))
+        self.mi_s3_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s3_mode_keyb,
+                                                        self.mi_s3_mode_midi,
+                                                        self.mi_s3_mode_mix])
+        self.mi_s3_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s3_mode_grp, 'sect3_mode'))
+        self.mi_s3_mute.toggled.connect(self.multi_gen_toggled('sect3_mute'))
+
+        # section4
+        self.mi_s4_single.valueChanged.connect(self.multi_gen_valueChanged('sect4_single'))
+        self.mi_s4_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect4_zone_low'))
+        self.mi_s4_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect4_zone_high'))
+        self.mi_s4_level.valueChanged.connect(self.multi_gen_valueChanged('sect4_level'))
+        self.mi_s4_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect4_transpose'))
+        self.mi_s4_tune.valueChanged.connect(self.multi_gen_valueChanged('sect4_tune'))
+        self.mi_s4_channel.valueChanged.connect(self.multi_gen_valueChanged('sect4_rec_chan'))
+        self.mi_s4_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect4_out_sel'))
+        self.mi_s4_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s4_vel_all,
+                                                        self.mi_s4_vel_soft,
+                                                        self.mi_s4_vel_loud])
+        self.mi_s4_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s4_velsw_grp, 'sect4_vel_sw'))
+        self.mi_s4_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s4_mode_keyb,
+                                                        self.mi_s4_mode_midi,
+                                                        self.mi_s4_mode_mix])
+        self.mi_s4_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s4_mode_grp, 'sect4_mode'))
+        self.mi_s4_mute.toggled.connect(self.multi_gen_toggled('sect4_mute'))
+
+        # section5
+        self.mi_s5_single.valueChanged.connect(self.multi_gen_valueChanged('sect5_single'))
+        self.mi_s5_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect5_zone_low'))
+        self.mi_s5_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect5_zone_high'))
+        self.mi_s5_level.valueChanged.connect(self.multi_gen_valueChanged('sect5_level'))
+        self.mi_s5_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect5_transpose'))
+        self.mi_s5_tune.valueChanged.connect(self.multi_gen_valueChanged('sect5_tune'))
+        self.mi_s5_channel.valueChanged.connect(self.multi_gen_valueChanged('sect5_rec_chan'))
+        self.mi_s5_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect5_out_sel'))
+        self.mi_s5_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s5_vel_all,
+                                                        self.mi_s5_vel_soft,
+                                                        self.mi_s5_vel_loud])
+        self.mi_s5_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s5_velsw_grp, 'sect5_vel_sw'))
+        self.mi_s5_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s5_mode_keyb,
+                                                        self.mi_s5_mode_midi,
+                                                        self.mi_s5_mode_mix])
+        self.mi_s5_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s5_mode_grp, 'sect5_mode'))
+        self.mi_s5_mute.toggled.connect(self.multi_gen_toggled('sect5_mute'))
+
+        # section6
+        self.mi_s6_single.valueChanged.connect(self.multi_gen_valueChanged('sect6_single'))
+        self.mi_s6_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect6_zone_low'))
+        self.mi_s6_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect6_zone_high'))
+        self.mi_s6_level.valueChanged.connect(self.multi_gen_valueChanged('sect6_level'))
+        self.mi_s6_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect6_transpose'))
+        self.mi_s6_tune.valueChanged.connect(self.multi_gen_valueChanged('sect6_tune'))
+        self.mi_s6_channel.valueChanged.connect(self.multi_gen_valueChanged('sect6_rec_chan'))
+        self.mi_s6_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect6_out_sel'))
+        self.mi_s6_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s6_vel_all,
+                                                        self.mi_s6_vel_soft,
+                                                        self.mi_s6_vel_loud])
+        self.mi_s6_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s6_velsw_grp, 'sect6_vel_sw'))
+        self.mi_s6_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s6_mode_keyb,
+                                                        self.mi_s6_mode_midi,
+                                                        self.mi_s6_mode_mix])
+        self.mi_s6_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s6_mode_grp, 'sect6_mode'))
+        self.mi_s6_mute.toggled.connect(self.multi_gen_toggled('sect6_mute'))
+
+        # section7
+        self.mi_s7_single.valueChanged.connect(self.multi_gen_valueChanged('sect7_single'))
+        self.mi_s7_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect7_zone_low'))
+        self.mi_s7_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect7_zone_high'))
+        self.mi_s7_level.valueChanged.connect(self.multi_gen_valueChanged('sect7_level'))
+        self.mi_s7_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect7_transpose'))
+        self.mi_s7_tune.valueChanged.connect(self.multi_gen_valueChanged('sect7_tune'))
+        self.mi_s7_channel.valueChanged.connect(self.multi_gen_valueChanged('sect7_rec_chan'))
+        self.mi_s7_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect7_out_sel'))
+        self.mi_s7_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s7_vel_all,
+                                                        self.mi_s7_vel_soft,
+                                                        self.mi_s7_vel_loud])
+        self.mi_s7_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s7_velsw_grp, 'sect7_vel_sw'))
+        self.mi_s7_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s7_mode_keyb,
+                                                        self.mi_s7_mode_midi,
+                                                        self.mi_s7_mode_mix])
+        self.mi_s7_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s7_mode_grp, 'sect7_mode'))
+        self.mi_s7_mute.toggled.connect(self.multi_gen_toggled('sect7_mute'))
+
+        # section8
+        self.mi_s8_single.valueChanged.connect(self.multi_gen_valueChanged('sect8_single'))
+        self.mi_s8_zone_low.valueChanged.connect(self.multi_gen_valueChanged('sect8_zone_low'))
+        self.mi_s8_zone_high.valueChanged.connect(self.multi_gen_valueChanged('sect8_zone_high'))
+        self.mi_s8_level.valueChanged.connect(self.multi_gen_valueChanged('sect8_level'))
+        self.mi_s8_transpose.valueChanged.connect(self.multi_gen_valueChanged('sect8_transpose'))
+        self.mi_s8_tune.valueChanged.connect(self.multi_gen_valueChanged('sect8_tune'))
+        self.mi_s8_channel.valueChanged.connect(self.multi_gen_valueChanged('sect8_rec_chan'))
+        self.mi_s8_outsel.valueChanged.connect(self.multi_gen_valueChanged('sect8_out_sel'))
+        self.mi_s8_velsw_grp = generate_button_group(self._window,
+                                                        [self.mi_s8_vel_all,
+                                                        self.mi_s8_vel_soft,
+                                                        self.mi_s8_vel_loud])
+        self.mi_s8_velsw_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s8_velsw_grp, 'sect8_vel_sw'))
+        self.mi_s8_mode_grp = generate_button_group(self._window,
+                                                        [self.mi_s8_mode_keyb,
+                                                        self.mi_s8_mode_midi,
+                                                        self.mi_s8_mode_mix])
+        self.mi_s8_mode_grp.buttonClicked.connect(self.multi_gen_radio_buttonClicked(self.mi_s8_mode_grp, 'sect8_mode'))
+        self.mi_s8_mute.toggled.connect(self.multi_gen_toggled('sect8_mute'))
+
+        # buttons
+        self.mi_load.clicked.connect(self.load_multi_instrument)
+        self.mi_save.clicked.connect(self.save_multi_instrument)
+        self.mi_copy.clicked.connect(self.copy_multi_instrument)
+        self.mi_paste.clicked.connect(self.paste_multi_instrument)
+
+        self.mi_sect_copy1.clicked.connect(self.multi_copy_section)
+        self.mi_sect_paste1.clicked.connect(self.multi_paste_section)
+        self.mi_sect_copy2.clicked.connect(self.multi_copy_section)
+        self.mi_sect_paste2.clicked.connect(self.multi_paste_section)
+
+
+
+        # effects change connectors
+        #
+        # basics
         self.eff_para1.valueChanged.connect(self.effect_gen_valueChanged('para1'))
         self.eff_para2.valueChanged.connect(self.effect_gen_valueChanged('para2'))
         self.eff_para3.valueChanged.connect(self.effect_gen_valueChanged('para3'))
@@ -461,6 +669,30 @@ class MainUI(Ui_MainWindow):
         return valuechanged
 
 
+    # multi change value connector
+    def multi_gen_valueChanged(self, funcname):
+
+        def valuechanged(val):
+            if self._multi is None:
+                return
+
+            func = getattr(K4MultiInstrument, funcname)
+            if type(func) == property:
+               func.fset(self._multi, val)
+            else:
+               func(self._multi, val)
+
+            self.update_status()
+
+            if funcname == 'name':
+                if self._multi_item is not None:
+                   s = self._multi_item.text(0).split()[0]+' - '+val
+                   self._multi_item.setText(0, s)
+
+        return valuechanged
+
+
+    # effect change value connector
     def effect_gen_valueChanged(self, funcname):
 
         def valuechanged(val):
@@ -478,6 +710,7 @@ class MainUI(Ui_MainWindow):
         return valuechanged
 
 
+    # instrument change radio button connector
     def ins_gen_radio_buttonClicked(self, grp, funcname):
 
         def buttonclicked(button):
@@ -499,6 +732,29 @@ class MainUI(Ui_MainWindow):
         return buttonclicked
 
 
+    # multi instrument change radio button connector
+    def multi_gen_radio_buttonClicked(self, grp, funcname):
+
+        def buttonclicked(button):
+            if self._ins is None:
+                return
+
+            id = grp.id(button)
+            print('multi radio Button clicked:', id)
+
+            # the id is the bit mask of the pressed button
+            func = getattr(K4MultiInstrument, funcname)
+            if type(func) == property:
+                func.fset(self._multi, id)
+            else:
+                func(self._multi, id)
+
+            self.update_status()
+
+        return buttonclicked
+
+
+    # instrument change check buttons connector
     def ins_gen_check_buttonClicked(self, funcname):
 
         def statechanged(newstate):
@@ -524,6 +780,7 @@ class MainUI(Ui_MainWindow):
         return statechanged
 
 
+    # instrument change toggle button connector
     def ins_gen_toggled(self, funcname):
 
         def toggled(checked):
@@ -542,6 +799,27 @@ class MainUI(Ui_MainWindow):
             self.update_status()
 
         return toggled
+
+    # multi instrument change toggle button connector
+    def multi_gen_toggled(self, funcname):
+
+        def toggled(checked):
+            if self._ins is None:
+                return
+
+            print('multi: radio button toggled', checked)
+
+            # the id is the bit mask of the pressed button
+            func = getattr(K4MultiInstrument, funcname)
+            if type(func) == property:
+                func.fset(self._multi, checked)
+            else:
+                func(self._multi, checked)
+
+            self.update_status()
+
+        return toggled
+
 
 
     def select_instrument(self, si_nr):
@@ -744,43 +1022,82 @@ class MainUI(Ui_MainWindow):
         self.mi_s2_mute.setChecked(multi.sect2_mute)
 
         # section3
-        self.mi_s3_single.setValue(multi.sect1_single)
-        self.mi_s3_zone_low.setValue(multi.sect1_zone_low)
-        self.mi_s3_zone_high.setValue(multi.sect1_zone_high)
-        self.mi_s3_level.setValue(multi.sect1_level)
-        self.mi_s3_transpose.setValue(multi.sect1_transpose)
-        self.mi_s3_tune.setValue(multi.sect1_tune)
-        self.mi_s3_channel.setValue(multi.sect1_rec_chan)
-        self.mi_s3_outsel.setValue(multi.sect1_out_sel)
-        self.mi_s3_velsw.children()[multi.sect1_vel_sw].setChecked(True)
-        self.mi_s3_mode.children()[multi.sect1_mode].setChecked(True)
-        self.mi_s3_mute.setChecked(multi.sect1_mute)
+        self.mi_s3_single.setValue(multi.sect3_single)
+        self.mi_s3_zone_low.setValue(multi.sect3_zone_low)
+        self.mi_s3_zone_high.setValue(multi.sect3_zone_high)
+        self.mi_s3_level.setValue(multi.sect3_level)
+        self.mi_s3_transpose.setValue(multi.sect3_transpose)
+        self.mi_s3_tune.setValue(multi.sect3_tune)
+        self.mi_s3_channel.setValue(multi.sect3_rec_chan)
+        self.mi_s3_outsel.setValue(multi.sect3_out_sel)
+        self.mi_s3_velsw.children()[multi.sect3_vel_sw].setChecked(True)
+        self.mi_s3_mode.children()[multi.sect3_mode].setChecked(True)
+        self.mi_s3_mute.setChecked(multi.sect3_mute)
 
         # section4
-        self.mi_s4_single.setValue(multi.sect1_single)
-        self.mi_s4_zone_low.setValue(multi.sect1_zone_low)
-        self.mi_s4_zone_high.setValue(multi.sect1_zone_high)
-        self.mi_s4_level.setValue(multi.sect1_level)
-        self.mi_s4_transpose.setValue(multi.sect1_transpose)
-        self.mi_s4_tune.setValue(multi.sect1_tune)
-        self.mi_s4_channel.setValue(multi.sect1_rec_chan)
-        self.mi_s4_outsel.setValue(multi.sect1_out_sel)
-        self.mi_s4_velsw.children()[multi.sect1_vel_sw].setChecked(True)
-        self.mi_s4_mode.children()[multi.sect1_mode].setChecked(True)
-        self.mi_s4_mute.setChecked(multi.sect1_mute)
+        self.mi_s4_single.setValue(multi.sect4_single)
+        self.mi_s4_zone_low.setValue(multi.sect4_zone_low)
+        self.mi_s4_zone_high.setValue(multi.sect4_zone_high)
+        self.mi_s4_level.setValue(multi.sect4_level)
+        self.mi_s4_transpose.setValue(multi.sect4_transpose)
+        self.mi_s4_tune.setValue(multi.sect4_tune)
+        self.mi_s4_channel.setValue(multi.sect4_rec_chan)
+        self.mi_s4_outsel.setValue(multi.sect4_out_sel)
+        self.mi_s4_velsw.children()[multi.sect4_vel_sw].setChecked(True)
+        self.mi_s4_mode.children()[multi.sect4_mode].setChecked(True)
+        self.mi_s4_mute.setChecked(multi.sect4_mute)
 
         # section5
-        self.mi_s5_single.setValue(multi.sect1_single)
-        self.mi_s5_zone_low.setValue(multi.sect1_zone_low)
-        self.mi_s5_zone_high.setValue(multi.sect1_zone_high)
-        self.mi_s5_level.setValue(multi.sect1_level)
-        self.mi_s5_transpose.setValue(multi.sect1_transpose)
-        self.mi_s5_tune.setValue(multi.sect1_tune)
-        self.mi_s5_channel.setValue(multi.sect1_rec_chan)
-        self.mi_s5_outsel.setValue(multi.sect1_out_sel)
-        self.mi_s5_velsw.children()[multi.sect1_vel_sw].setChecked(True)
-        self.mi_s5_mode.children()[multi.sect1_mode].setChecked(True)
-        self.mi_s5_mute.setChecked(multi.sect1_mute)
+        self.mi_s5_single.setValue(multi.sect5_single)
+        self.mi_s5_zone_low.setValue(multi.sect5_zone_low)
+        self.mi_s5_zone_high.setValue(multi.sect5_zone_high)
+        self.mi_s5_level.setValue(multi.sect5_level)
+        self.mi_s5_transpose.setValue(multi.sect5_transpose)
+        self.mi_s5_tune.setValue(multi.sect5_tune)
+        self.mi_s5_channel.setValue(multi.sect5_rec_chan)
+        self.mi_s5_outsel.setValue(multi.sect5_out_sel)
+        self.mi_s5_velsw.children()[multi.sect5_vel_sw].setChecked(True)
+        self.mi_s5_mode.children()[multi.sect5_mode].setChecked(True)
+        self.mi_s5_mute.setChecked(multi.sect5_mute)
+
+        # section6
+        self.mi_s6_single.setValue(multi.sect6_single)
+        self.mi_s6_zone_low.setValue(multi.sect6_zone_low)
+        self.mi_s6_zone_high.setValue(multi.sect6_zone_high)
+        self.mi_s6_level.setValue(multi.sect6_level)
+        self.mi_s6_transpose.setValue(multi.sect6_transpose)
+        self.mi_s6_tune.setValue(multi.sect6_tune)
+        self.mi_s6_channel.setValue(multi.sect6_rec_chan)
+        self.mi_s6_outsel.setValue(multi.sect6_out_sel)
+        self.mi_s6_velsw.children()[multi.sect6_vel_sw].setChecked(True)
+        self.mi_s6_mode.children()[multi.sect6_mode].setChecked(True)
+        self.mi_s6_mute.setChecked(multi.sect6_mute)
+
+        # section7
+        self.mi_s7_single.setValue(multi.sect7_single)
+        self.mi_s7_zone_low.setValue(multi.sect7_zone_low)
+        self.mi_s7_zone_high.setValue(multi.sect7_zone_high)
+        self.mi_s7_level.setValue(multi.sect7_level)
+        self.mi_s7_transpose.setValue(multi.sect7_transpose)
+        self.mi_s7_tune.setValue(multi.sect7_tune)
+        self.mi_s7_channel.setValue(multi.sect7_rec_chan)
+        self.mi_s7_outsel.setValue(multi.sect7_out_sel)
+        self.mi_s7_velsw.children()[multi.sect7_vel_sw].setChecked(True)
+        self.mi_s7_mode.children()[multi.sect7_mode].setChecked(True)
+        self.mi_s7_mute.setChecked(multi.sect7_mute)
+
+        # section8
+        self.mi_s8_single.setValue(multi.sect8_single)
+        self.mi_s8_zone_low.setValue(multi.sect8_zone_low)
+        self.mi_s8_zone_high.setValue(multi.sect8_zone_high)
+        self.mi_s8_level.setValue(multi.sect8_level)
+        self.mi_s8_transpose.setValue(multi.sect8_transpose)
+        self.mi_s8_tune.setValue(multi.sect8_tune)
+        self.mi_s8_channel.setValue(multi.sect8_rec_chan)
+        self.mi_s8_outsel.setValue(multi.sect8_out_sel)
+        self.mi_s8_velsw.children()[multi.sect8_vel_sw].setChecked(True)
+        self.mi_s8_mode.children()[multi.sect8_mode].setChecked(True)
+        self.mi_s8_mute.setChecked(multi.sect8_mute)
 
         self.unlock_status()
 
@@ -876,7 +1193,7 @@ class MainUI(Ui_MainWindow):
 
 
 
-
+    # single instruments button functions
     def load_instrument(self):
         if self._mf.data is not None:
             print('Load instrument')
@@ -889,12 +1206,14 @@ class MainUI(Ui_MainWindow):
 
             if filename[0] != '':
                 self.set_working_dir(filename[0])
-                self._ins.load(filename[0])
-                self.select_instrument(self._si_nr)
-                s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
-                self._ins_item.setText(0, s)
+                if self._ins.load(filename[0]):
+                    self.select_instrument(self._si_nr)
+                    s = self._ins_item.text(0).split()[0]+' - '+self._ins.name
+                    self._ins_item.setText(0, s)
 
-                self.update_instruments()
+                    self.update_instruments()
+                else:
+                    self.dialog_failed_data_loading('single instrument')
 
 
     def save_instrument(self):
@@ -923,6 +1242,75 @@ class MainUI(Ui_MainWindow):
         self.update_instruments()
 
 
+    # multi instrument button functions
+    def load_multi_instrument(self):
+        if self._mf.data is not None:
+            print('Load multi instrument')
+
+            filename = QFileDialog.getOpenFileName(self._window, translate('main', "Load multi instrument file"),
+                                                        #os.getcwd(),
+                                                        self.get_working_dir(),
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            print(filename)
+
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                if self._multi.load(filename[0]):
+                    self.select_multi(self._mi_nr)
+                    s = self._multi_item.text(0).split()[0]+' - '+self._multi.name
+                    self._multi_item.setText(0, s)
+                else:
+                    print('Error while loading')
+                    self.dialog_failed_data_loading('multi instrument')
+
+
+    def save_multi_instrument(self):
+        if self._mf.data is not None:
+            print('Save multi instrument')
+            name = self.get_working_dir()+'/'+self._multi.name+'.k4'
+            filename = QFileDialog.getSaveFileName(self._window, translate('main', "Save multi instrument file"),
+                                                        #os.getcwd(),
+                                                        name,
+                                                        translate('main', "k4 Files (*.k4 *.K4);;Bin Files (*.bin)"))
+            if filename[0] != '':
+                self.set_working_dir(filename[0])
+                self._multi.save(filename[0])
+
+
+    def copy_multi_instrument(self):
+        if self._mf.data is not None:
+            print('Copy multi instrument')
+
+
+    def paste_multi_instrument(self):
+        if self._mf.data is not None:
+            print('Paste multi instrument')
+
+
+    def multi_copy_section(self):
+        if self._mf.data is not None:
+            print('Copy multi instrument section')
+
+            dialog = SectionDialog()
+            ret = dialog.exec()
+            if ret == 1:
+                sect = dialog.getdata()
+                print(f'Copy section {sect}')
+
+
+
+    def multi_paste_section(self):
+        if self._mf.data is not None:
+            print('Paste multi instrument section')
+
+            dialog = SectionDialog()
+            ret = dialog.exec()
+            if ret == 1:
+                sect = dialog.getdata()
+                print(f'Paste section {sect}')
+
+
+    # effects button functions
     def load_effect(self):
         if self._mf.data is not None:
             print('Load instrument')
@@ -934,9 +1322,10 @@ class MainUI(Ui_MainWindow):
             print(filename)
             if filename[0] != '':
                 self.set_working_dir(filename[0])
-                self._effect.load(filename[0])
-                self.select_effect(self._eff_nr)
-
+                if self._effect.load(filename[0]):
+                    self.select_effect(self._eff_nr)
+                else:
+                    self.dialog_failed_data_loading('effect')
 
 
     def save_effect(self):
@@ -1081,3 +1470,18 @@ class MainUI(Ui_MainWindow):
                 self._mf.save_midifile(filename)
             else:
                 self._mf.save_sysexfile(filename)
+
+
+# Dialog definitions
+class SectionDialog(QtWidgets.QDialog):
+    """Employee dialog."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Create an instance of the GUI
+        self.ui = Ui_Sect_Dialog()
+        # Run the .setupUi() method to show the GUI
+        self.ui.setupUi(self)
+
+
+    def getdata(self):
+        return int(self.ui.sect_sel.text())

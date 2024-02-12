@@ -1,3 +1,8 @@
 {
-    "files": ["form.ui","mainwindow.py","mainform.py"]
+    "files": [
+        "form.ui",
+        "mainwindow.py",
+        "mainform.py",
+        "sect_dialog.ui"
+    ]
 }
