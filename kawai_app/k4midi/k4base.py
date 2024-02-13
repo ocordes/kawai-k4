@@ -1,7 +1,7 @@
 # k4base.py
 #
 # written by: Oliver Cordes 2023-04-10
-# changed by: Oliver Cordes 2023-05-06
+# changed by: Oliver Cordes 2024-02-13
 
 
 import copy
@@ -40,6 +40,13 @@ class K4Base(object):
         if _debug:
             print(f'change checksum from {self._data[-1]:x} to {sum:x}')
         self._data[-1] = sum
+
+
+    # update_data
+    #
+    # update_data is called after the data has changed
+    def update_data(self):
+        pass
 
 
     # most functions can be used by templates
@@ -134,4 +141,82 @@ class K4Base(object):
 
         if len(data) == len(self._data):
             self._data = copy.copy(data)
+            self.update_data()
 
+
+# k4BaseSection
+#
+# the class is used for sections of the binary data
+# it uses the same data block as the main class
+# but refers to a specific part of the data block by an offset
+# changes of a section property are directly reflected in the data block
+
+class K4BaseSection(object):
+    def __init__(self, data, ofs=0):
+        self._data = data
+        self._ofs = ofs
+
+    def __len__(self):
+        return 0
+
+
+    # update_data
+    #
+    # update_data is called after the data has changed, it
+    # overwrites the data block with the new data
+    def update_data(self, data):
+        self._data = data   # update the data block
+
+
+    # get_data
+    #
+    # returns the bytes of the section
+    def get_data(self):
+        return self._data[self._ofs:self._ofs+len(self)]
+
+    # paste
+    #
+    # paste the section data into the data block
+    def paste(self, section):
+        if section is None: return
+
+        # copy the section data into the data block
+        data = section.get_data()   # get binary data
+        self._data[self._ofs:self._ofs+len(self)] = data
+
+        
+    # func_template
+    #
+    # function template to gegerate the getter and setter functions for the properties
+    def func_template(ofs, shift=0, mask=255, correct=0):
+        def set_f(self, newval):
+            if _debug:
+                print(f'set value @{self._ofs+ofs}: {newval}')
+            # print(f'mask={mask}, shift={shift} correct={correct}')
+
+            newval = newval - correct
+            nmask = ~(mask << shift)
+            # print(nmask)
+
+            # print(f'oldval={self._data[self._ofs+ofs]:0b} {self._data[self._ofs+ofs]}')
+            d = self._data[self._ofs+ofs] & nmask  # clear all bits
+
+            # print(f'oldval(cleared)={d:0b}')
+            nnewval = newval << shift
+            # print(f'val(shifted)={nnewval:0b}')
+            d = d | nnewval
+            if _debug:                
+                print(f'newval={d:0b} {d}')
+            # set the new data
+            self._data[self._ofs+ofs] = d
+
+
+        def get_f(self):
+            b = ((self._data[self._ofs+ofs] >> shift) & mask) + correct
+            if _debug:
+                print(f'get value @{ofs} {self._data[self._ofs+ofs]} {self._data[self._ofs+ofs]:0b}')
+                print(f'mask={mask}, shift={shift} correct={correct} -> {b} {b:0b}')
+            return b
+
+        return get_f, set_f
+    
