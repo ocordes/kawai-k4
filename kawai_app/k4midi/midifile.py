@@ -1,21 +1,21 @@
 # midifile.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-02-19
+# changed by: Oliver Cordes 2024-04-17
 
 
-def chunk_size(bytes):
-    length = bytes[0]*256*256*256
-    length += bytes[1]*256*256
-    length += bytes[2]*256
-    length += bytes[3]
+def chunk_size(bdata):
+    length = bdata[0]*256*256*256
+    length += bdata[1]*256*256
+    length += bdata[2]*256
+    length += bdata[3]
 
     return length
 
 
-def two_bytes(bytes):
-    tb = bytes[0]*256
-    tb += bytes[1]
+def two_bytes(bdata):
+    tb = bdata[0]*256
+    tb += bdata[1]
 
     return tb
 

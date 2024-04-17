@@ -1,21 +1,27 @@
 # k4base.py
 #
 # written by: Oliver Cordes 2023-04-10
-# changed by: Oliver Cordes 2024-02-13
+# changed by: Oliver Cordes 2024-04-17
 
+from typing import ByteString
 
 import copy
 
 _debug = False
 
 class K4Base(object):
+    id = 0x00 # some defaults
+    size =  0 # some defaults
+
+    #_data: ByteString = None
+
     def __init__(self, data):
         self._data = bytearray(data)
 
         # self.verify_checksum()
 
     def verify_checksum(self):
-        sum = 0
+        sum : int = 0
         for i in self._data[:-1]:
             sum += i
         sum += 0xa5
@@ -99,9 +105,9 @@ class K4Base(object):
         print(f'Save data to {filename} ...')
 
         with open(filename, 'bw') as f:
-            f.write(self.id.to_bytes(1))
-            f.write(len(self._data).to_bytes(2))
-            f.write(self._data)
+            _ = f.write(str(self.id.to_bytes(1)))
+            _ = f.write(str(len(self._data).to_bytes(2)))
+            _ = f.write(str(self._data))
 
 
     # load
@@ -111,12 +117,12 @@ class K4Base(object):
         print(f'Load data from {filename} ...')
 
         with open(filename, 'rb') as f:
-            b = f.read(1)[0]
+            b = int(f.read(1)[0])
             if b == self.id:
-                size = int.from_bytes(f.read(2))
-                if size == len(self._data):
+                dsize = int.from_bytes(f.read(2))
+                if dsize == len(self._data):
                     olddata = self._data
-                    self._data = bytearray(f.read(size))
+                    self._data = bytearray(f.read(dsize))
                     check = self.verify_checksum()
                     if not check:
                         print('Checksum error while reading data from disk!')
@@ -136,7 +142,7 @@ class K4Base(object):
         return copy.copy(self._data)
 
 
-    def paste(self, data):
+    def paste(self, data) -> None:
         if data is None: return
 
         if len(data) == len(self._data):

@@ -1,7 +1,7 @@
 # k4dump.py
 #
 # written by: Oliver Cordes 2023-01-29
-# changed by: Oliver Cordes 2023-05-06
+# changed by: Oliver Cordes 2024-04-17
 
 
 from k4midi.midifile import MidiFile
@@ -13,17 +13,17 @@ from k4midi.k4effects import K4Effects
 
 _debug = False
 
-def read_delta(bytes):
+def read_delta(bdata):
     delta = 0
     rbytes = 0
 
     while True:
-        b = bytes[0]
+        b = bdata[0]
         #print('1', delta, b, b & 0x7f)
-        bytes = bytes[1:]
+        bdata = bdata[1:]
         delta = (delta << 7) | (b & 0x7f)
         if b < 0x80:
-            return delta, bytes
+            return delta, bdata
 
 
 
